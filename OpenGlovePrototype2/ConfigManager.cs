@@ -15,7 +15,7 @@ namespace OpenGlovePrototype2
 
         public ConfigManager()
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
+            NetHttpBinding binding = new NetHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
         }
