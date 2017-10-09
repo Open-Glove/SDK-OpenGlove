@@ -123,7 +123,7 @@ namespace OpenGlovePrototype2
         {
             selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
 
-            Dictionary<String, String> openedConfiguration = new Dictionary<string, string>();
+            Dictionary<String, String> openedConfiguration = new Dictionary<String, String>();
 
             XDocument xml = XDocument.Load(fileName);
 
@@ -133,15 +133,17 @@ namespace OpenGlovePrototype2
             }
 
             openedConfiguration = xml.Root.Element("mappings").Elements("mapping")
-                               .ToDictionary(c => (string)c.Element("region"),
-                                             c => (string)c.Element("actuator"));
+                               .ToDictionary(c => (String)c.Element("region"),
+                                             c => (String)c.Element("actuator"));
 
             selectedGlove.GloveConfiguration.GloveProfile.Mappings = openedConfiguration;
 
-            openedConfiguration = xml.Root.Element("FlexorsMappings").Elements("mapping")
-                               .ToDictionary(c => (string)c.Element("region"),
-                                             c => (string)c.Element("flexor"));
-            selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = openedConfiguration;
+            Dictionary<int, int> openedConfiguration2 = new Dictionary<int, int>();
+
+            openedConfiguration2 = xml.Root.Element("FlexorsMappings").Elements("mapping")
+                               .ToDictionary(c => (Int32)c.Element("region"),
+                                             c => (Int32)c.Element("flexor"));
+            selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = openedConfiguration2;
 
             //Aqui deberia comprobarse que sean todos valores validos
             selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
@@ -156,7 +158,7 @@ namespace OpenGlovePrototype2
                 selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
             }
 
-            Dictionary<String, String> openedConfiguration = new Dictionary<string, string>();
+            Dictionary<int, int> openedConfiguration = new Dictionary<int, int>();
 
             XDocument xml = XDocument.Load(fileName);
 
@@ -166,8 +168,8 @@ namespace OpenGlovePrototype2
             }
 
             openedConfiguration = xml.Root.Element("FlexorsMappings").Elements("mapping")
-                               .ToDictionary(c => (string)c.Element("region"),
-                                             c => (string)c.Element("flexor"));
+                               .ToDictionary(c => (Int32)c.Element("region"),
+                                             c => (Int32)c.Element("flexor"));
             selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = openedConfiguration;
 
             //Aqui deberia comprobarse que sean todos valores validos
@@ -219,7 +221,7 @@ namespace OpenGlovePrototype2
 
             mappings = new XElement("FlexorsMappings");
             rootXML.Add(mappings);
-            foreach (KeyValuePair<string, string> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
+            foreach (KeyValuePair<int, int> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
             {
                 XElement mappingXML = new XElement("mapping", new XElement("region", mapping.Key), new XElement("flexor", mapping.Value));
                 mappings.Add(mappingXML);
@@ -253,7 +255,7 @@ namespace OpenGlovePrototype2
             rootXML.SetAttributeValue("gloveHash", selectedGlove.GloveConfiguration.GloveHash);
             XElement mappings = new XElement("FlexorsMappings");
             rootXML.Add(mappings);
-            foreach (KeyValuePair<string, string> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
+            foreach (KeyValuePair<int, int> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
             {
                 XElement mappingXML = new XElement("mapping", new XElement("region", mapping.Key), new XElement("flexor", mapping.Value));
                 mappings.Add(mappingXML);

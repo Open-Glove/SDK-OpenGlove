@@ -353,7 +353,7 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 private int AreaCountField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
-                private System.Collections.Generic.Dictionary<string, string> FlexorsMappingsField;
+                private System.Collections.Generic.Dictionary<int, int> FlexorsMappingsField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
                 private string GloveHashField;
@@ -387,7 +387,7 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 }
                 
                 [System.Runtime.Serialization.DataMemberAttribute()]
-                public System.Collections.Generic.Dictionary<string, string> FlexorsMappings {
+                public System.Collections.Generic.Dictionary<int, int> FlexorsMappings {
                     get {
                         return this.FlexorsMappingsField;
                     }
