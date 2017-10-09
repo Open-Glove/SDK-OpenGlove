@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OpenGlovePrototype2.AddBoard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAJAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddBoard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGlovePrototype2.App" Collapsed="true">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGlovePrototype2.ConfigManager" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAGAAAAAAAAQCAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConfigManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGlovePrototype2.Greeter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACICAAYFAAJNAAACCAoAAUAQAAgABABAAEJIAAQg=</HashCode>
+      <FileName>Greeter.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGlovePrototype2.LoadingBar" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LoadingBar.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGlovePrototype2.PinsConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Class Name="OpenGlovePrototype2.PinsConfiguration.PinRow" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PinsConfiguration.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="OpenGlovePrototype2.PinsConfiguration.Board" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PinsConfiguration.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAACBQAAAAMAAAABAAIwAAAAAAAAAIAAAACAAAAA=</HashCode>
+      <FileName>PinsConfiguration.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGloveSDKConfigurationPrototype2.ConfigurationTool" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Class Name="OpenGloveSDKConfigurationPrototype2.ConfigurationTool.Mapping" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ConfigurationTool.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACQAKAAIIAAIECAAAAAYgAAAIAIIEAAJAgQAACAAA=</HashCode>
+      <FileName>ConfigurationTool.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGlovePrototype2.Properties.Resources" Collapsed="true">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGlovePrototype2.Properties.Settings" Collapsed="true">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

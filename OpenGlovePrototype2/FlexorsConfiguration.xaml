@@ -1,0 +1,604 @@
+﻿<Window x:Class="OpenGlovePrototype2.FlexorsConfiguration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenGlovePrototype2"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        mc:Ignorable="d"
+        Title="OpenGlove Profile Tool" Height="732.99" Width="888.079" Background="#FF00B47F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFCBF3E7">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="363*"/>
+            <ColumnDefinition Width="659*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.ColumnSpan="2" Fill="#FF00B47F" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="1022"/>
+        <Label x:Name="labelHeader" Grid.ColumnSpan="2" Content="Flexors Configuration" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
+        <Menu x:Name="menu" Height="35" Margin="0,70,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF001912" FontSize="16">
+            <MenuItem x:Name="saveButton" Header="   Save" Foreground="White" Height="32" Width="68" Click="saveButton_Click" IsEnabled="False"/>
+        </Menu>
+        <TabControl x:Name="tabControl" Height="540" VerticalAlignment="Top" Margin="264,110,0,0" HorizontalAlignment="Left" Width="534" Grid.ColumnSpan="2" IsHitTestVisible="True" SelectionChanged="tabControl_SelectionChanged_1" >
+
+            <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True" >
+                <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Image x:Name="imageDorsal" Height="540" VerticalAlignment="Top" Source="dorsalbones.png" Stretch="UniformToFill" Margin="0,0,-1,0" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Grid x:Name="selectorsGridDorso" RenderTransformOrigin="0.5,0.5" Margin="3,9,0,-9" HorizontalAlignment="Left" Width="520">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="329*"/>
+                            <RowDefinition Height="211*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <!-- FINGER 0 -->
+                        <Grid Margin="392,254,0,177" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region0" HorizontalAlignment="Left" Height="96" Margin="19,12,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="38.977"/>
+                                        <TranslateTransform X="-0.206" Y="0.741"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox0" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="0" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy0" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="20,27,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="-8.542" Y="-5.999"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+                        <!-- FINGER 1 -->
+                        <Grid Margin="327,90,0,130" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region1" HorizontalAlignment="Left" Height="96" Margin="9,17,0,-4" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerIndexDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="9.982"/>
+                                        <TranslateTransform X="-0.005" Y="-0.125"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="1" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy1" Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="6,24,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="-1.333" Y="0.177"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+                        <!-- FINGER 2 -->
+                        <Grid Margin="242,82,0,138" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region2" HorizontalAlignment="Left" Height="96" Margin="7,11,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="2.615"/>
+                                        <TranslateTransform X="-0.017" Y="-0.214"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="2" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy2" Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="4,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="-0.438" Y="0.516"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 3 -->
+                        <Grid Margin="158,77,0,143" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region3" HorizontalAlignment="Left" Margin="15,6,0,-18" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.Row="1">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="0.455"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="3" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy3" Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="7,41,0,-2" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 4 -->
+                        <Grid Margin="79,124,0,96" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region4" HorizontalAlignment="Left" Margin="20,5,0,-17" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.Row="1">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="-9.807"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox4" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="4" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy4" Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="14,41,0,-2" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+                        <!-- FINGER 5 -->
+                        <Grid Margin="343,5,0,97" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region5" HorizontalAlignment="Left" Margin="4,12,0,1" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="39.482"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox5" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="5" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy5" Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="0,13,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 6 -->
+                        <Grid Margin="303,210,0,10" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region6" HorizontalAlignment="Left" Margin="9,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="10.504"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox6" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="6" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy6" Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="2,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 7 -->
+                        <Grid Margin="227,196,0,24" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region7" HorizontalAlignment="Left" Margin="15,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="4.999"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox7" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="7" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy7" Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="8,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 8 -->
+                        <Grid Margin="158,196,0,24" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region8" HorizontalAlignment="Left" Margin="19,13,0,0" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="-2.368"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox8" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="8" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy8" Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="11,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                        <!-- FINGER 6 -->
+                        <Grid Margin="105,238,0,193" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="region9" HorizontalAlignment="Left" Margin="16,17,0,-4" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
+                                        <SkewTransform AngleY="2.292" AngleX="0"/>
+                                        <RotateTransform Angle="-11.62"/>
+                                        <TranslateTransform X="-0.047" Y="-0.596"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ComboBox x:Name="comboBox9" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="44" Height="21" TabIndex="9" IsTabStop="False" SelectionChanged="selectorsSelectionChanged" DropDownClosed="selectorClosed" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.RowSpan="2">
+                                <ComboBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ComboBox.RenderTransform>
+                            </ComboBox>
+                            <Label x:Name="label_Copy9" Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="10,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
+                                        <SkewTransform AngleY="2.82" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="1.904" Y="0.954"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="dorsoTab2" Header="Flex test" >
+                <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Image x:Name="imageDorsal2" Height="540" VerticalAlignment="Top" Source="dorso.png" Stretch="UniformToFill" Margin="0,0,-1,0" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+
+                    <!-- Finger 0 -->
+
+                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-126.257"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 1 -->
+                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-99.172"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 2 -->
+                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-91.707"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 3 -->
+                    <ProgressBar x:Name="progressBar3" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90.224"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 4 -->
+                    <ProgressBar x:Name="progressBar4" HorizontalAlignment="Left" Height="28" Margin="362,189,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-78.805"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 5 -->
+                    <ProgressBar x:Name="progressBar5" HorizontalAlignment="Left" Height="28" Margin="114,396,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-126.51"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 6 -->
+                    <ProgressBar x:Name="progressBar6" HorizontalAlignment="Left" Height="28" Margin="143,234,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-103.278"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 7 -->
+                    <ProgressBar x:Name="progressBar7" HorizontalAlignment="Left" Height="28" Margin="213,224,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-92.236"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 8 -->
+                    <ProgressBar x:Name="progressBar8" HorizontalAlignment="Left" Height="28" Margin="283,240,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90.224"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+                    <!-- Finger 9 -->
+                    <ProgressBar x:Name="progressBar9" HorizontalAlignment="Left" Height="28" Margin="343,289,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-79.024"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+
+
+                </Grid>
+
+            </TabItem>
+
+
+
+
+        </TabControl>
+        <StatusBar Height="28" Margin="0,658,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF00B47F">
+            <StatusBarItem x:Name="statusBarItemProfileLabel" Content="Profile:" Height="24" VerticalAlignment="Top" Background="#FF00B47F" Foreground="White" Width="52" HorizontalAlignment="Left" Margin="12,0,0,0"/>
+            <StatusBarItem x:Name="statusBarItemProfile" Content="None" Height="24" VerticalAlignment="Top" Width="910" HorizontalAlignment="Left" Foreground="White"/>
+        </StatusBar>
+        <ListView x:Name="mappingsList" HorizontalAlignment="Left" Height="367" VerticalAlignment="Top" Width="246" IsSynchronizedWithCurrentItem="True" SelectionChanged="mappingsList_SelectionChanged" Margin="13,138,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Flexor" Width="120" DisplayMemberBinding="{Binding Flexor}" />
+                    <GridViewColumn Header="Region" Width="120" DisplayMemberBinding="{Binding Region}" />
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <Button x:Name="buttonTestFlexors" Content="Test Flexors" HorizontalAlignment="Left" Margin="13,505,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonTestFlexors_Click"/>
+        <xctk:IntegerUpDown x:Name="intensityUpDown" Margin="88,584,268,0" VerticalAlignment="Top" Height="34" IsEnabled="False" DefaultValue="0" DisplayDefaultValueOnEmptyText="True"/>
+
+    </Grid>
+</Window>

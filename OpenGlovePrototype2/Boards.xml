@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<boards>
+  <board>
+    <name>LilyPad</name>
+    <digitalPins>13</digitalPins>
+    <firstAnalogPin>14</firstAnalogPin>
+    <analogPins>6</analogPins>
+  </board>
+
+  <board>
+    <name>LilyPad simple</name>
+    <digitalPins>11</digitalPins>
+    <firstAnalogPin>16</firstAnalogPin>
+    <analogPins>4</analogPins>
+  </board>
+  
+</boards>
