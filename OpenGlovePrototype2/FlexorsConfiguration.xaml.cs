@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
+using System.Threading;
 
 namespace OpenGlovePrototype2
 {
@@ -27,6 +28,8 @@ namespace OpenGlovePrototype2
 
         private List<ComboBox> selectors;
 
+        private List<ProgressBar> progressBars;
+
         private IEnumerable<int> flexors;
 
         private OpenGloveAPI gloves = OpenGloveAPI.GetInstance();
@@ -43,6 +46,7 @@ namespace OpenGlovePrototype2
 
             this.selectedGlove = selectedGlove;
             this.initializeSelectors();
+            this.initializeProgressBars();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
@@ -222,7 +226,6 @@ namespace OpenGlovePrototype2
                 MessageBoxButton button = MessageBoxButton.OK;
 
                 MessageBox.Show(message, caption, button, MessageBoxImage.Information);
-
             }
         }
 
@@ -291,7 +294,7 @@ namespace OpenGlovePrototype2
                     if (!selection.Equals(""))
                     {
                         int selectionFlexor = Int32.Parse(selection);
-                        removeFlexor(selectionFlexor, sender); //cambiar a flex
+                        removeFlexor(selectionFlexor, sender);
                         try
                         {
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Add(owner, selectionFlexor);
@@ -314,13 +317,11 @@ namespace OpenGlovePrototype2
                             liberateFlexor(liberatedFlexorC, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Remove(owner);
                         }
-
                     }
                 }
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
-
         }
 
         /// <summary>
@@ -414,6 +415,40 @@ namespace OpenGlovePrototype2
                 tabControl.SelectedIndex = 1;
                 buttonTestFlexors.Content = "Stop";
 
+        private void changeBarValue(int index, int value)
+        {
+            switch (index)
+            {
+                case 0:
+                    this.progressBar0.Value = value;
+                    break;
+                case 1:
+                    this.progressBar1.Value = value;
+                    break;
+                case 2:
+                    progressBar2.Value = value;
+                    break;
+                case 3:
+                    progressBar3.Value = value;
+                    break;
+                case 4:
+                    progressBar4.Value = value;
+                    break;
+                case 5:
+                    progressBar5.Value = value;
+                    break;
+                case 6:
+                    progressBar6.Value = value;
+                    break;
+                case 7:
+                    progressBar7.Value = value;
+                    break;
+                case 8:
+                    progressBar8.Value = value;
+                    break;
+                case 9:
+                    progressBar9.Value = value;
+                    break;
             }
         }
 
