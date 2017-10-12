@@ -46,7 +46,6 @@ namespace OpenGlovePrototype2
 
             this.selectedGlove = selectedGlove;
             this.initializeSelectors();
-            this.initializeProgressBars();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
@@ -404,16 +403,20 @@ namespace OpenGlovePrototype2
 
               }
               */
-            if (testing) {
+            if (testing)
+            {
                 testing = false;
                 buttonTestFlexors.Content = "Test";
                 tabControl.SelectedIndex = 0;
-               
-            }else if (this.mappingsList.Items.Count > 0)
+
+            }
+            else if (this.mappingsList.Items.Count > 0)
             {
                 testing = true;
                 tabControl.SelectedIndex = 1;
                 buttonTestFlexors.Content = "Stop";
+            }
+        }
 
         private void changeBarValue(int index, int value)
         {

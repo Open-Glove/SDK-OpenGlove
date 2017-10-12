@@ -67,14 +67,10 @@ namespace OpenGlove_API_C_Sharp_HL
 
         public int getflexor(string gloveAddress, int pin)
         {
-            serviceClient
+            
             return 0;
         }
 
-        public void captureFlexorsValues(Glove selectedGlove)
-        {
-            serviceClient.getFlexorsValues(selectedGlove.BluetoothAddress);
-        }
 
         /// <summary>
         /// Establishes connection with a glove
