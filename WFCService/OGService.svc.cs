@@ -3,12 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-//using System.Runtime.Remoting.Channels;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Threading.Tasks;
 
-namespace OpenGloveWCF
+namespace WFCService
 {
     public class OGService : IOGService
     {
@@ -18,14 +14,13 @@ namespace OpenGloveWCF
 
         private BackgroundWorker bgw;
 
-
         void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             Glove g = (Glove)(((List<object>)e.Argument)[0]);
             IEnumerable<int> actuator = (IEnumerable<int>)(((List<object>)e.Argument)[1]);
             IEnumerable<string> intensity = (IEnumerable<string>)(((List<object>)e.Argument)[2]);
             //Your time taking work. Here it's your data query method.
-            
+
             g.LegacyGlove.ActivateMotor(actuator, intensity);
         }
 
@@ -79,10 +74,11 @@ namespace OpenGloveWCF
             }
             return 0; //OK
         }
-        
+
         public int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList)
         {
-            if (actuators == null || intensityList == null) {
+            if (actuators == null || intensityList == null)
+            {
                 return 0;
             }
             foreach (Glove g in Glove.Gloves)
@@ -110,7 +106,7 @@ namespace OpenGloveWCF
             }
             return 0; //OK
         }
-        
+
         public List<Glove> GetGloves()
         {
             return Glove.Gloves;
@@ -180,19 +176,4 @@ namespace OpenGloveWCF
             return 0;
         }
     }
-
-    public class WSChatService : IWSChatService
-    {
-        public async Task SendMessageToServer(string msg)
-        {
-            var callback = OperationContext.Current.GetCallbackChannel<IWSChatCallback>();
-            if (((IChannel)callback).State == CommunicationState.Opened)
-            {
-                await callback.SendMessageToClient(
-                    string.Format("Got message {0} at {1}",
-                    msg, DateTime.Now.ToLongTimeString()));
-            }
-        }
-    }
-
 }

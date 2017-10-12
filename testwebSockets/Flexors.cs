@@ -9,13 +9,14 @@ using WebSocketSharp;
 namespace testwebSockets
 {
 
-    class Flexors : WebSocketBehavior
+    public class Flexors : WebSocketBehavior
     {
-        WCF service = WCF.GetInstance();
+        mainControl serr = mainControl.GetInstance();
+        Glove guante = new Glove();
 
         public List<int> flexors { get; set; }
         
-        private void getFlex(string address){
+        private static void setlex(string address){
             
         }
 

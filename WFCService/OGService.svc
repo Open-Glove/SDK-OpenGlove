@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WFCService.Service1" CodeBehind="OGService.svc.cs" %>
