@@ -434,7 +434,7 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="dorsoTab2" Header="Flex test" >
-                <Grid x:Name="progressBarsDorso" Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -456,7 +456,7 @@
 
                     <!-- Finger 0 -->
 
-                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="0" Maximum="300">
+                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -468,7 +468,7 @@
                     </ProgressBar>
 
                     <!-- Finger 1 -->
-                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1">
+                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -480,7 +480,7 @@
                     </ProgressBar>
 
                     <!-- Finger 2 -->
-                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2">
+                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -492,7 +492,7 @@
                     </ProgressBar>
 
                     <!-- Finger 3 -->
-                    <ProgressBar x:Name="progressBar3" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="3">
+                    <ProgressBar x:Name="progressBar3" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -504,7 +504,7 @@
                     </ProgressBar>
 
                     <!-- Finger 4 -->
-                    <ProgressBar x:Name="progressBar4" HorizontalAlignment="Left" Height="28" Margin="362,189,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="4">
+                    <ProgressBar x:Name="progressBar4" HorizontalAlignment="Left" Height="28" Margin="362,189,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -516,7 +516,7 @@
                     </ProgressBar>
 
                     <!-- Finger 5 -->
-                    <ProgressBar x:Name="progressBar5" HorizontalAlignment="Left" Height="28" Margin="114,396,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="5">
+                    <ProgressBar x:Name="progressBar5" HorizontalAlignment="Left" Height="28" Margin="114,396,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -528,7 +528,7 @@
                     </ProgressBar>
 
                     <!-- Finger 6 -->
-                    <ProgressBar x:Name="progressBar6" HorizontalAlignment="Left" Height="28" Margin="143,234,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="6">
+                    <ProgressBar x:Name="progressBar6" HorizontalAlignment="Left" Height="28" Margin="143,234,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -540,7 +540,7 @@
                     </ProgressBar>
 
                     <!-- Finger 7 -->
-                    <ProgressBar x:Name="progressBar7" HorizontalAlignment="Left" Height="28" Margin="213,224,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="7">
+                    <ProgressBar x:Name="progressBar7" HorizontalAlignment="Left" Height="28" Margin="213,224,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -552,7 +552,7 @@
                     </ProgressBar>
 
                     <!-- Finger 8 -->
-                    <ProgressBar x:Name="progressBar8" HorizontalAlignment="Left" Height="28" Margin="283,240,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="8">
+                    <ProgressBar x:Name="progressBar8" HorizontalAlignment="Left" Height="28" Margin="283,240,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -564,7 +564,7 @@
                     </ProgressBar>
 
                     <!-- Finger 9 -->
-                    <ProgressBar x:Name="progressBar9" HorizontalAlignment="Left" Height="28" Margin="343,289,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="9">
+                    <ProgressBar x:Name="progressBar9" HorizontalAlignment="Left" Height="28" Margin="343,289,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

@@ -23,7 +23,8 @@ namespace OpenGlove_API_C_Sharp_HL
         {
             NetHttpBinding binding = new NetHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
-            serviceClient = new OGServiceClient(binding, address); 
+            serviceClient = new OGServiceClient(binding, address);
+            
         }
 
         /// <summary>
@@ -63,17 +64,6 @@ namespace OpenGlove_API_C_Sharp_HL
         public List<Glove> UpdateDevices()
         {
             return serviceClient.RefreshGloves().ToList();
-        }
-
-        public int getflexor(string gloveAddress, int pin)
-        {
-            serviceClient
-            return 0;
-        }
-
-        public void captureFlexorsValues(Glove selectedGlove)
-        {
-            serviceClient.getFlexorsValues(selectedGlove.BluetoothAddress);
         }
 
         /// <summary>
