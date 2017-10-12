@@ -260,7 +260,7 @@ namespace OpenGloveWCF
                 public Dictionary<string, string> Mappings = new Dictionary<string, string>();
 
                 [DataMember]
-                public Dictionary<string, string> FlexorsMappings = new Dictionary<string, string>();
+                public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
             }
         }
 

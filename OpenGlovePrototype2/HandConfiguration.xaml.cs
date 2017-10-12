@@ -59,7 +59,8 @@ namespace OpenGlovePrototype2
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
                 this.selectedGlove.GloveConfiguration.GloveProfile.Mappings = new Dictionary<string, string>();
-                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<string, string>();
+                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<int, int>();
+                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappingsValues = new Dictionary<int, int>();
             }
 
         }

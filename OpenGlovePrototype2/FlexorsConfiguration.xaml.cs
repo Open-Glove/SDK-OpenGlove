@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
+using System.Threading;
 
 namespace OpenGlovePrototype2
 {
@@ -27,6 +28,8 @@ namespace OpenGlovePrototype2
 
         private List<ComboBox> selectors;
 
+        private List<ProgressBar> progressBars;
+
         private IEnumerable<int> flexors;
 
         private OpenGloveAPI gloves = OpenGloveAPI.GetInstance();
@@ -43,10 +46,11 @@ namespace OpenGlovePrototype2
 
             this.selectedGlove = selectedGlove;
             this.initializeSelectors();
+            this.initializeProgressBars();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
-                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<string, string>();
+                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<int, int>();
                 foreach (ComboBox selector in this.selectors)
                 {
                     selector.Items.Add("");
@@ -122,13 +126,13 @@ namespace OpenGlovePrototype2
         /// </summary>
         /// <param name="flexor"></param>
         /// <param name="owner"></param>
-        private void removeFlexor(String flexor, object owner) 
+        private void removeFlexor(int flexor, object owner) 
         {
             foreach (ComboBox selector in this.selectors)
             {
                 if (((ComboBox)owner) != selector)
                 {
-                    selector.Items.Remove(Int32.Parse(flexor));
+                    selector.Items.Remove(flexor);
                 }
             }
         }
@@ -138,13 +142,13 @@ namespace OpenGlovePrototype2
         /// </summary>
         /// <param name="liberatedFlexor"></param>
         /// <param name="preowner"></param>
-        private void liberateFlexor(String liberatedFlexor, Object preowner)
+        private void liberateFlexor(int liberatedFlexor, Object preowner)
         {
             foreach (ComboBox selector in this.selectors)
             {
                 if (!selector.Equals(preowner))
                 {
-                    selector.Items.Add(Int32.Parse(liberatedFlexor));
+                    selector.Items.Add(liberatedFlexor);
                 }
             }
         }
@@ -189,13 +193,13 @@ namespace OpenGlovePrototype2
         /// DEV: Should go to backend.
         /// </summary>
         /// <param name="mappings"></param>
-        private void refreshMappingsList(Dictionary<string, string> mappings)
+        private void refreshMappingsList(Dictionary<int, int> mappings)
         {
             this.mappingsList.Items.Clear();
-            foreach (KeyValuePair<string, string> mapping in mappings.ToList())
+            foreach (KeyValuePair<int, int> mapping in mappings.ToList())
             {
                 //Console.WriteLine("MAPPING: "+ mapping.Key + ", " + mapping.Value);
-                this.mappingsList.Items.Add(new Mapping() { Flexor = mapping.Value, Region = mapping.Key });
+                this.mappingsList.Items.Add(new Mapping() { Flexor = mapping.Value.ToString(), Region = mapping.Key.ToString() });
             }
         }
 
@@ -222,7 +226,6 @@ namespace OpenGlovePrototype2
                 MessageBoxButton button = MessageBoxButton.OK;
 
                 MessageBox.Show(message, caption, button, MessageBoxImage.Information);
-
             }
         }
 
@@ -243,10 +246,10 @@ namespace OpenGlovePrototype2
                 this.refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
                 this.resetSelectors();
 
-                foreach (KeyValuePair<string, string> mapping in this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.ToList())
+                foreach (KeyValuePair<int, int> mapping in this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.ToList())
                 {
-                    this.selectors[Int32.Parse(mapping.Key)].SelectedItem = Int32.Parse(mapping.Value);
-                    this.removeFlexor(mapping.Value, this.selectors[Int32.Parse(mapping.Key)]);
+                    this.selectors[mapping.Key].SelectedItem = mapping.Value;
+                    this.removeFlexor(mapping.Value, this.selectors[mapping.Key]);
                 }
                 this.statusBarItemProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
             }
@@ -285,39 +288,40 @@ namespace OpenGlovePrototype2
 
                 // Si se selecciona un actuador, la idea es que no se pueda volver a seleccionar en otro punto de la mano.
 
-                String owner = ((ComboBox)sender).TabIndex.ToString();
+                int owner = ((ComboBox)sender).TabIndex;
                 if (selection != null)
-                {
+                { 
                     if (!selection.Equals(""))
                     {
-                        removeFlexor(selection, sender); //cambiar a flex
+                        int selectionFlexor = Int32.Parse(selection);
+                        removeFlexor(selectionFlexor, sender);
                         try
                         {
-                            this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Add(owner, selection);
+                            this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Add(owner, selectionFlexor);
                         }
                         catch (Exception)
                         {
-                            String liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
+                            int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
                             liberateFlexor(liberatedFlexor, sender);
-                            this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner] = selection;
+                            this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner] = selectionFlexor;
                         }
                     }
                     else
                     {
-                        String liberatedFlexor;
-                        this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.TryGetValue(owner, out liberatedFlexor);
+                        int liberatedFlexorC;
+                        this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.TryGetValue(owner, out liberatedFlexorC);
+                        int? liberatedFlexor = liberatedFlexorC;
                         if (liberatedFlexor != null)
                         {
-                            liberateFlexor(liberatedFlexor, sender);
+                            liberatedFlexorC = liberatedFlexor == null ? default(int) : liberatedFlexor.GetValueOrDefault();
+                            liberateFlexor(liberatedFlexorC, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Remove(owner);
                         }
-
                     }
                 }
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
-
         }
 
         /// <summary>
@@ -411,6 +415,40 @@ namespace OpenGlovePrototype2
                 tabControl.SelectedIndex = 1;
                 buttonTestFlexors.Content = "Stop";
 
+        private void changeBarValue(int index, int value)
+        {
+            switch (index)
+            {
+                case 0:
+                    this.progressBar0.Value = value;
+                    break;
+                case 1:
+                    this.progressBar1.Value = value;
+                    break;
+                case 2:
+                    progressBar2.Value = value;
+                    break;
+                case 3:
+                    progressBar3.Value = value;
+                    break;
+                case 4:
+                    progressBar4.Value = value;
+                    break;
+                case 5:
+                    progressBar5.Value = value;
+                    break;
+                case 6:
+                    progressBar6.Value = value;
+                    break;
+                case 7:
+                    progressBar7.Value = value;
+                    break;
+                case 8:
+                    progressBar8.Value = value;
+                    break;
+                case 9:
+                    progressBar9.Value = value;
+                    break;
             }
         }
 
