@@ -16,23 +16,26 @@ namespace OpenGloveWCF
 
         private const int AREACOUNT = 58;
 
+        private webSocketsService openGloveWS = new webSocketsService();
+
         private BackgroundWorker bgw;
 
-        public int streamData(string gloveAddress)
+        public int streamData()
         {
-            foreach (Glove g in Glove.Gloves)
-            {
-                if (g.BluetoothAddress.Equals(gloveAddress))
-                {
-                    if (g.Connected)
-                    {
-                       
+            openGloveWS.addEndPoint();
+            openGloveWS.startWS();
+            return 0;
+        }
 
-                    }
-                }
-            }
+        public int starBroadcasting() {
+            setRightGloveWS();
+            openGloveWS.startBroadcast();
+            return 0;
+        }
 
-            return 1;
+        public void setRightGloveWS()
+        {
+            openGloveWS.setRightGloveWS(Glove.getRightlove());
         }
 
         void bgw_DoWork(object sender, DoWorkEventArgs e)

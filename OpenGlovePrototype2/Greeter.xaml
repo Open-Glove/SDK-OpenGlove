@@ -59,5 +59,6 @@
         <Menu x:Name="menuService" Height="40" Margin="0,339,0,0" VerticalAlignment="Top" Background="#FF00B47F" HorizontalAlignment="Right" Width="669" Grid.ColumnSpan="2">
             <MenuItem x:Name="serviceToggle" Header="ServiceToggle" Foreground="White" Click="serviceToggle_Click" Height="40" Width="670"/>
         </Menu>
+        <Button x:Name="button" Content="START WS" Grid.Column="1" HorizontalAlignment="Left" Margin="358,49,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="button_Click"/>
     </Grid>
 </Window>

@@ -71,7 +71,10 @@ namespace OpenGloveWCF
 
     
         [OperationContract]
-        int streamData(string gloveAddress);
+        int streamData();
+
+        [OperationContract]
+        int starBroadcasting();
 
     }
     /*

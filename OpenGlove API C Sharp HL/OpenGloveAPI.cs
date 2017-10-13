@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Xml.Linq;
+
 
 namespace OpenGlove_API_C_Sharp_HL
 {
@@ -37,6 +39,13 @@ namespace OpenGlove_API_C_Sharp_HL
                 instance = new OpenGloveAPI();
             }
             return instance;
+        }
+
+        public void letsgoWS()
+        {
+            serviceClient.streamData();
+            Thread.Sleep(1000);
+            serviceClient.starBroadcasting();
         }
 
         /// <summary>

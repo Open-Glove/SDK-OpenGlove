@@ -430,6 +430,9 @@ namespace OpenGlovePrototype2
             
         }
 
-
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.letsgoWS();
+        }
     }
 }
