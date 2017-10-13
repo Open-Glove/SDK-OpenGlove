@@ -485,6 +485,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/ActivateMany", ReplyAction="http://tempuri.org/IOGService/ActivateManyResponse")]
         int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/streamData", ReplyAction="http://tempuri.org/IOGService/streamDataResponse")]
+        int streamData(string gloveAddress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -540,6 +543,10 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList) {
             return base.Channel.ActivateMany(gloveAddress, actuators, intensityList);
+        }
+        
+        public int streamData(string gloveAddress) {
+            return base.Channel.streamData(gloveAddress);
         }
     }
 }

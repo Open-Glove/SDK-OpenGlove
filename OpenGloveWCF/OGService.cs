@@ -18,6 +18,22 @@ namespace OpenGloveWCF
 
         private BackgroundWorker bgw;
 
+        public int streamData(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    if (g.Connected)
+                    {
+                       
+
+                    }
+                }
+            }
+
+            return 1;
+        }
 
         void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -33,6 +49,7 @@ namespace OpenGloveWCF
         {
             //After completing the job.
         }
+
 
         public int Activate(string gloveAddress, int actuator, int intensity)
         {
@@ -80,6 +97,7 @@ namespace OpenGloveWCF
             return 0; //OK
         }
         
+
         public int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList)
         {
             if (actuators == null || intensityList == null) {
@@ -142,12 +160,43 @@ namespace OpenGloveWCF
                 {
                     if (g.GloveConfiguration != null)
                     {
-                        g.LegacyGlove = new LegacyOpenGlove();
-                        g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
-                        g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
-                        g.Connected = true;
+                        Glove actualGlove;
+                        if (g.Side==Sides.Right)
+                        {
+                            actualGlove = Glove.getRightlove();
+                            if (actualGlove != null && actualGlove.Connected == true)
+                            {
+                                return 2;// GLOVE ON USE
+                            }else
+                            {
+                                g.LegacyGlove = new LegacyOpenGlove();
+                                g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
+                                g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
+                                g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
+                                g.LegacyGlove.PinMode(g.GloveConfiguration.FlexPins, g.GloveConfiguration.FlexInit);
+                                g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                                g.Connected = true;
+                                Glove.setRightGlove(g.BluetoothAddress);
+                            }
+                        }else
+                        {
+                            actualGlove = Glove.getLeftGlove();
+                            if (actualGlove!= null && actualGlove.Connected == true)
+                            {
+                                return 2;// GLOVE ON USE
+                            }
+                            else
+                            {
+                                g.LegacyGlove = new LegacyOpenGlove();
+                                g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
+                                g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
+                                g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
+                                g.LegacyGlove.PinMode(g.GloveConfiguration.FlexPins, g.GloveConfiguration.FlexInit);
+                                g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                                g.Connected = true;
+                                Glove.setLeftGlove(g.BluetoothAddress);
+                            }
+                        }
                     }
                     else
                     {
@@ -161,6 +210,34 @@ namespace OpenGloveWCF
 
         public int Disconnect(string gloveAddres)
         {
+            if (Glove.getRightlove().BluetoothAddress.Equals(gloveAddres))
+            {
+                try
+                {
+                    Glove.getRightlove().LegacyGlove.ClosePort();
+                }
+                catch (Exception)
+                {
+
+                }
+                Glove.getRightlove().Connected = false;
+                return 0;
+            }
+            if (Glove.getLeftGlove().BluetoothAddress.Equals(gloveAddres))
+            {
+                try
+                {
+                    Glove.getLeftGlove().LegacyGlove.ClosePort();
+                }
+                catch (Exception)
+                {
+
+                }
+                Glove.getLeftGlove().Connected = false;
+                return 0;
+            }
+            return 0;
+            /*
             foreach (Glove g in Glove.Gloves)
             {
                 if (g.BluetoothAddress.Equals(gloveAddres))
@@ -177,22 +254,7 @@ namespace OpenGloveWCF
                     return 0;
                 }
             }
-            return 0;
+            */
         }
     }
-
-    public class WSChatService : IWSChatService
-    {
-        public async Task SendMessageToServer(string msg)
-        {
-            var callback = OperationContext.Current.GetCallbackChannel<IWSChatCallback>();
-            if (((IChannel)callback).State == CommunicationState.Opened)
-            {
-                await callback.SendMessageToClient(
-                    string.Format("Got message {0} at {1}",
-                    msg, DateTime.Now.ToLongTimeString()));
-            }
-        }
-    }
-
 }

@@ -58,6 +58,12 @@
   <wsdl:message name="IOGService_ActivateMany_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActivateManyResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_streamData_InputMessage">
+    <wsdl:part name="parameters" element="tns:streamData" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_streamData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:streamDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -86,6 +92,10 @@
     <wsdl:operation name="ActivateMany">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/ActivateMany" message="tns:IOGService_ActivateMany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ActivateManyResponse" message="tns:IOGService_ActivateMany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="streamData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/streamData" message="tns:IOGService_streamData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/streamDataResponse" message="tns:IOGService_streamData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -147,6 +157,15 @@
     </wsdl:operation>
     <wsdl:operation name="ActivateMany">
       <soap12:operation soapAction="http://tempuri.org/IOGService/ActivateMany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="streamData">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/streamData" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

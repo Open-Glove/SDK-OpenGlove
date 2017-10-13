@@ -66,8 +66,13 @@ namespace OpenGloveWCF
                     BodyStyle = WebMessageBodyStyle.Wrapped,
                     UriTemplate = "ActivateMany?gloveAddress={gloveAddress}")]
         int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList);
-    }
 
+    
+        [OperationContract]
+        int streamData(string gloveAddress);
+
+    }
+    /*
     [ServiceContract]
     public interface IgloveFlexorsServiceCallBack
     {
@@ -81,21 +86,9 @@ namespace OpenGloveWCF
         [OperationContract(IsOneWay = true)]
         void StartSendingQuotes();
     }
+    */
 
-
-    [ServiceContract(CallbackContract = typeof(IWSChatCallback))]
-    public interface IWSChatService
-    {
-        [OperationContract(IsOneWay = true)]
-        Task SendMessageToServer(string msg);
-    }
-
-    [ServiceContract]
-    interface IWSChatCallback
-    {
-        [OperationContract(IsOneWay = true)]
-        Task SendMessageToClient(string msg);
-    }
+    
     /*
     [DataContract]
     public class ActivateManyData {
@@ -118,6 +111,9 @@ namespace OpenGloveWCF
         /// </summary>
         private static List<Glove> gloves;
 
+        private static Glove LeftGlove;
+        private static Glove RightGlove;
+
         /// <summary>
         /// Gets the current list of gloves connected to the system. If it is the first 
         /// execution since the service start, it will refresh the list.
@@ -129,10 +125,59 @@ namespace OpenGloveWCF
                 if (gloves == null)
                 {
                     gloves = ScanGloves();
-
                 }
                 return gloves;
             }
+        }
+
+        public static Glove getLeftGlove()
+        {
+            if (LeftGlove != null)
+            {
+                return LeftGlove;
+            }
+            return null;
+        }
+
+        public static int setLeftGlove(string gloveAddress)
+        {
+            if (gloves != null)
+            {
+                foreach(Glove g in gloves)
+                {
+                    if (g.BluetoothAddress.Equals(gloveAddress))
+                    {
+                        LeftGlove = g;
+                        return 1;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        public static Glove getRightlove()
+        {
+            if (RightGlove != null)
+            {
+                return RightGlove;
+            }
+            return null;
+        }
+
+        public static int setRightGlove(string gloveAddress)
+        {
+            if (gloves != null)
+            {
+                foreach (Glove g in gloves)
+                {
+                    if (g.BluetoothAddress.Equals(gloveAddress))
+                    {
+                        RightGlove = g;
+                        return 1;
+                    }
+                }
+            }
+            return 0;
         }
 
         /// <summary>

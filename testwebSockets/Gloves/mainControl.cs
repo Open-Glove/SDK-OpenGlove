@@ -26,7 +26,13 @@ namespace testwebSockets.Gloves
             }
         }
 
-        private static List<Glove> ScanGloves()
+        public List<Glove> RefreshGloves()
+        {
+            this.availableGloves = ScanGloves();
+            return availableGloves;
+        }
+
+        public List<Glove> ScanGloves()
         {
             List<Glove> scannedGloves = new List<Glove>();
             var devices = SerialPort.GetPortNames(); ;
@@ -48,10 +54,5 @@ namespace testwebSockets.Gloves
             return scannedGloves;
         }
 
-        public List<Glove> RefreshGloves()
-        {
-            this.availableGloves = ScanGloves();
-            return availableGloves;
-        }
     }
 }

@@ -349,8 +349,22 @@ namespace OpenGlovePrototype2
 
         private void comboBoxSide_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedGlove.Side = (Side) ((ComboBox)sender).SelectedItem;
-            configManager.saveGlove(selectedGlove);
+            if (selectedGlove.Connected == false)
+            {
+                selectedGlove.Side = (Side)((ComboBox)sender).SelectedItem;
+                configManager.saveGlove(selectedGlove);
+            }else
+            {
+                if (selectedGlove.Side == Side.Right)
+                {
+               //MessageBoxResult messageBoxResult = MessageBox.Show("Para cambiar el guante de lado, primero desconecta el guante", "Cambio de lado", MessageBoxButton.OK);
+                    ((ComboBox)sender).SelectedIndex = 1;
+                }else
+                {
+                    ((ComboBox)sender).SelectedIndex = 0;
+                }
+            }
+            
         }
 
         private int startService() {

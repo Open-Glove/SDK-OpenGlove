@@ -11,13 +11,13 @@ namespace testwebSockets
 
     public class Flexors : WebSocketBehavior
     {
-        mainControl serr = mainControl.GetInstance();
-        Glove guante = new Glove();
+        Gloves.mainControl mc = new Gloves.mainControl();
+        Gloves.Glove guante = new Gloves.Glove();
 
         public List<int> flexors { get; set; }
         
         private static void setlex(string address){
-            
+
         }
 
         protected override void OnMessage(MessageEventArgs e)
