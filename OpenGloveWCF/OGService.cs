@@ -237,24 +237,7 @@ namespace OpenGloveWCF
                 return 0;
             }
             return 0;
-            /*
-            foreach (Glove g in Glove.Gloves)
-            {
-                if (g.BluetoothAddress.Equals(gloveAddres))
-                {
-                    try
-                    {
-                        g.LegacyGlove.ClosePort();
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                    g.Connected = false;
-                    return 0;
-                }
-            }
-            */
+           
         }
     }
 }

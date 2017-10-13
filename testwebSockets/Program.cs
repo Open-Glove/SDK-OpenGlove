@@ -17,8 +17,6 @@ namespace testwebSockets
              wssv.Start();
              Console.ReadKey(true);
              wssv.Stop();*/
-            Glove g = new Glove();
-
         }
     }
 }

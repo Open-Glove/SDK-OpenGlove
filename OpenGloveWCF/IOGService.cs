@@ -8,6 +8,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using WebSocketSharp;
+using WebSocketSharp.Server;
 
 namespace OpenGloveWCF
 {
@@ -113,6 +115,7 @@ namespace OpenGloveWCF
 
         private static Glove LeftGlove;
         private static Glove RightGlove;
+
 
         /// <summary>
         /// Gets the current list of gloves connected to the system. If it is the first 
