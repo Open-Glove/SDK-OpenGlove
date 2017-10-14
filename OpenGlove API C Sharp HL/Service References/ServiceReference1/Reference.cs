@@ -486,11 +486,14 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/ActivateMany", ReplyAction="http://tempuri.org/IOGService/ActivateManyResponse")]
         int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/streamData", ReplyAction="http://tempuri.org/IOGService/streamDataResponse")]
-        int streamData();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/startWSService", ReplyAction="http://tempuri.org/IOGService/startWSServiceResponse")]
+        int startWSService();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/starBroadcasting", ReplyAction="http://tempuri.org/IOGService/starBroadcastingResponse")]
-        int starBroadcasting();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/startBroadcasting", ReplyAction="http://tempuri.org/IOGService/startBroadcastingResponse")]
+        int startBroadcasting(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/stopBroadcasting", ReplyAction="http://tempuri.org/IOGService/stopBroadcastingResponse")]
+        int stopBroadcasting(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -548,12 +551,16 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
             return base.Channel.ActivateMany(gloveAddress, actuators, intensityList);
         }
         
-        public int streamData() {
-            return base.Channel.streamData();
+        public int startWSService() {
+            return base.Channel.startWSService();
         }
         
-        public int starBroadcasting() {
-            return base.Channel.starBroadcasting();
+        public int startBroadcasting(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove) {
+            return base.Channel.startBroadcasting(glove);
+        }
+        
+        public int stopBroadcasting(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove) {
+            return base.Channel.stopBroadcasting(glove);
         }
     }
 }

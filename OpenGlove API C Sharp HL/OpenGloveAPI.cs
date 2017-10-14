@@ -25,7 +25,8 @@ namespace OpenGlove_API_C_Sharp_HL
         {
             NetHttpBinding binding = new NetHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
-            serviceClient = new OGServiceClient(binding, address); 
+            serviceClient = new OGServiceClient(binding, address);
+            serviceClient.startWSService();
         }
 
         /// <summary>
@@ -41,11 +42,14 @@ namespace OpenGlove_API_C_Sharp_HL
             return instance;
         }
 
-        public void letsgoWS()
+        public void letsgoWS(Glove g)
         {
-            serviceClient.streamData();
-            Thread.Sleep(1000);
-            serviceClient.starBroadcasting();
+            serviceClient.startBroadcasting(g);
+        }
+
+        public void stopWS(Glove g)
+        {
+            serviceClient.stopBroadcasting(g);
         }
 
         /// <summary>

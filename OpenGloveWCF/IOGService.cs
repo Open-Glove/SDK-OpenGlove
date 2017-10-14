@@ -71,10 +71,13 @@ namespace OpenGloveWCF
 
     
         [OperationContract]
-        int streamData();
+        int startWSService();
 
         [OperationContract]
-        int starBroadcasting();
+        int startBroadcasting(Glove glove);
+
+        [OperationContract]
+        int stopBroadcasting(Glove glove);
 
     }
     /*

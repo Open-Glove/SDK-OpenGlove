@@ -50,7 +50,6 @@ namespace OpenGlovePrototype2
 
         public HandConfiguration(Glove selectedGlove)
         {
-          
             InitializeComponent();
             configManager = new ConfigManager();
             this.selectedGlove = selectedGlove;
@@ -84,7 +83,6 @@ namespace OpenGlovePrototype2
             {
                 this.numberFlexors.Content = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count;
             }
-            
         }
 
         private void openButton_Click(object sender, RoutedEventArgs e)

@@ -20,22 +20,71 @@ namespace OpenGloveWCF
 
         private BackgroundWorker bgw;
 
-        public int streamData()
+        public int startWSService()
         {
-            openGloveWS.addEndPoint();
-            openGloveWS.startWS();
+            try
+            {
+                openGloveWS.addEndPoint();
+                openGloveWS.startWS();
+                return 0;
+            }
+            catch
+            {
+                return 1; // error
+            }
+            
+        }
+
+        public int startBroadcasting(Glove glove) {
+            if(glove.Connected == true)
+            {
+                if (glove.Side == Sides.Right)
+                {
+                    try
+                    {
+                        setGloveWS(glove.Side);
+                        openGloveWS.startBroadcast(glove.Side);
+                        return 0;
+                    }
+                    catch
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        setGloveWS(glove.Side);
+                        openGloveWS.startBroadcast(glove.Side);
+                        return 0;
+                    }
+                    catch
+                    {
+                        return 1;
+                    }
+                }
+            }else
+            {
+                return 1;
+            }
+        }
+
+        public int stopBroadcasting(Glove glove)
+        {
+            openGloveWS.stopBroadcast(glove.Side);
             return 0;
         }
 
-        public int starBroadcasting() {
-            setRightGloveWS();
-            openGloveWS.startBroadcast();
-            return 0;
-        }
-
-        public void setRightGloveWS()
+        public void setGloveWS(Sides side)
         {
-            openGloveWS.setRightGloveWS(Glove.getRightlove());
+            if(side == Sides.Right)
+            {
+                openGloveWS.setRightGloveWS(Glove.getRightlove());
+            }else
+            {
+                openGloveWS.setLeftGloveWS(Glove.getLeftGlove());
+            }
         }
 
         void bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -180,6 +229,7 @@ namespace OpenGloveWCF
                                 g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
                                 g.Connected = true;
                                 Glove.setRightGlove(g.BluetoothAddress);
+
                             }
                         }else
                         {

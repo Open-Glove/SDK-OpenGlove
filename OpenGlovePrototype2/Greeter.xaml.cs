@@ -432,7 +432,12 @@ namespace OpenGlovePrototype2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            gloves.letsgoWS();
+            gloves.letsgoWS(this.selectedGlove);
+        }
+
+        private void buttonStopWS_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.stopWS(this.selectedGlove);
         }
     }
 }
