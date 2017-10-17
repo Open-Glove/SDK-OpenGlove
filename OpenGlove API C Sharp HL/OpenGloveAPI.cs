@@ -5,7 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Xml.Linq;
-
+using WebSocketSharp;
 
 namespace OpenGlove_API_C_Sharp_HL
 {
@@ -50,6 +50,20 @@ namespace OpenGlove_API_C_Sharp_HL
         public void stopWS(Glove g)
         {
             serviceClient.stopBroadcasting(g);
+        }
+
+        string a;
+
+        public void listenerWS()
+        {
+            using (var ws = new WebSocket("ws://localhost:9876/rightGlove"))
+            {
+                ws.OnMessage += (sender, e) => {
+                    a = e.Data;
+                    Console.WriteLine("Flexor: " + e.Data);
+                };     
+                ws.Connect();
+            }
         }
 
         /// <summary>
@@ -253,5 +267,20 @@ namespace OpenGlove_API_C_Sharp_HL
         Thenar,
 
         HypoThenarProximal
+    }
+
+    public enum FlexorsRegion
+    {
+        ThumbInterphalangealJoint = 0,
+        IndexInterphalangealJoint,
+        MiddleInterphalangealJoint,
+        RingInterphalangealJoint,
+        SmallInterphalangealJoint,
+
+        ThumbMetacarpophalangealJoint,
+        IndexMetacarpophalangealJoint,
+        MiddleMetacarpophalangealJoint,
+        RingMetacarpophalangealJoint,
+        SmallMetacarpophalangealJoint
     }
 }

@@ -12,6 +12,7 @@ namespace OpenGloveWCF
 {
     public class OGService : IOGService
     {
+
         private const bool DEBUGGING = false;
 
         private const int AREACOUNT = 58;
@@ -36,6 +37,7 @@ namespace OpenGloveWCF
         }
 
         public int startBroadcasting(Glove glove) {
+
             if(glove.Connected == true)
             {
                 if (glove.Side == Sides.Right)

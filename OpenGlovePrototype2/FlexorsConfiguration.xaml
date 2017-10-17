@@ -20,7 +20,7 @@
         </Menu>
         <TabControl x:Name="tabControl" Height="540" VerticalAlignment="Top" Margin="264,110,0,0" HorizontalAlignment="Left" Width="534" Grid.ColumnSpan="2" IsHitTestVisible="True" SelectionChanged="tabControl_SelectionChanged_1" >
 
-            <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True" >
+            <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True"  >
                 <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -59,7 +59,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region0" HorizontalAlignment="Left" Height="96" Margin="19,12,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region0" HorizontalAlignment="Left" Height="96" Margin="19,12,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="ThumbInterphalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -96,7 +96,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region1" HorizontalAlignment="Left" Height="96" Margin="9,17,0,-4" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerIndexDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region1" HorizontalAlignment="Left" Height="96" Margin="9,17,0,-4" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="IndexInterphalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -133,7 +133,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region2" HorizontalAlignment="Left" Height="96" Margin="7,11,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region2" HorizontalAlignment="Left" Height="96" Margin="7,11,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="MiddleInterphalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -171,7 +171,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region3" HorizontalAlignment="Left" Margin="15,6,0,-18" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.Row="1">
+                            <Rectangle x:Name="region3" HorizontalAlignment="Left" Margin="15,6,0,-18" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="RingInterphalangealJoint" Grid.Row="1">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -209,7 +209,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region4" HorizontalAlignment="Left" Margin="20,5,0,-17" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.Row="1">
+                            <Rectangle x:Name="region4" HorizontalAlignment="Left" Margin="20,5,0,-17" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="SmallInterphalangealJoint" Grid.Row="1">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -246,7 +246,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region5" HorizontalAlignment="Left" Margin="4,12,0,1" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region5" HorizontalAlignment="Left" Margin="4,12,0,1" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="ThumbMetacarpophalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -284,7 +284,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region6" HorizontalAlignment="Left" Margin="9,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region6" HorizontalAlignment="Left" Margin="9,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="IndexMetacarpophalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -322,7 +322,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region7" HorizontalAlignment="Left" Margin="15,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region7" HorizontalAlignment="Left" Margin="15,5,0,8" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="MiddleMetacarpophalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -360,7 +360,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region8" HorizontalAlignment="Left" Margin="19,13,0,0" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region8" HorizontalAlignment="Left" Margin="19,13,0,0" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="RingMetacarpophalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -398,7 +398,7 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="region9" HorizontalAlignment="Left" Margin="16,17,0,-4" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="FingerSmallDistal" Grid.RowSpan="2">
+                            <Rectangle x:Name="region9" HorizontalAlignment="Left" Margin="16,17,0,-4" Width="33" RenderTransformOrigin="0.5,0.5" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" Fill="#00000000" MouseUp="region1_MouseUp" StrokeThickness="3" Stroke="#FFF0F0F0" ToolTip="SmallMetacarpophalangealJoint" Grid.RowSpan="2">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.999" ScaleX="1.001"/>
@@ -468,7 +468,7 @@
                     </ProgressBar>
 
                     <!-- Finger 1 -->
-                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1">
+                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1" Maximum="300" Minimum="100">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -480,7 +480,7 @@
                     </ProgressBar>
 
                     <!-- Finger 2 -->
-                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2">
+                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2" Maximum="300" Minimum="100">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

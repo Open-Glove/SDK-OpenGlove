@@ -8,6 +8,7 @@ using WebSocketSharp.Server;
 using OpenGlove;
 using System.Threading;
 using System.Runtime.Serialization;
+using NetJSON;
 
 namespace OpenGloveWCF
 {
@@ -19,15 +20,14 @@ namespace OpenGloveWCF
         public static int delay = 60;
         public static Glove RightGlove, LeftGlove;
         static Thread broadcastRG, broadcastLG;
-        private static Boolean rightFlag, leftFlag;
 
         static string rightGloveTrackingURL = "/rightGlove";
         static string leftGloveTrackingURL = "/leftGlove";
 
         public void addEndPoint()
         {
-            wssv.AddWebSocketService<WSbase.Laputa>(rightGloveTrackingURL);
-            wssv.AddWebSocketService<WSbase.Laputa>(leftGloveTrackingURL);
+            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>(rightGloveTrackingURL);
+            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>(leftGloveTrackingURL);
         }
         public void startWS()
         {
@@ -51,35 +51,40 @@ namespace OpenGloveWCF
 
         public void broadCastFlexors(string trackingURL)
         {
-            Boolean flag;
             Dictionary<int, int> flexors;
             LegacyOpenGlove instance;
             if (trackingURL.Equals(rightGloveTrackingURL))
             {
+            //    RightGlove = Glove.getRightlove();
                 instance = RightGlove.LegacyGlove;
                 flexors = RightGlove.GloveConfiguration.GloveProfile.FlexorsMappings;
-                rightFlag = true;
-                flag = rightFlag;
             }
             else
             {
+            //    LeftGlove = Glove.getLeftGlove();
                 instance = LeftGlove.LegacyGlove;
                 flexors = LeftGlove.GloveConfiguration.GloveProfile.FlexorsMappings;
-                leftFlag = true;
-                flag = leftFlag;
             }
             TimeSpan stop, start;
-            
+            Boolean iguales = Object.ReferenceEquals(RightGlove, Glove.getRightlove());
+            trackingData data = new trackingData();
+            data.FlexorsValues = new Dictionary<int, int>();
+            data.AccelerometerValues = new Dictionary<int, int>();
             while (true)
             {
                 start = new TimeSpan(DateTime.Now.Ticks);
                 foreach (KeyValuePair<int, int> mapping in flexors)
                 {
-                    wssv.WebSocketServices[trackingURL].Sessions.Broadcast(mapping.Value.ToString()+": "+instance.AnalogRead(mapping.Value));
+                    data.FlexorsValues.Add(mapping.Key, Int32.Parse(instance.AnalogRead(mapping.Value)));
                 }
+                var json = NetJSON.NetJSON.Serialize(data);
+                data.FlexorsValues.Clear();
+
+                // wssv.WebSocketServices[trackingURL].Sessions.Broadcast(mapping.Value.ToString() + ": " + instance.AnalogRead(mapping.Value));
+                wssv.WebSocketServices[trackingURL].Sessions.Broadcast(json);
                 stop = new TimeSpan(DateTime.Now.Ticks);
                 double a = stop.Subtract(start).TotalMilliseconds;
-                wssv.WebSocketServices[trackingURL].Sessions.Broadcast("tiempo: "+a);
+               // wssv.WebSocketServices[trackingURL].Sessions.Broadcast("tiempo: "+a);
                 Thread.Sleep(delay);
             }
         }
@@ -101,12 +106,10 @@ namespace OpenGloveWCF
         {
             if (side == Sides.Right)
             {
-               // rightFlag = false;
                 broadcastRG.Abort();
             }
             else
             {
-               // leftFlag = false;
                 broadcastLG.Abort();
             }     
         }

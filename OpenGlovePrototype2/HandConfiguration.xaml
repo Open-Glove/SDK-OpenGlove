@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenGlovePrototype2"
         mc:Ignorable="d"
-        Title="HandConfiguration" Height="252.911" Width="470.126" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFCBF3E7">
+        Title="HandConfiguration" Height="274.62" Width="470.126" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>

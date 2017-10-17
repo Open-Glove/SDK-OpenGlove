@@ -11,6 +11,9 @@ using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System.Threading;
+using WebSocketSharp;
+using NetJSON;
+using System.Threading.Tasks;
 
 namespace OpenGlovePrototype2
 {
@@ -37,6 +40,8 @@ namespace OpenGlovePrototype2
         private Glove selectedGlove;
 
         private ConfigManager configManager;
+
+        private OpenGlove_API_C_Sharp_HL.trackingData tData = new OpenGlove_API_C_Sharp_HL.trackingData();
 
         public FlexorsConfiguration(Glove selectedGlove)
         {
@@ -76,6 +81,10 @@ namespace OpenGlovePrototype2
             {
                 flipControls();
             }
+
+            //WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
+           
+
         }
 
         /// <summary>
@@ -366,8 +375,10 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
+        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove")
 
-        private void buttonTestFlexors_Click(object sender, RoutedEventArgs e)
+        Task mytask;
+        private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
         {
             if (!selectedGlove.Connected)
             {
@@ -380,33 +391,13 @@ namespace OpenGlovePrototype2
             }
             sw.Restart();
 
-            /*  Mapping mapping = (Mapping)this.mappingsList.SelectedItem;
-              if (testing)
-              {
-                  this.gloves.Activate(selectedGlove, Int32.Parse(mapping.Region), 0);
-                  testing = false;
-                  buttonTestIntensity.Content = "Test";
-                  this.mappingsList.IsEnabled = true;
 
-              }
-              else if (this.mappingsList.SelectedItem != null)
-              {
-                  this.gloves.Activate(selectedGlove, Int32.Parse(mapping.Region), ((int)this.intensityUpDown.Value));
-
-                  sw.Stop();
-
-                  Console.WriteLine("Elapsed={0}", sw.Elapsed);
-
-                  testing = true;
-                  buttonTestIntensity.Content = "Stop";
-                  this.mappingsList.IsEnabled = false;
-
-              }
-              */
             if (testing)
             {
                 testing = false;
                 buttonTestFlexors.Content = "Test";
+                //gloves.stopWS(this.selectedGlove);
+                
                 tabControl.SelectedIndex = 0;
 
             }
@@ -414,9 +405,45 @@ namespace OpenGlovePrototype2
             {
                 testing = true;
                 tabControl.SelectedIndex = 1;
+                ws.Close();
+                // gloves.letsgoWS(this.selectedGlove);
+                Console.WriteLine("TEST WS");
+
+                mytask = Task.Run(() =>
+                {
+                    using (ws)
+                    {
+                        ws.OnMessage += (sender, ev) =>
+                        {
+                            tData = NetJSON.NetJSON.Deserialize<OpenGlove_API_C_Sharp_HL.trackingData>(ev.Data);
+                            Console.WriteLine("JSON: " + ev.Data);
+                            if (tData.FlexorsValues != null)
+                            {
+                                Console.WriteLine("not null");
+                                foreach (KeyValuePair<string, int> mappingValue in tData.FlexorsValues)
+                                {
+                                    Console.WriteLine("mapping: " + mappingValue.Key+ " Value: "+ mappingValue.Value);
+                                    
+
+                                    this.Dispatcher.Invoke((Action)(() =>
+                                    {
+                                        changeBarValue(Int32.Parse(mappingValue.Key), mappingValue.Value);
+                                    }));
+                                }
+                            }else
+                            {
+                                Console.WriteLine("Flexors NULL");
+                            }
+                        };
+                        ws.Connect();
+                        while (testing == true) { }
+                    }
+                });
+
                 buttonTestFlexors.Content = "Stop";
             }
         }
+
 
         private void changeBarValue(int index, int value)
         {

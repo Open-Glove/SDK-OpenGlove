@@ -344,6 +344,7 @@ namespace OpenGloveWCF
 
                 [DataMember]
                 public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
+
             }
         }
 

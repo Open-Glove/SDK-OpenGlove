@@ -12,13 +12,13 @@ namespace OpenGloveWCF
     {
         private static List<int> flexors = new List<int> {16,17,19 };
 
-        public class Laputa : WebSocketBehavior
+        public class FlexorsEndPoint : WebSocketBehavior
         {
             protected override void OnMessage(MessageEventArgs e)
             {
-                var msg = e.Data == "BALUS"
-                          ? "I've been balused already..."
-                          : "I'm not available now.";
+                var msg = e.Data == "ayuda"
+                          ? "Primero configura el guante y luego activa la obtención de datos..."
+                          : "OpenGlove WebSockets aun no implementa funciones para datos entrantes, lo siento";
                 Send(msg);
             }
         }

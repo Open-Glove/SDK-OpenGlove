@@ -92,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenGlove API C Sharp\OpenGlove API C Sharp\OpenGlove API C Sharp.csproj">
-      <Project>{cef4f9b5-732b-4af3-9963-deda08f9b0f7}</Project>
-      <Name>OpenGlove API C Sharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenGloveWCF\OpenGloveWCF.csproj">
       <Project>{d2b43edd-0119-4779-aafb-b9a19d36e492}</Project>
       <Name>OpenGloveWCF</Name>
