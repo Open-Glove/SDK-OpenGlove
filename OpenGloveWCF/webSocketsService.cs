@@ -24,6 +24,19 @@ namespace OpenGloveWCF
         static string rightGloveTrackingURL = "/rightGlove";
         static string leftGloveTrackingURL = "/leftGlove";
 
+        public int map (float valor, float in_min, float in_max, float out_min, float out_max)
+        {
+            int resultado = (int)Math.Round((valor-in_min) * (out_max-out_min) / (in_max-in_min) + out_min);
+            if (resultado < 0)
+            {
+                return 0;
+            }
+            if (resultado > 100){
+                return 100;
+            }
+            return resultado;
+        }
+
         public void addEndPoint()
         {
             wssv.AddWebSocketService<WSbase.FlexorsEndPoint>(rightGloveTrackingURL);
@@ -75,7 +88,9 @@ namespace OpenGloveWCF
                 start = new TimeSpan(DateTime.Now.Ticks);
                 foreach (KeyValuePair<int, int> mapping in flexors)
                 {
-                    data.FlexorsValues.Add(mapping.Key, Int32.Parse(instance.AnalogRead(mapping.Value)));
+                    
+                    // data.FlexorsValues.Add(mapping.Key, Int32.Parse(instance.AnalogRead(mapping.Value)));
+                    data.FlexorsValues.Add(mapping.Key, map(Int32.Parse(instance.AnalogRead(mapping.Value)),270,90,0,100));
                 }
                 var json = NetJSON.NetJSON.Serialize(data);
                 data.FlexorsValues.Clear();

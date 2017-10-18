@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OpenGlovePrototype2"
          xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         mc:Ignorable="d"
-        Title="OpenGlove Profile Tool" Height="732.99" Width="888.079" Background="#FF00B47F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="OpenGlove Profile Tool" Height="732.99" Width="888.079" Background="#FF00B47F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid Background="#FFCBF3E7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="363*"/>
@@ -456,7 +456,7 @@
 
                     <!-- Finger 0 -->
 
-                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="0" Maximum="300">
+                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="0">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -468,7 +468,7 @@
                     </ProgressBar>
 
                     <!-- Finger 1 -->
-                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1" Maximum="300" Minimum="100">
+                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -480,7 +480,7 @@
                     </ProgressBar>
 
                     <!-- Finger 2 -->
-                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2" Maximum="300" Minimum="100">
+                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2">
                         <ProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

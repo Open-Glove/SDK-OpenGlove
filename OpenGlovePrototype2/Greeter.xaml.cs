@@ -185,7 +185,7 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = false;
-                this.buttonOpenProfileConfig.IsEnabled = false;
+              //  this.buttonOpenProfileConfig.IsEnabled = false;
                 this.ConnectMenuItem.IsEnabled = false;
                 this.CurrentProfileMenuItem.IsEnabled = false;
             }
@@ -195,7 +195,7 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = true;
-                this.buttonOpenProfileConfig.IsEnabled = true;
+              //  this.buttonOpenProfileConfig.IsEnabled = true;
                 this.ConnectMenuItem.IsEnabled = true;
 
                 if (this.selectedGlove.GloveConfiguration.GloveProfile == null)

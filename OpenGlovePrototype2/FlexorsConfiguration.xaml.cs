@@ -375,7 +375,7 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
-        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove")
+        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
 
         Task mytask;
         private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
@@ -489,6 +489,15 @@ namespace OpenGlovePrototype2
 
         private void tabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (testing == true)
+            {
+                testing = false;
+            }
 
         }
     }
