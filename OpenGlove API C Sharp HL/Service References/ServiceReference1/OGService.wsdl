@@ -58,24 +58,6 @@
   <wsdl:message name="IOGService_ActivateMany_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActivateManyResponse" />
   </wsdl:message>
-  <wsdl:message name="IOGService_startWSService_InputMessage">
-    <wsdl:part name="parameters" element="tns:startWSService" />
-  </wsdl:message>
-  <wsdl:message name="IOGService_startWSService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:startWSServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="IOGService_startBroadcasting_InputMessage">
-    <wsdl:part name="parameters" element="tns:startBroadcasting" />
-  </wsdl:message>
-  <wsdl:message name="IOGService_startBroadcasting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:startBroadcastingResponse" />
-  </wsdl:message>
-  <wsdl:message name="IOGService_stopBroadcasting_InputMessage">
-    <wsdl:part name="parameters" element="tns:stopBroadcasting" />
-  </wsdl:message>
-  <wsdl:message name="IOGService_stopBroadcasting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:stopBroadcastingResponse" />
-  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -104,18 +86,6 @@
     <wsdl:operation name="ActivateMany">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/ActivateMany" message="tns:IOGService_ActivateMany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ActivateManyResponse" message="tns:IOGService_ActivateMany_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="startWSService">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/startWSService" message="tns:IOGService_startWSService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/startWSServiceResponse" message="tns:IOGService_startWSService_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="startBroadcasting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/startBroadcasting" message="tns:IOGService_startBroadcasting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/startBroadcastingResponse" message="tns:IOGService_startBroadcasting_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="stopBroadcasting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/stopBroadcasting" message="tns:IOGService_stopBroadcasting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/stopBroadcastingResponse" message="tns:IOGService_stopBroadcasting_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -177,33 +147,6 @@
     </wsdl:operation>
     <wsdl:operation name="ActivateMany">
       <soap12:operation soapAction="http://tempuri.org/IOGService/ActivateMany" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="startWSService">
-      <soap12:operation soapAction="http://tempuri.org/IOGService/startWSService" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="startBroadcasting">
-      <soap12:operation soapAction="http://tempuri.org/IOGService/startBroadcasting" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="stopBroadcasting">
-      <soap12:operation soapAction="http://tempuri.org/IOGService/stopBroadcasting" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

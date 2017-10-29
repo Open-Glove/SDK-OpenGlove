@@ -1,4 +1,6 @@
 using System.IO.Ports;
+using WebSocketSharp;
+using WebSocketSharp.Server;
 
 namespace OpenGlove
 {
@@ -8,6 +10,24 @@ namespace OpenGlove
     /// </summary>
     class Communication
     {
+        private static string WSAddress = "ws://localhost:9876/";
+        private static WebSocketServer wssv = new WebSocketServer(WSAddress);
+
+        public class WSbase
+        {
+
+            public class FlexorsEndPoint : WebSocketBehavior
+            {
+                protected override void OnMessage(MessageEventArgs e)
+                {
+                    var msg = e.Data == "ayuda"
+                              ? "Primero configura el guante y luego activa la obtención de datos..."
+                              : "OpenGlove WebSockets aun no implementa funciones para datos entrantes...";
+                    Send(msg);
+                }
+            }
+        }
+
         /// <summary>
         /// Serial port communication field. 
         /// </summary>
@@ -46,10 +66,11 @@ namespace OpenGlove
         /// <param name="baudRate">Data rate in bits per second. Use one of these values: 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200</param>
         public void OpenPort(string portName, int baudRate)
         {
-           
             this.port.PortName = portName;
             this.port.BaudRate = baudRate;
             this.port.Open();
+            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>(this.port.PortName+"/flexors");
+            wssv.Start();
         }
         /// <summary>
         /// Send the string to the serial port
@@ -73,6 +94,7 @@ namespace OpenGlove
         public void ClosePort()
         {
             this.port.Close();
+            wssv.Stop();
 
         }
 

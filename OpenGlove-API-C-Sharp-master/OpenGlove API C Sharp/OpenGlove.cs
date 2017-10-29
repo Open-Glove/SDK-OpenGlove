@@ -166,6 +166,55 @@ namespace OpenGlove
 
         }
 
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="pin"></param>
+        /// <param name="mapping"></param>
+        public void addFlexor(int pin, int mapping)
+        {
+            string message = messageGenerator.addFlexor(pin, mapping);
+            communication.Write(message);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="mapping"></param>
+        public void removeFlexor(int mapping)
+        {
+            string message = messageGenerator.removeFlexor(mapping);
+            communication.Write(message);
+        }
+        //calibrateFlexors()
+
+        /// <summary>
+        ///  
+        /// </summary>
+        public void calibrateFlexors()
+        {
+            string message = messageGenerator.calibrateFlexors();
+            communication.Write(message);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        public void confirmCalibration()
+        {
+            string message = messageGenerator.confirmCalibration();
+            communication.Write(message);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="value"></param>
+        public void setThreshold(int value)
+        {
+            string message = messageGenerator.setThreshold(value);
+            communication.Write(message);
+        }
 
     }
 }

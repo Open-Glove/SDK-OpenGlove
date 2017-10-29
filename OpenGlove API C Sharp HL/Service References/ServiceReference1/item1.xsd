@@ -98,44 +98,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="startWSService">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="startWSServiceResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="startWSServiceResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="startBroadcasting">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OpenGloveWCF" minOccurs="0" name="glove" nillable="true" type="q6:Glove" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="startBroadcastingResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="startBroadcastingResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="stopBroadcasting">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OpenGloveWCF" minOccurs="0" name="glove" nillable="true" type="q7:Glove" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="stopBroadcastingResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="stopBroadcastingResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

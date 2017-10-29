@@ -48,6 +48,24 @@ namespace OpenGlove
         private string analogWriteInputFunctionNumber = "8";
 
         /// <summary>
+        /// Description
+        /// </summary>
+        private string addFlexorInputFunctionNumber = "10";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string removeFlexorInputFunctionNumber = "11";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string calibrateFlexorsInputFunctionNumber = "12";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string setThresholdInputFunctionNumber = "13";
+
+
+        /// <summary>
         /// Generate a message to initialize pins like motors in the control software
         /// </summary>
         /// <param name="pins">List of pins that  are initialized</param>
@@ -348,8 +366,66 @@ namespace OpenGlove
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pin">Number of the pin</param>
+        /// <param name="mapping">Mapping value, it can be from 0 to 10</param>
+        /// <returns>A string with the "addFlexor" format specified in the OpenGlove communication protocol</returns>
+        public string addFlexor(int pin, int mapping)
+        {
+            string message = addFlexorInputFunctionNumber + separator + pin
+                + separator + mapping + terminal;
+            return message;
+        }
 
-       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mapping">Mapping value, it can be from 0 to 10</param>
+        /// <returns>A string with the "removeFlexor" format specified in the OpenGlove communication protocol</returns>
+        public string removeFlexor(int mapping)
+        {
+            string message = removeFlexorInputFunctionNumber + separator + mapping + terminal;
+            return message;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "removeFlexor" format specified in the OpenGlove communication protocol</returns>
+        public string calibrateFlexors()
+        {
+            string message = calibrateFlexorsInputFunctionNumber + terminal;
+            return message;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "removeFlexor" format specified in the OpenGlove communication protocol</returns>
+        public string confirmCalibration()
+        {
+            string message = "e";
+            return message;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>A string with the "setThreshold" format specified in the OpenGlove communication protocol</returns>
+        public string setThreshold(int value)
+        {
+            string message = setThresholdInputFunctionNumber + separator + value + terminal;
+            return message;
+        }
+
+
+
 
     }
 }
