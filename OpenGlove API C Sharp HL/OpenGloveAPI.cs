@@ -26,7 +26,6 @@ namespace OpenGlove_API_C_Sharp_HL
             NetHttpBinding binding = new NetHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
-            serviceClient.startWSService();
         }
 
         /// <summary>
@@ -41,17 +40,7 @@ namespace OpenGlove_API_C_Sharp_HL
             }
             return instance;
         }
-
-        public void letsgoWS(Glove g)
-        {
-            serviceClient.startBroadcasting(g);
-        }
-
-        public void stopWS(Glove g)
-        {
-            serviceClient.stopBroadcasting(g);
-        }
-
+        /*
         string a;
 
         public void listenerWS()
@@ -65,6 +54,7 @@ namespace OpenGlove_API_C_Sharp_HL
                 ws.Connect();
             }
         }
+        */
 
         /// <summary>
         /// List of current connected devices
@@ -90,12 +80,6 @@ namespace OpenGlove_API_C_Sharp_HL
         public List<Glove> UpdateDevices()
         {
             return serviceClient.RefreshGloves().ToList();
-        }
-
-        public int getflexor(string gloveAddress, int pin)
-        {
-            
-            return 0;
         }
 
 

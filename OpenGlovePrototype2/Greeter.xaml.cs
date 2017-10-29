@@ -185,7 +185,7 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = false;
-                this.buttonOpenProfileConfig.IsEnabled = false;
+               // this.buttonOpenProfileConfig.IsEnabled = false;
                 this.ConnectMenuItem.IsEnabled = false;
                 this.CurrentProfileMenuItem.IsEnabled = false;
             }
@@ -195,7 +195,7 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = true;
-                this.buttonOpenProfileConfig.IsEnabled = true;
+               // this.buttonOpenProfileConfig.IsEnabled = true;
                 this.ConnectMenuItem.IsEnabled = true;
 
                 if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
@@ -353,16 +353,6 @@ namespace OpenGlovePrototype2
             {
                 selectedGlove.Side = (Side)((ComboBox)sender).SelectedItem;
                 configManager.saveGlove(selectedGlove);
-            }else
-            {
-                if (selectedGlove.Side == Side.Right)
-                {
-               //MessageBoxResult messageBoxResult = MessageBox.Show("Para cambiar el guante de lado, primero desconecta el guante", "Cambio de lado", MessageBoxButton.OK);
-                    ((ComboBox)sender).SelectedIndex = 1;
-                }else
-                {
-                    ((ComboBox)sender).SelectedIndex = 0;
-                }
             }
             
         }
@@ -430,14 +420,5 @@ namespace OpenGlovePrototype2
             
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            gloves.letsgoWS(this.selectedGlove);
-        }
-
-        private void buttonStopWS_Click(object sender, RoutedEventArgs e)
-        {
-            gloves.stopWS(this.selectedGlove);
-        }
     }
 }

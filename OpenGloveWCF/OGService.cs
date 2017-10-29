@@ -182,5 +182,31 @@ namespace OpenGloveWCF
             }
             return 0;
         }
+
+        public void addFlexor(Glove glove, int pin, int mapping)
+        {
+            glove.LegacyGlove.addFlexor(pin, mapping);
+        }
+
+        public void removeflexor(Glove glove, int mapping)
+        {
+            glove.LegacyGlove.removeFlexor(mapping);
+        }
+
+        public void calibrateFlexors(Glove glove)
+        {
+            glove.LegacyGlove.calibrateFlexors();
+        }
+
+        public void confirmCalibration(Glove glove)
+        {
+            glove.LegacyGlove.confirmCalibration();
+        }
+
+        public void setThreshold(Glove glove, int value)
+        {
+            glove.LegacyGlove.setThreshold(value);
+        }
+
     }
 }

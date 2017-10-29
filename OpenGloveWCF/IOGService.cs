@@ -69,6 +69,21 @@ namespace OpenGloveWCF
                     UriTemplate = "ActivateMany?gloveAddress={gloveAddress}")]
         int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList);
 
+        [OperationContract]
+        void addFlexor(Glove glove, int pin, int mapping);
+
+        [OperationContract]
+        void removeFlexor(Glove glove, int mapping);
+
+        [OperationContract]
+        void calibrateFlexors(Glove glove);
+
+        [OperationContract]
+        void confirmCalibration(Glove glove);
+
+        [OperationContract]
+        void setThreshold(Glove glove, int value);
+
     }
 
     
