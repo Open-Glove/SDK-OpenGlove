@@ -73,6 +73,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.15\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -106,6 +110,9 @@
     <Compile Include="AddBoard.xaml.cs">
       <DependentUpon>AddBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CalibratingFlexors.xaml.cs">
+      <DependentUpon>CalibratingFlexors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Greeter.xaml.cs">
       <DependentUpon>Greeter.xaml</DependentUpon>
@@ -126,6 +133,10 @@
       <DependentUpon>VibeBoardsConfiguration.xaml</DependentUpon>
     </Compile>
     <Page Include="AddBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalibratingFlexors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +233,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Images\calibrationText.gif" />
+    <Resource Include="Images\hand_closetoopen.gif" />
+    <Resource Include="Images\hand_openandclose.gif" />
+    <Resource Include="Images\hand_quiet.gif" />
     <Resource Include="dorsalBones.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
+using System;
 using System.IO.Ports;
+using System.Threading;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
@@ -10,9 +12,9 @@ namespace OpenGlove
     /// </summary>
     class Communication
     {
-        private static string WSAddress = "ws://localhost:9876/";
+        private static string WSAddress = "ws://localhost:9876";
         private static WebSocketServer wssv = new WebSocketServer(WSAddress);
-
+        static Thread readThread;
         public class WSbase
         {
 
@@ -31,7 +33,7 @@ namespace OpenGlove
         /// <summary>
         /// Serial port communication field. 
         /// </summary>
-        private SerialPort port = new SerialPort();
+        private static SerialPort port = new SerialPort();
 
         /// <summary>
         /// Initialize an instance of Communication class without open the communication with the device.
@@ -46,9 +48,9 @@ namespace OpenGlove
         /// <param name="baudRate">Data rate in bits per second. Use one of these values: 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200</param>
         public Communication(string portName, int baudRate)  
         {
-            this.port.PortName = portName;
-            this.port.BaudRate = baudRate;
-            this.port.Open();
+            port.PortName = portName;
+            port.BaudRate = baudRate;
+            port.Open();
         }
         /// <summary>
         /// Returns an array with all active serial ports names
@@ -66,11 +68,13 @@ namespace OpenGlove
         /// <param name="baudRate">Data rate in bits per second. Use one of these values: 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200</param>
         public void OpenPort(string portName, int baudRate)
         {
-            this.port.PortName = portName;
-            this.port.BaudRate = baudRate;
-            this.port.Open();
-            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>(this.port.PortName+"/flexors");
+            port.PortName = portName;
+            port.BaudRate = baudRate;
+            port.Open();
+            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>("/"+ port.PortName);
             wssv.Start();
+            readThread = new Thread(Read);
+            readThread.Start();
         }
         /// <summary>
         /// Send the string to the serial port
@@ -78,7 +82,7 @@ namespace OpenGlove
         /// <param name="data">String data to send</param>
         public void Write(string data)
         {
-            this.port.Write(data);
+            port.Write(data);
         }
         /// <summary>
         /// Read the input buffet until a next line character
@@ -86,20 +90,33 @@ namespace OpenGlove
         /// <returns>A string without the next line character</returns>
         public string ReadLine()
         {
-            return this.port.ReadLine();
+            return port.ReadLine();
         }
         /// <summary>
         /// Close the serial communication
         /// </summary>
         public void ClosePort()
         {
-            this.port.Close();
+            port.Close();
+            readThread.Abort();
             wssv.Stop();
 
         }
 
-       
-
+        public static void Read()
+        {
+            while (true)
+            {
+                try
+                {
+                    string message = port.ReadLine();
+                    wssv.WebSocketServices["/"+port.PortName].Sessions.Broadcast(message);
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
 
     }
 }

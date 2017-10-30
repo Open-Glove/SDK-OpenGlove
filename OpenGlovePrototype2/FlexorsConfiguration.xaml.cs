@@ -82,7 +82,6 @@ namespace OpenGlovePrototype2
                 flipControls();
             }
 
-            //WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
            
 
         }
@@ -209,6 +208,16 @@ namespace OpenGlovePrototype2
                 //Console.WriteLine("MAPPING: "+ mapping.Key + ", " + mapping.Value);
                 this.mappingsList.Items.Add(new Mapping() { Flexor = mapping.Value.ToString(), Region = mapping.Key.ToString() });
             }
+
+            if (this.mappingsList.Items.Count > 0)
+            {
+                buttonCalibrateFlexors.IsEnabled = true;
+                buttonTestFlexors.IsEnabled = true;
+            }else
+            {
+                buttonCalibrateFlexors.IsEnabled = false;
+                buttonTestFlexors.IsEnabled = false;
+            }
         }
 
         /// <summary>
@@ -306,12 +315,14 @@ namespace OpenGlovePrototype2
                         try
                         {
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Add(owner, selectionFlexor);
+                            gloves.addFlexor(this.selectedGlove, selectionFlexor, owner);
                         }
                         catch (Exception)
                         {
                             int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
                             liberateFlexor(liberatedFlexor, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner] = selectionFlexor;
+                            gloves.addFlexor(this.selectedGlove, selectionFlexor, owner);
                         }
                     }
                     else
@@ -324,6 +335,7 @@ namespace OpenGlovePrototype2
                             liberatedFlexorC = liberatedFlexor == null ? default(int) : liberatedFlexor.GetValueOrDefault();
                             liberateFlexor(liberatedFlexorC, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Remove(owner);
+                            gloves.removeFlexor(this.selectedGlove, owner);
                         }
                     }
                 }
@@ -375,7 +387,7 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
-        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove")
+        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
 
         Task mytask;
         private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
@@ -490,6 +502,33 @@ namespace OpenGlovePrototype2
         private void tabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void buttonCalibrateFlexors_Click(object sender, RoutedEventArgs e)
+        {
+            CalibratingFlexors CF = new CalibratingFlexors(selectedGlove);
+            CF.ShowDialog();
+        }
+
+        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(this.ThresholdValue.Value < 0)
+            {
+                this.ThresholdValue.Value = 0;
+            }
+        }
+
+        private void buttonSetThreshold_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                gloves.setThreshold(this.selectedGlove, (int)ThresholdValue.Value);
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 

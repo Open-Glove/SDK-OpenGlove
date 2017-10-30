@@ -82,6 +82,34 @@ namespace OpenGlove_API_C_Sharp_HL
             return serviceClient.RefreshGloves().ToList();
         }
 
+        public int addFlexor(Glove selectedGlove, int flexor, int mapping)
+        {
+            return this.serviceClient.addFlexor(selectedGlove.BluetoothAddress, flexor, mapping);
+        }
+
+        public int removeFlexor(Glove selectedGlove, int mapping)
+        {
+            return this.serviceClient.removeFlexor(selectedGlove.BluetoothAddress, mapping);
+        }
+
+        public void calibrateFlexors(Glove selectedGlove)
+        {
+           this.serviceClient.calibrateFlexors(selectedGlove.BluetoothAddress);
+        }
+
+        public void confirmCalibration(Glove selectedGlove)
+        {
+            this.serviceClient.confirmCalibration(selectedGlove.BluetoothAddress);
+        }
+
+        public void setThreshold(Glove selectedGlove, int value)
+        {
+            this.serviceClient.setThreshold(selectedGlove.BluetoothAddress,value);
+        }
+
+
+
+
 
         /// <summary>
         /// Establishes connection with a glove

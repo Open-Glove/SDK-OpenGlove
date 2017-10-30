@@ -182,31 +182,71 @@ namespace OpenGloveWCF
             }
             return 0;
         }
-
-        public void addFlexor(Glove glove, int pin, int mapping)
+        
+        public int addFlexor(string gloveAddress, int pin, int mapping)
         {
-            glove.LegacyGlove.addFlexor(pin, mapping);
+
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.addFlexor(pin, mapping);
+                    return 0;
+                }
+            }
+            return 1;
+
         }
 
-        public void removeflexor(Glove glove, int mapping)
+        public int removeFlexor(string gloveAddress, int mapping)
         {
-            glove.LegacyGlove.removeFlexor(mapping);
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.removeFlexor(mapping);
+                    return 0;
+                }
+            }
+            return 1;
+            
         }
 
-        public void calibrateFlexors(Glove glove)
+        public void calibrateFlexors(string gloveAddress)
         {
-            glove.LegacyGlove.calibrateFlexors();
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.calibrateFlexors();
+                }
+            }
+            
         }
 
-        public void confirmCalibration(Glove glove)
+        public void confirmCalibration(string gloveAddress)
         {
-            glove.LegacyGlove.confirmCalibration();
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.confirmCalibration();
+                }
+            }
+            
         }
 
-        public void setThreshold(Glove glove, int value)
+        public void setThreshold(string gloveAddress, int value)
         {
-            glove.LegacyGlove.setThreshold(value);
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setThreshold(value);
+                }
+            }
+            
         }
-
+        
     }
 }

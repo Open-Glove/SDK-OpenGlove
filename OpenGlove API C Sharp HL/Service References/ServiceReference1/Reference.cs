@@ -485,6 +485,21 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/ActivateMany", ReplyAction="http://tempuri.org/IOGService/ActivateManyResponse")]
         int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/addFlexor", ReplyAction="http://tempuri.org/IOGService/addFlexorResponse")]
+        int addFlexor(string gloveAddress, int pin, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/removeFlexor", ReplyAction="http://tempuri.org/IOGService/removeFlexorResponse")]
+        int removeFlexor(string gloveAddress, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/calibrateFlexors", ReplyAction="http://tempuri.org/IOGService/calibrateFlexorsResponse")]
+        void calibrateFlexors(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/confirmCalibration", ReplyAction="http://tempuri.org/IOGService/confirmCalibrationResponse")]
+        void confirmCalibration(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setThreshold", ReplyAction="http://tempuri.org/IOGService/setThresholdResponse")]
+        void setThreshold(string gloveAddress, int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -540,6 +555,26 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList) {
             return base.Channel.ActivateMany(gloveAddress, actuators, intensityList);
+        }
+        
+        public int addFlexor(string gloveAddress, int pin, int mapping) {
+            return base.Channel.addFlexor(gloveAddress, pin, mapping);
+        }
+        
+        public int removeFlexor(string gloveAddress, int mapping) {
+            return base.Channel.removeFlexor(gloveAddress, mapping);
+        }
+        
+        public void calibrateFlexors(string gloveAddress) {
+            base.Channel.calibrateFlexors(gloveAddress);
+        }
+        
+        public void confirmCalibration(string gloveAddress) {
+            base.Channel.confirmCalibration(gloveAddress);
+        }
+        
+        public void setThreshold(string gloveAddress, int value) {
+            base.Channel.setThreshold(gloveAddress, value);
         }
     }
 }

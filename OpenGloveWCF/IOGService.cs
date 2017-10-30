@@ -70,20 +70,45 @@ namespace OpenGloveWCF
         int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList);
 
         [OperationContract]
-        void addFlexor(Glove glove, int pin, int mapping);
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "AddFlexor?gloveAddress={gloveAddress}&pin={pin}&mapping={mapping}")]
+        int addFlexor(string gloveAddress, int pin, int mapping);
+        
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "RemoveFlexor?gloveAddress={gloveAddress}&mapping={mapping}")]
+        int removeFlexor(string gloveAddress, int mapping);
+        
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "CalibrateFlexors?gloveAddress={gloveAddress}")]
+        void calibrateFlexors(string gloveAddress);
 
         [OperationContract]
-        void removeFlexor(Glove glove, int mapping);
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "ConfirmCalibration?gloveAddress={gloveAddress}")]
+        void confirmCalibration(string gloveAddress);
 
         [OperationContract]
-        void calibrateFlexors(Glove glove);
-
-        [OperationContract]
-        void confirmCalibration(Glove glove);
-
-        [OperationContract]
-        void setThreshold(Glove glove, int value);
-
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setThreshold?gloveAddress={gloveAddress}&value={value}")]
+        void setThreshold(string gloveAddress, int value);
+        
     }
 
     

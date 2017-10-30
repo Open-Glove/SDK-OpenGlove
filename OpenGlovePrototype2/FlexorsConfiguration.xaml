@@ -597,8 +597,11 @@
 
             </ListView.View>
         </ListView>
-        <Button x:Name="buttonTestFlexors" Content="Test Flexors" HorizontalAlignment="Left" Margin="13,505,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonTestFlexors_Click"/>
+        <Button x:Name="buttonTestFlexors" Content="Test Flexors" HorizontalAlignment="Left" Margin="13,539,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonTestFlexors_Click" IsHitTestVisible="True" IsEnabled="False"/>
         <xctk:IntegerUpDown x:Name="intensityUpDown" Margin="88,584,268,0" VerticalAlignment="Top" Height="34" IsEnabled="False" DefaultValue="0" DisplayDefaultValueOnEmptyText="True"/>
+        <Button x:Name="buttonCalibrateFlexors" Content="Calibrate Flexors" HorizontalAlignment="Left" Margin="13,505,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonCalibrateFlexors_Click" IsEnabled="False"/>
+        <xctk:IntegerUpDown x:Name="ThresholdValue" HorizontalAlignment="Left" Margin="13,573,0,0" VerticalAlignment="Top" Height="34" Width="154" DefaultValue="0" DisplayDefaultValueOnEmptyText="True" ValueChanged="IntegerUpDown_ValueChanged"/>
+        <Button x:Name="buttonSetThreshold" Content="Set Threshold" HorizontalAlignment="Left" Margin="167,573,0,0" VerticalAlignment="Top" Width="92" Height="34" IsHitTestVisible="True" Click="buttonSetThreshold_Click"/>
 
     </Grid>
 </Window>

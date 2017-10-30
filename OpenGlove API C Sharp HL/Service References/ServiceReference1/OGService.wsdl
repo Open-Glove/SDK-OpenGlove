@@ -58,6 +58,36 @@
   <wsdl:message name="IOGService_ActivateMany_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActivateManyResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_addFlexor_InputMessage">
+    <wsdl:part name="parameters" element="tns:addFlexor" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_addFlexor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addFlexorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_removeFlexor_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeFlexor" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_removeFlexor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeFlexorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_calibrateFlexors_InputMessage">
+    <wsdl:part name="parameters" element="tns:calibrateFlexors" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_calibrateFlexors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:calibrateFlexorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_confirmCalibration_InputMessage">
+    <wsdl:part name="parameters" element="tns:confirmCalibration" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_confirmCalibration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:confirmCalibrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setThreshold_InputMessage">
+    <wsdl:part name="parameters" element="tns:setThreshold" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setThreshold_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setThresholdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -86,6 +116,26 @@
     <wsdl:operation name="ActivateMany">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/ActivateMany" message="tns:IOGService_ActivateMany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ActivateManyResponse" message="tns:IOGService_ActivateMany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addFlexor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/addFlexor" message="tns:IOGService_addFlexor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/addFlexorResponse" message="tns:IOGService_addFlexor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeFlexor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/removeFlexor" message="tns:IOGService_removeFlexor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/removeFlexorResponse" message="tns:IOGService_removeFlexor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="calibrateFlexors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/calibrateFlexors" message="tns:IOGService_calibrateFlexors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/calibrateFlexorsResponse" message="tns:IOGService_calibrateFlexors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCalibration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/confirmCalibration" message="tns:IOGService_confirmCalibration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/confirmCalibrationResponse" message="tns:IOGService_confirmCalibration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setThreshold">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setThreshold" message="tns:IOGService_setThreshold_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setThresholdResponse" message="tns:IOGService_setThreshold_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -147,6 +197,51 @@
     </wsdl:operation>
     <wsdl:operation name="ActivateMany">
       <soap12:operation soapAction="http://tempuri.org/IOGService/ActivateMany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFlexor">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/addFlexor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeFlexor">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/removeFlexor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calibrateFlexors">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/calibrateFlexors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCalibration">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/confirmCalibration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setThreshold">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/setThreshold" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
