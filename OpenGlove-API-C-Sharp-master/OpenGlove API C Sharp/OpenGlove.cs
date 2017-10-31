@@ -216,5 +216,14 @@ namespace OpenGlove
             communication.Write(message);
         }
 
+        /// <summary>
+        ///  
+        /// </summary>
+        public void resetFlexors()
+        {
+            string message = messageGenerator.resetFlexors();
+            communication.Write(message);
+        }
+
     }
 }

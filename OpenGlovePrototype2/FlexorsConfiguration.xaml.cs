@@ -50,6 +50,7 @@ namespace OpenGlovePrototype2
             configManager = new ConfigManager();
 
             this.selectedGlove = selectedGlove;
+
             this.initializeSelectors();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
@@ -387,7 +388,8 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
-        WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
+
+        WebSocket ws;
 
         Task mytask;
         private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
@@ -409,16 +411,16 @@ namespace OpenGlovePrototype2
                 testing = false;
                 buttonTestFlexors.Content = "Test";
                 //gloves.stopWS(this.selectedGlove);
-                
+                ws.Close();
                 tabControl.SelectedIndex = 0;
 
             }
-            else if (this.mappingsList.Items.Count > 0)
+            else if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
             {
+                ws = new WebSocket("ws://localhost:9876/"+this.selectedGlove.Port);
                 testing = true;
                 tabControl.SelectedIndex = 1;
-                ws.Close();
-                // gloves.letsgoWS(this.selectedGlove);
+                
                 Console.WriteLine("TEST WS");
 
                 mytask = Task.Run(() =>
@@ -427,24 +429,23 @@ namespace OpenGlovePrototype2
                     {
                         ws.OnMessage += (sender, ev) =>
                         {
-                            tData = NetJSON.NetJSON.Deserialize<OpenGlove_API_C_Sharp_HL.trackingData>(ev.Data);
-                            Console.WriteLine("JSON: " + ev.Data);
-                            if (tData.FlexorsValues != null)
+                            string[] words;
+                            if (ev.Data!= null)
                             {
-                                Console.WriteLine("not null");
-                                foreach (KeyValuePair<string, int> mappingValue in tData.FlexorsValues)
+                                words = ev.Data.Split(',');
+                                try
                                 {
-                                    Console.WriteLine("mapping: " + mappingValue.Key+ " Value: "+ mappingValue.Value);
-                                    
-
                                     this.Dispatcher.Invoke((Action)(() =>
                                     {
-                                        changeBarValue(Int32.Parse(mappingValue.Key), mappingValue.Value);
+                                        changeBarValue(Int32.Parse(words[0]), Int32.Parse(words[1]));
                                     }));
+                                    Console.WriteLine(ev.Data);
+
+                                }catch
+                                {
+                                    Console.WriteLine("ERROR");
                                 }
-                            }else
-                            {
-                                Console.WriteLine("Flexors NULL");
+                                
                             }
                         };
                         ws.Connect();
@@ -529,6 +530,19 @@ namespace OpenGlovePrototype2
 
             }
             
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("Flexors: "+selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count);
+                Console.WriteLine("name port:" + selectedGlove.Port);
+            }
+            catch
+            {
+                Console.WriteLine("No flexors");
+            }
         }
     }
 

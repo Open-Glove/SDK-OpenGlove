@@ -63,6 +63,10 @@ namespace OpenGlove
         /// Description
         /// </summary>
         private string setThresholdInputFunctionNumber = "13";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string resetFlexorsInputFunctionNumber = "14";
 
 
         /// <summary>
@@ -424,6 +428,15 @@ namespace OpenGlove
             return message;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "resetFlexors" format specified in the OpenGlove communication protocol</returns>
+        public string resetFlexors()
+        {
+            string message = resetFlexorsInputFunctionNumber + terminal;
+            return message;
+        }
 
 
 

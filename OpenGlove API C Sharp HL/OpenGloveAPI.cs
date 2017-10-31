@@ -107,6 +107,12 @@ namespace OpenGlove_API_C_Sharp_HL
             this.serviceClient.setThreshold(selectedGlove.BluetoothAddress,value);
         }
 
+        public void resetFlexors(Glove selectedGlove)
+        {
+            this.serviceClient.resetFlexors(selectedGlove.BluetoothAddress);
+        }
+
+
 
 
 

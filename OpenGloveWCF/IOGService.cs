@@ -108,7 +108,15 @@ namespace OpenGloveWCF
                     BodyStyle = WebMessageBodyStyle.Bare,
                     UriTemplate = "setThreshold?gloveAddress={gloveAddress}&value={value}")]
         void setThreshold(string gloveAddress, int value);
-        
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "ResetFlexors?gloveAddress={gloveAddress}")]
+        void resetFlexors(string gloveAddress);
+
     }
 
     
@@ -300,6 +308,9 @@ namespace OpenGloveWCF
 
                 [DataMember]
                 public int AreaCount = 58;
+
+                [DataMember]
+                public int FlexorsThreshold;
 
                 [DataMember]
                 public Dictionary<string, string> Mappings = new Dictionary<string, string>();

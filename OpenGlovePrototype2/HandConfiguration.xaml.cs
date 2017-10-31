@@ -59,6 +59,7 @@ namespace OpenGlovePrototype2
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
                 this.selectedGlove.GloveConfiguration.GloveProfile.Mappings = new Dictionary<string, string>();
                 this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<int, int>();
+                gloves.resetFlexors(this.selectedGlove);
             }
 
         }
@@ -87,7 +88,7 @@ namespace OpenGlovePrototype2
 
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current flex profile. Are you sure?", "New flexors configuration confirmation", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current Glove Profile. Are you sure?", "New Glove Profile configuration confirmation", MessageBoxButton.YesNo);
 
             if (messageBoxResult == MessageBoxResult.Yes)
             {

@@ -88,6 +88,12 @@
   <wsdl:message name="IOGService_setThreshold_OutputMessage">
     <wsdl:part name="parameters" element="tns:setThresholdResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_resetFlexors_InputMessage">
+    <wsdl:part name="parameters" element="tns:resetFlexors" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_resetFlexors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:resetFlexorsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -136,6 +142,10 @@
     <wsdl:operation name="setThreshold">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setThreshold" message="tns:IOGService_setThreshold_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setThresholdResponse" message="tns:IOGService_setThreshold_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="resetFlexors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/resetFlexors" message="tns:IOGService_resetFlexors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/resetFlexorsResponse" message="tns:IOGService_resetFlexors_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -242,6 +252,15 @@
     </wsdl:operation>
     <wsdl:operation name="setThreshold">
       <soap12:operation soapAction="http://tempuri.org/IOGService/setThreshold" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetFlexors">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/resetFlexors" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

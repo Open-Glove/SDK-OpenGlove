@@ -356,6 +356,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 private System.Collections.Generic.Dictionary<int, int> FlexorsMappingsField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private int FlexorsThresholdField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
                 private string GloveHashField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -395,6 +398,19 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                         if ((object.ReferenceEquals(this.FlexorsMappingsField, value) != true)) {
                             this.FlexorsMappingsField = value;
                             this.RaisePropertyChanged("FlexorsMappings");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public int FlexorsThreshold {
+                    get {
+                        return this.FlexorsThresholdField;
+                    }
+                    set {
+                        if ((this.FlexorsThresholdField.Equals(value) != true)) {
+                            this.FlexorsThresholdField = value;
+                            this.RaisePropertyChanged("FlexorsThreshold");
                         }
                     }
                 }
@@ -500,6 +516,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setThreshold", ReplyAction="http://tempuri.org/IOGService/setThresholdResponse")]
         void setThreshold(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/resetFlexors", ReplyAction="http://tempuri.org/IOGService/resetFlexorsResponse")]
+        void resetFlexors(string gloveAddress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -575,6 +594,10 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public void setThreshold(string gloveAddress, int value) {
             base.Channel.setThreshold(gloveAddress, value);
+        }
+        
+        public void resetFlexors(string gloveAddress) {
+            base.Channel.resetFlexors(gloveAddress);
         }
     }
 }

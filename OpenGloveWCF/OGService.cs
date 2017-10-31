@@ -149,6 +149,10 @@ namespace OpenGloveWCF
                         g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
                         g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
                         g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                        if(g.GloveConfiguration.GloveProfile == null || (g.GloveConfiguration.GloveProfile!=null && g.GloveConfiguration.GloveProfile.FlexorsMappings.Count == 0) )
+                        {
+                            g.LegacyGlove.resetFlexors();
+                        }
                         g.Connected = true;
                     }
                     else
@@ -191,6 +195,19 @@ namespace OpenGloveWCF
                 if (g.BluetoothAddress.Equals(gloveAddress))
                 {
                     g.LegacyGlove.addFlexor(pin, mapping);
+                    /*if (g.GloveConfiguration.GloveProfile.FlexorsMappings!=null && g.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
+                    {
+                        foreach (KeyValuePair<int, int> flexorMapping in g.GloveConfiguration.GloveProfile.FlexorsMappings)
+                        {
+                            if (flexorMapping.Value == pin)
+                            {
+                                return 1;
+                            }
+                        }
+                        g.LegacyGlove.addFlexor(pin, mapping);
+
+                    }
+                    */
                     return 0;
                 }
             }
@@ -247,6 +264,17 @@ namespace OpenGloveWCF
             }
             
         }
-        
+
+        public void resetFlexors(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.resetFlexors();
+                }
+            }
+        }
+
     }
 }

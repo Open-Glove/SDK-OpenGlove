@@ -49,17 +49,21 @@ namespace OpenGlovePrototype2
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (e.ProgressPercentage == 50)
+
+            if (e.ProgressPercentage == 0)
             {
                 changeOpenAndClose();
             }
-            if (e.ProgressPercentage == 99)
+            else if(e.ProgressPercentage < 99)
+            {
+                labelMessage.Content = e.ProgressPercentage-1;
+            }
+            else if (e.ProgressPercentage == 99)
             {
                 gloves.confirmCalibration(selectedGlove);
-                finishCalibration(); 
-                
+                finishCalibration();                       
             }
-            if (e.ProgressPercentage == 100)
+            else if (e.ProgressPercentage == 100)
             {
                 this.Close();
             }
@@ -67,10 +71,16 @@ namespace OpenGlovePrototype2
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            int seconds = 7;
+            int init_progress = 0;
             gloves.calibrateFlexors(selectedGlove);
             Thread.Sleep(3500);
-            backgroundWorker1.ReportProgress(50);
-            Thread.Sleep(7000);
+            backgroundWorker1.ReportProgress(init_progress);
+            for(int i = seconds+1; i > 0; i--)
+            {
+                backgroundWorker1.ReportProgress(i);
+                Thread.Sleep(1000);
+            }
             backgroundWorker1.ReportProgress(99);
             Thread.Sleep(2000);
             backgroundWorker1.ReportProgress(100);

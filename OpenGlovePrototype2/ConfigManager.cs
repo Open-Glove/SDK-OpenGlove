@@ -122,7 +122,7 @@ namespace OpenGlovePrototype2
         public void OpenProfileConfiguration(string fileName, Glove selectedGlove)
         {
             selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
-
+            serviceClient.resetFlexors(selectedGlove.BluetoothAddress);
             Dictionary<String, String> openedConfiguration = new Dictionary<String, String>();
 
             XDocument xml = XDocument.Load(fileName);
@@ -145,10 +145,16 @@ namespace OpenGlovePrototype2
                                              c => (Int32)c.Element("flexor"));
             selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = openedConfiguration2;
 
-            //Aqui deberia comprobarse que sean todos valores validos
-            selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
+            foreach (KeyValuePair<int, int> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
+            {
+                serviceClient.addFlexor(selectedGlove.BluetoothAddress, mapping.Value, mapping.Key);
+            }
+
+
+                //Aqui deberia comprobarse que sean todos valores validos
+                selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
             selectedGlove.GloveConfiguration.GloveProfile.GloveHash = selectedGlove.GloveConfiguration.GloveHash;
-            serviceClient.SaveGlove(selectedGlove);
+           // serviceClient.SaveGlove(selectedGlove);
         }
 
         public void OpenProfileFlexConfiguration(string fileName, Glove selectedGlove)
