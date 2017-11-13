@@ -146,9 +146,13 @@ namespace OpenGloveWCF
                     {
                         g.LegacyGlove = new LegacyOpenGlove();
                         g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
-                        g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                        if (g.GloveConfiguration.PositivePins.Count > 0 && g.GloveConfiguration.NegativePins.Count > 0)
+                        {
+                            g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
+                            g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
+                            g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                        }
+                        
                         if(g.GloveConfiguration.GloveProfile == null || (g.GloveConfiguration.GloveProfile!=null && g.GloveConfiguration.GloveProfile.FlexorsMappings.Count == 0) )
                         {
                             g.LegacyGlove.resetFlexors();
@@ -195,19 +199,7 @@ namespace OpenGloveWCF
                 if (g.BluetoothAddress.Equals(gloveAddress))
                 {
                     g.LegacyGlove.addFlexor(pin, mapping);
-                    /*if (g.GloveConfiguration.GloveProfile.FlexorsMappings!=null && g.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
-                    {
-                        foreach (KeyValuePair<int, int> flexorMapping in g.GloveConfiguration.GloveProfile.FlexorsMappings)
-                        {
-                            if (flexorMapping.Value == pin)
-                            {
-                                return 1;
-                            }
-                        }
-                        g.LegacyGlove.addFlexor(pin, mapping);
 
-                    }
-                    */
                     return 0;
                 }
             }
@@ -272,6 +264,10 @@ namespace OpenGloveWCF
                 if (g.BluetoothAddress.Equals(gloveAddress))
                 {
                     g.LegacyGlove.resetFlexors();
+                    if(g.GloveConfiguration.GloveProfile != null && g.GloveConfiguration.GloveProfile.FlexorsMappings != null)
+                    {
+                        g.GloveConfiguration.GloveProfile.FlexorsMappings.Clear();
+                    }
                 }
             }
         }

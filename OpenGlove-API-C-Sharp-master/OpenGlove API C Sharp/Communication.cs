@@ -14,7 +14,7 @@ namespace OpenGlove
     {
         private static string WSAddress = "ws://localhost:9876";
         private static WebSocketServer wssv = new WebSocketServer(WSAddress);
-        static Thread readThread;
+        //static Thread readThread;
         public class WSbase
         {
 
@@ -70,11 +70,12 @@ namespace OpenGlove
         {
             port.PortName = portName;
             port.BaudRate = baudRate;
-            port.Open();
-            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>("/"+ port.PortName);
+            port.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
+            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>("/" + port.PortName);
             wssv.Start();
-            readThread = new Thread(Read);
-            readThread.Start();
+            port.Open();
+           // readThread = new Thread(Read);
+          //  readThread.Start();
         }
         /// <summary>
         /// Send the string to the serial port
@@ -98,11 +99,30 @@ namespace OpenGlove
         public void ClosePort()
         {
             port.Close();
-            readThread.Abort();
+           // readThread.Abort();
             wssv.Stop();
 
         }
 
+        private static void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            // Obtenemos el puerto serie que lanza el evento
+            SerialPort currentSerialPort = (SerialPort)sender;
+
+            // Leemos el dato recibido del puerto serie
+            try
+            {
+                string inData = currentSerialPort.ReadLine();
+            
+                wssv.WebSocketServices["/" + port.PortName].Sessions.Broadcast(inData);
+            }
+            catch
+            {
+
+            }
+            
+        }
+        /*
         public static void Read()
         {
             while (true)
@@ -117,6 +137,7 @@ namespace OpenGlove
                 }
             }
         }
+        */
 
     }
 }

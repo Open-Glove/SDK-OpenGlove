@@ -84,7 +84,6 @@
     <Compile Include="IOGService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OGService.cs" />
-    <Compile Include="trackingData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

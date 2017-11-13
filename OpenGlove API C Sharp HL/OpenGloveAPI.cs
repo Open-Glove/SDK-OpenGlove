@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebSocketSharp;
 
@@ -15,19 +16,24 @@ namespace OpenGlove_API_C_Sharp_HL
         /// Singleton instance of the API
         /// </summary>
         private static OpenGloveAPI instance;
-
+        bool WebSocketActive;
         /// <summary>
         /// Client for the WCF service
         /// </summary>
         private OGServiceClient serviceClient;
 
+        public delegate void FingerMovement(int region, int value);
+        WebSocket WebSocketClient;
+        public event FingerMovement fingersFunction;
         OpenGloveAPI()
         {
             NetHttpBinding binding = new NetHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
+            WebSocketActive = false;
         }
 
+   
         /// <summary>
         /// Gets the current API instance
         /// </summary>
@@ -40,21 +46,60 @@ namespace OpenGlove_API_C_Sharp_HL
             }
             return instance;
         }
-        /*
-        string a;
 
-        public void listenerWS()
+       // WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
+
+        public void readFingers( )
         {
-            using (var ws = new WebSocket("ws://localhost:9876/rightGlove"))
+            using (WebSocketClient)
             {
-                ws.OnMessage += (sender, e) => {
-                    a = e.Data;
-                    Console.WriteLine("Flexor: " + e.Data);
-                };     
-                ws.Connect();
+                WebSocketClient.OnMessage += (sender, e) => {
+                    int mapping, value;
+                    string[] words;
+                    if (e.Data != null)
+                    {
+                        words = e.Data.Split(',');
+                        try
+                        {
+                            mapping = Int32.Parse(words[0]);
+                            value = Int32.Parse(words[1]);
+                            fingersFunction?.Invoke(mapping, value);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("ERROR");
+                        }
+                    }
+                };
+                WebSocketClient.Connect();
+                WebSocketActive = true;
+                while (WebSocketActive == true) { }
             }
         }
-        */
+
+        Task mytask;
+        public void captureFingers(Glove selectedGlove)
+        {
+            WebSocketClient = new WebSocket("ws://localhost:9876/" + selectedGlove.Port);
+            try
+            {
+                mytask = Task.Run(() =>
+                {
+                    readFingers();
+                });
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void stopReadFingers()
+        {
+            WebSocketClient.Close();
+            WebSocketActive = false;
+        }
+        
 
         /// <summary>
         /// List of current connected devices

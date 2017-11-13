@@ -41,8 +41,6 @@ namespace OpenGlovePrototype2
 
         private ConfigManager configManager;
 
-        private OpenGlove_API_C_Sharp_HL.trackingData tData = new OpenGlove_API_C_Sharp_HL.trackingData();
-
         public FlexorsConfiguration(Glove selectedGlove)
         {
             InitializeComponent();
@@ -388,10 +386,6 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
-
-        WebSocket ws;
-
-        Task mytask;
         private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
         {
             if (!selectedGlove.Connected)
@@ -410,63 +404,40 @@ namespace OpenGlovePrototype2
             {
                 testing = false;
                 buttonTestFlexors.Content = "Test";
-                //gloves.stopWS(this.selectedGlove);
-                ws.Close();
+                gloves.fingersFunction -= testFingers;
+                gloves.stopReadFingers();
                 tabControl.SelectedIndex = 0;
 
             }
             else if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
             {
-                ws = new WebSocket("ws://localhost:9876/"+this.selectedGlove.Port);
                 testing = true;
                 tabControl.SelectedIndex = 1;
-                
                 Console.WriteLine("TEST WS");
-
-                mytask = Task.Run(() =>
-                {
-                    using (ws)
-                    {
-                        ws.OnMessage += (sender, ev) =>
-                        {
-                            string[] words;
-                            if (ev.Data!= null)
-                            {
-                                words = ev.Data.Split(',');
-                                try
-                                {
-                                    this.Dispatcher.Invoke((Action)(() =>
-                                    {
-                                        changeBarValue(Int32.Parse(words[0]), Int32.Parse(words[1]));
-                                    }));
-                                    Console.WriteLine(ev.Data);
-
-                                }catch
-                                {
-                                    Console.WriteLine("ERROR");
-                                }
-                                
-                            }
-                        };
-                        ws.Connect();
-                        while (testing == true) { }
-                    }
-                });
-
+                gloves.fingersFunction += testFingers;
+                gloves.captureFingers(selectedGlove);
                 buttonTestFlexors.Content = "Stop";
             }
         }
 
+
+        public void testFingers(int index, int value)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.changeBarValue(index, value);
+            }));
+        }
 
         private void changeBarValue(int index, int value)
         {
             switch (index)
             {
                 case 0:
-                    this.progressBar0.Value = value;
+                    progressBar0.Value = value;
                     break;
                 case 1:
-                    this.progressBar1.Value = value;
+                    progressBar1.Value = value;
                     break;
                 case 2:
                     progressBar2.Value = value;
@@ -532,18 +503,7 @@ namespace OpenGlovePrototype2
             
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Console.WriteLine("Flexors: "+selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count);
-                Console.WriteLine("name port:" + selectedGlove.Port);
-            }
-            catch
-            {
-                Console.WriteLine("No flexors");
-            }
-        }
+
     }
 
 }
