@@ -74,6 +74,8 @@ namespace OpenGlovePrototype2
 
         private void buttonIMU_Click(object sender, RoutedEventArgs e)
         {
+        //    IMUConfiguration imuConfig = new IMUConfiguration(this.selectedGlove);
+        //    imuConfig.ShowDialog();
 
             //refreshControls();
         }
