@@ -1,0 +1,16 @@
+﻿<Window x:Class="OpenGlovePrototype2.IMUConfiguration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenGlovePrototype2"
+        mc:Ignorable="d"
+        Title="IMUConfiguration" Height="384.806" Width="624.382">
+    <Grid>
+        <Rectangle Fill="#FF00B47F" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="616"/>
+        <Label x:Name="labelHeader" Content="IMU Configuration" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
+        <Label x:Name="label" Content="IMU Model:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="26" Margin="82,91,0,0" VerticalAlignment="Top" Width="136"/>
+
+    </Grid>
+</Window>

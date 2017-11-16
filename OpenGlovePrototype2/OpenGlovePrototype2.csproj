@@ -120,6 +120,9 @@
     <Compile Include="HandConfiguration.xaml.cs">
       <DependentUpon>HandConfiguration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IMUConfiguration.xaml.cs">
+      <DependentUpon>IMUConfiguration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoadingBar.xaml.cs">
       <DependentUpon>LoadingBar.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HandConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IMUConfiguration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

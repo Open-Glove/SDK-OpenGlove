@@ -68,11 +68,13 @@ namespace OpenGlovePrototype2
         {
             VibeBoardsConfiguration vibeConfig = new VibeBoardsConfiguration(this.selectedGlove);
             vibeConfig.ShowDialog();
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.Mappings != null)
-            {
-                this.numbersActuators.Content = this.selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count;
-            }
-            
+
+            //refreshControls();
+        }
+
+        private void buttonIMU_Click(object sender, RoutedEventArgs e)
+        {
+
             //refreshControls();
         }
 
@@ -80,10 +82,7 @@ namespace OpenGlovePrototype2
         {
             FlexorsConfiguration FC = new FlexorsConfiguration(this.selectedGlove);
             FC.ShowDialog();
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings != null)
-            {
-                this.numberFlexors.Content = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count;
-            }
+
         }
 
         private void openButton_Click(object sender, RoutedEventArgs e)
@@ -103,15 +102,6 @@ namespace OpenGlovePrototype2
                     {
                         configManager.OpenProfileConfiguration(openConfigurationDialog.FileName, selectedGlove);
 
-                        if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings != null)
-                        {
-                            this.numberFlexors.Content = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count;
-                        }
-
-                        if (this.selectedGlove.GloveConfiguration.GloveProfile.Mappings != null)
-                        {
-                            this.numbersActuators.Content = this.selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count;
-                        }
                     }
                 }
             }

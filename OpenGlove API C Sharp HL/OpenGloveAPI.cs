@@ -22,9 +22,6 @@ namespace OpenGlove_API_C_Sharp_HL
         /// </summary>
         private OGServiceClient serviceClient;
 
-        public delegate void FingerMovement(int region, int value);
-        WebSocket WebSocketClient;
-        public event FingerMovement fingersFunction;
         OpenGloveAPI()
         {
             NetHttpBinding binding = new NetHttpBinding();
@@ -47,7 +44,9 @@ namespace OpenGlove_API_C_Sharp_HL
             return instance;
         }
 
-       // WebSocket ws = new WebSocket("ws://localhost:9876/rightGlove");
+        public delegate void FingerMovement(int region, int value);
+        WebSocket WebSocketClient;
+        public event FingerMovement fingersFunction;
 
         public void readFingers( )
         {

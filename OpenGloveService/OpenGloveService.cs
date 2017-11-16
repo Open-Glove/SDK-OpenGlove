@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Configuration.Install;
 using System.Threading;
 using System.ServiceModel.Description;
-using OpenGlove;
+using OpenGloveWCF;
 using InTheHand.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Management;

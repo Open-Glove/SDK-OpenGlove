@@ -44,7 +44,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="buttonCreateGloveConfig" Content="Create Glove Configuration" VerticalAlignment="Top" Height="48" FontSize="18" Click="buttonCreateGloveConfig_Click" IsEnabled="False" Grid.RowSpan="2"/>
             <Button x:Name="buttonOpenGloveConfig" Content="Open Glove Configuration" Margin="0,47,0,0" VerticalAlignment="Top" Height="49" FontSize="18" IsEnabled="False" Click="buttonOpenGloveConfig_Click" Grid.Row="1"/>
-            <Button x:Name="buttonCreateProfileConfig" Content="Create Profile Configuration" Margin="0,102,0,0" VerticalAlignment="Top" Height="48" FontSize="18" IsEnabled="False" Click="buttonCreateProfileConfig_Click" Grid.Row="1"/>
+            <Button x:Name="buttonCreateProfileConfig" Content="Glove Configuration" Margin="0,102,0,0" VerticalAlignment="Top" Height="48" FontSize="18" IsEnabled="False" Click="buttonCreateProfileConfig_Click" Grid.Row="1" SnapsToDevicePixels="True"/>
             <Button x:Name="buttonOpenProfileConfig" Content="Open Profile Configuration" Margin="0,156,0,0" FontSize="18" IsEnabled="False" Click="buttonOpenProfileConfig_Click" Grid.Row="1" Height="49" VerticalAlignment="Top"/>
         </Grid>
         <ComboBox x:Name="comboBoxSide" Margin="83,122,332,0" SelectionChanged="comboBoxSide_SelectionChanged" IsEnabled="False" Grid.ColumnSpan="2" Height="28" VerticalAlignment="Top"/>

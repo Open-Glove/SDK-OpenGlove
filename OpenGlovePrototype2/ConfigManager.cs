@@ -151,8 +151,8 @@ namespace OpenGlovePrototype2
             }
 
 
-                //Aqui deberia comprobarse que sean todos valores validos
-                selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
+            //Aqui deberia comprobarse que sean todos valores validos
+            selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
             selectedGlove.GloveConfiguration.GloveProfile.GloveHash = selectedGlove.GloveConfiguration.GloveHash;
            // serviceClient.SaveGlove(selectedGlove);
         }
@@ -235,7 +235,7 @@ namespace OpenGlovePrototype2
 
             rootXML.Save(fileName);
             selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
-            serviceClient.SaveGlove(selectedGlove);
+          //  serviceClient.SaveGlove(selectedGlove);
         }
 
         public void saveGloveVibeBoardsProfile(string fileName, Glove selectedGlove)

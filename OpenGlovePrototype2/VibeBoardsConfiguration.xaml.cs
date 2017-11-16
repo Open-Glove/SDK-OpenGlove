@@ -270,6 +270,10 @@ namespace OpenGlovePrototype2
                     this.selectors[Int32.Parse(mapping.Key)].SelectedItem = Int32.Parse(mapping.Value);
                     this.removeActuator(mapping.Value, this.selectors[Int32.Parse(mapping.Key)]);
                 }
+                if(this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName == null)
+                {
+                    this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName = "Unnamed Configuration";
+                }
                 this.statusBarItemProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
             }
             else

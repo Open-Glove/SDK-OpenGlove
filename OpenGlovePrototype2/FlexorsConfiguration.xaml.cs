@@ -12,7 +12,6 @@ using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System.Threading;
 using WebSocketSharp;
-using NetJSON;
 using System.Threading.Tasks;
 
 namespace OpenGlovePrototype2
@@ -266,6 +265,10 @@ namespace OpenGlovePrototype2
                 {
                     this.selectors[mapping.Key].SelectedItem = mapping.Value;
                     this.removeFlexor(mapping.Value, this.selectors[mapping.Key]);
+                }
+                if (this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName == null)
+                {
+                    this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName = "Unnamed Configuration";
                 }
                 this.statusBarItemProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
             }
