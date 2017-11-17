@@ -29,8 +29,6 @@ namespace OpenGlove_API_C_Sharp_HL
             serviceClient = new OGServiceClient(binding, address);
             WebSocketActive = false;
         }
-
-   
         /// <summary>
         /// Gets the current API instance
         /// </summary>
@@ -45,24 +43,64 @@ namespace OpenGlove_API_C_Sharp_HL
         }
 
         public delegate void FingerMovement(int region, int value);
+        public delegate void accelerometerValues(float ax, float ay, float az);
+        public delegate void gyroscopeValues(float gx, float gy, float gz);
+        public delegate void magnometerValues(float mx, float my, float mz);
+        public delegate void allIMUValues(float ax, float ay, float az, float gx, float gy, float gz,float mx, float my, float mz);
         WebSocket WebSocketClient;
         public event FingerMovement fingersFunction;
+        public event accelerometerValues accelerometerFunction;
+        public event gyroscopeValues gyroscopeFunction;
+        public event magnometerValues magnometerFunction;
+        public event allIMUValues imu_ValuesFunction;
 
-        public void readFingers( )
+        public void readData( )
         {
             using (WebSocketClient)
             {
+                int mapping, value;
+                float valueX, valueY, valueZ;
+                string[] words;
+
                 WebSocketClient.OnMessage += (sender, e) => {
-                    int mapping, value;
-                    string[] words;
+                    
                     if (e.Data != null)
                     {
                         words = e.Data.Split(',');
                         try
                         {
-                            mapping = Int32.Parse(words[0]);
-                            value = Int32.Parse(words[1]);
-                            fingersFunction?.Invoke(mapping, value);
+                            switch (words[0])
+                            {
+                                case "f":
+                                    mapping = Int32.Parse(words[1]);
+                                    value = Int32.Parse(words[2]);
+                                    fingersFunction?.Invoke(mapping, value);
+                                    break;
+                                case "a":
+                                    valueX =float.Parse(words[1]);
+                                    valueY = float.Parse(words[2]);
+                                    valueZ = float.Parse(words[3]);
+                                    accelerometerFunction?.Invoke(valueX,valueY,valueZ);
+                                    break;
+                                case "g":
+                                    valueX = float.Parse(words[1]);
+                                    valueY = float.Parse(words[2]);
+                                    valueZ = float.Parse(words[3]);
+                                    gyroscopeFunction?.Invoke(valueX, valueY, valueZ);
+                                    break;
+                                case "m":
+                                    valueX = float.Parse(words[1]);
+                                    valueY = float.Parse(words[2]);
+                                    valueZ = float.Parse(words[3]);
+                                    magnometerFunction?.Invoke(valueX, valueY, valueZ);
+                                    break;
+                                case "z":
+                                    imu_ValuesFunction?.Invoke(float.Parse(words[1]), float.Parse(words[2]), float.Parse(words[3]), float.Parse(words[4]), float.Parse(words[5]), float.Parse(words[6]), float.Parse(words[7]), float.Parse(words[8]), float.Parse(words[9]));
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
                         }
                         catch
                         {
@@ -77,14 +115,15 @@ namespace OpenGlove_API_C_Sharp_HL
         }
 
         Task mytask;
-        public void captureFingers(Glove selectedGlove)
+
+        public void startCaptureData(Glove selectedGlove)
         {
             WebSocketClient = new WebSocket("ws://localhost:9876/" + selectedGlove.Port);
             try
             {
                 mytask = Task.Run(() =>
                 {
-                    readFingers();
+                    readData();
                 });
             }
             catch
@@ -93,12 +132,11 @@ namespace OpenGlove_API_C_Sharp_HL
             }
         }
 
-        public void stopReadFingers()
+        public void stopCaptureData()
         {
             WebSocketClient.Close();
             WebSocketActive = false;
         }
-        
 
         /// <summary>
         /// List of current connected devices
@@ -155,6 +193,24 @@ namespace OpenGlove_API_C_Sharp_HL
         {
             this.serviceClient.resetFlexors(selectedGlove.BluetoothAddress);
         }
+
+        public void startIMU(Glove selectedGlove)
+        {
+            this.serviceClient.startIMU(selectedGlove.BluetoothAddress);
+        }
+
+        public void startIMU(Glove selectedGlove, bool value)
+        {
+            if (value == true)
+            {
+                this.serviceClient.setIMUStatus(selectedGlove.BluetoothAddress, 1);
+            }else
+            {
+                this.serviceClient.setIMUStatus(selectedGlove.BluetoothAddress, 0);
+            }
+            
+        }
+
 
 
 

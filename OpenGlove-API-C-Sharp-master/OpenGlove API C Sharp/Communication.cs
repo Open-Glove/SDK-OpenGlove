@@ -18,7 +18,7 @@ namespace OpenGlove
         public class WSbase
         {
 
-            public class FlexorsEndPoint : WebSocketBehavior
+            public class GloveEndPoint : WebSocketBehavior
             {
                 protected override void OnMessage(MessageEventArgs e)
                 {
@@ -71,7 +71,7 @@ namespace OpenGlove
             port.PortName = portName;
             port.BaudRate = baudRate;
             port.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
-            wssv.AddWebSocketService<WSbase.FlexorsEndPoint>("/" + port.PortName);
+            wssv.AddWebSocketService<WSbase.GloveEndPoint>("/" + port.PortName);
             wssv.Start();
             port.Open();
            // readThread = new Thread(Read);

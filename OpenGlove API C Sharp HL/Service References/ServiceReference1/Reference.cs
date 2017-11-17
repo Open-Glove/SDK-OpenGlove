@@ -519,6 +519,12 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/resetFlexors", ReplyAction="http://tempuri.org/IOGService/resetFlexorsResponse")]
         void resetFlexors(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/startIMU", ReplyAction="http://tempuri.org/IOGService/startIMUResponse")]
+        void startIMU(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setIMUStatus", ReplyAction="http://tempuri.org/IOGService/setIMUStatusResponse")]
+        void setIMUStatus(string gloveAddress, int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -598,6 +604,14 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public void resetFlexors(string gloveAddress) {
             base.Channel.resetFlexors(gloveAddress);
+        }
+        
+        public void startIMU(string gloveAddress) {
+            base.Channel.startIMU(gloveAddress);
+        }
+        
+        public void setIMUStatus(string gloveAddress, int value) {
+            base.Channel.setIMUStatus(gloveAddress, value);
         }
     }
 }

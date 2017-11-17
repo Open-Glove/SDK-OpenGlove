@@ -117,6 +117,22 @@ namespace OpenGloveWCF
                     UriTemplate = "ResetFlexors?gloveAddress={gloveAddress}")]
         void resetFlexors(string gloveAddress);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "startIMU?gloveAddress={gloveAddress}")]
+        void startIMU(string gloveAddress);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setIMUStatus?gloveAddress={gloveAddress}&value={value}")]
+        void setIMUStatus(string gloveAddress, int value);
+
     }
 
     

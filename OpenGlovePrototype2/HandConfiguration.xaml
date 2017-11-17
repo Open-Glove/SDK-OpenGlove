@@ -10,7 +10,7 @@
 
         <Button x:Name="buttonFlexors" Content="Flexors " HorizontalAlignment="Left" Margin="22,87,0,0" VerticalAlignment="Top" Width="250" Height="60" Grid.Column="0" Click="buttonFlexors_Click" FontSize="23"/>
         <Button x:Name="buttonVibeBoards" Content="Vibe Boards" HorizontalAlignment="Left" Margin="22,152,0,0" VerticalAlignment="Top" Width="250" Height="60" Click="buttonVibeBoards_Click" FontSize="23"/>
-        <Button x:Name="buttonIMU" Content="IMU" HorizontalAlignment="Left" Margin="22,217,0,0" VerticalAlignment="Top" Width="250" Height="60" Click="buttonVibeBoards_Click" FontSize="23"/>
+        <Button x:Name="buttonIMU" Content="IMU" HorizontalAlignment="Left" Margin="22,217,0,0" VerticalAlignment="Top" Width="250" Height="60" Click="buttonIMU_Click" FontSize="23"/>
         <Menu x:Name="menu" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="298" Background="Black">
             <Separator  Width="20"/>
             <MenuItem x:Name="OpenConfigMenuItem" Header="Open Config" Height="26" Width="75" HorizontalAlignment="Center"  Foreground="White" Background="Black" BorderBrush="Black" Click="openButton_Click"/>

@@ -94,6 +94,18 @@
   <wsdl:message name="IOGService_resetFlexors_OutputMessage">
     <wsdl:part name="parameters" element="tns:resetFlexorsResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_startIMU_InputMessage">
+    <wsdl:part name="parameters" element="tns:startIMU" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_startIMU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:startIMUResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setIMUStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:setIMUStatus" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setIMUStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setIMUStatusResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -146,6 +158,14 @@
     <wsdl:operation name="resetFlexors">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/resetFlexors" message="tns:IOGService_resetFlexors_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/resetFlexorsResponse" message="tns:IOGService_resetFlexors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="startIMU">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/startIMU" message="tns:IOGService_startIMU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/startIMUResponse" message="tns:IOGService_startIMU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setIMUStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setIMUStatus" message="tns:IOGService_setIMUStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setIMUStatusResponse" message="tns:IOGService_setIMUStatus_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -261,6 +281,24 @@
     </wsdl:operation>
     <wsdl:operation name="resetFlexors">
       <soap12:operation soapAction="http://tempuri.org/IOGService/resetFlexors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startIMU">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/startIMU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setIMUStatus">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/setIMUStatus" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -67,6 +67,14 @@ namespace OpenGlove
         /// Description
         /// </summary>
         private string resetFlexorsInputFunctionNumber = "14";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string startIMUFunctionNumber = "20";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string setIMUStatusFunctionNumber = "21";
 
 
         /// <summary>
@@ -437,6 +445,27 @@ namespace OpenGlove
             string message = resetFlexorsInputFunctionNumber + terminal;
             return message;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "startIMU" format specified in the OpenGlove communication protocol</returns>
+        public string startIMU()
+        {
+            string message = startIMUFunctionNumber + terminal;
+            return message;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "setIMUStatus" format specified in the OpenGlove communication protocol</returns>
+        public string setIMUStatus(int status)
+        {
+            string message = setIMUStatusFunctionNumber + separator + status + terminal;
+            return message;
+        }
+
 
 
 

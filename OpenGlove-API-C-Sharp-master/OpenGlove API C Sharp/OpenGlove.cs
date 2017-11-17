@@ -224,6 +224,27 @@ namespace OpenGlove
             string message = messageGenerator.resetFlexors();
             communication.Write(message);
         }
+        /////////////////
+        //IMU FUNCTIONS//
+        /////////////////
+
+        /// <summary>
+        ///  
+        /// </summary>
+        public void startIMU()
+        {
+            string message = messageGenerator.startIMU();
+            communication.Write(message);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        public void setIMUStatus(int status)
+        {
+            string message = messageGenerator.setIMUStatus(status);
+            communication.Write(message);
+        }
 
     }
 }

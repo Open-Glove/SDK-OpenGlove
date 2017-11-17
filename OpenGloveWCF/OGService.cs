@@ -157,6 +157,7 @@ namespace OpenGloveWCF
                         {
                             g.LegacyGlove.resetFlexors();
                         }
+                        g.LegacyGlove.setIMUStatus(0);
                         g.Connected = true;
                     }
                     else
@@ -257,6 +258,7 @@ namespace OpenGloveWCF
             
         }
 
+
         public void resetFlexors(string gloveAddress)
         {
             foreach (Glove g in Glove.Gloves)
@@ -270,6 +272,30 @@ namespace OpenGloveWCF
                     }
                 }
             }
+        }
+
+        public void setIMUStatus(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setIMUStatus(value);
+                }
+            }
+
+        }
+
+        public void startIMU(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.startIMU();
+                }
+            }
+
         }
 
     }

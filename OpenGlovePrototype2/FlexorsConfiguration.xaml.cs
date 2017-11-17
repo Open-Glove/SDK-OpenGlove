@@ -408,7 +408,7 @@ namespace OpenGlovePrototype2
                 testing = false;
                 buttonTestFlexors.Content = "Test";
                 gloves.fingersFunction -= testFingers;
-                gloves.stopReadFingers();
+                gloves.stopCaptureData();
                 tabControl.SelectedIndex = 0;
 
             }
@@ -417,8 +417,9 @@ namespace OpenGlovePrototype2
                 testing = true;
                 tabControl.SelectedIndex = 1;
                 Console.WriteLine("TEST WS");
+                
+                gloves.startCaptureData(selectedGlove);
                 gloves.fingersFunction += testFingers;
-                gloves.captureFingers(selectedGlove);
                 buttonTestFlexors.Content = "Stop";
             }
         }
