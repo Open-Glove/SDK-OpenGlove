@@ -10,6 +10,7 @@ using System.ServiceModel.Web;
 using System.Threading.Tasks;
 using WebSocketSharp;
 using WebSocketSharp.Server;
+using System.Text.RegularExpressions;
 
 namespace OpenGloveWCF
 {
@@ -133,6 +134,14 @@ namespace OpenGloveWCF
                     UriTemplate = "setIMUStatus?gloveAddress={gloveAddress}&value={value}")]
         void setIMUStatus(string gloveAddress, int value);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setRawData?gloveAddress={gloveAddress}&value={value}")]
+        void setRawData(string gloveAddress, int value);
+
     }
 
     
@@ -209,11 +218,14 @@ namespace OpenGloveWCF
                 string comPort = device;
                 string address = device;
                 string name = device;
+                int WebsocketBase = 9870;
+                int PortNumber = Int32.Parse(Regex.Replace(comPort, @"[^\d]", "")); //Obtiene el número del puerto
 
                 Glove foundGlove = new Glove();
                 foundGlove.BluetoothAddress = deviceAddress;
                 foundGlove.Port = comPort;
                 foundGlove.Name = name;
+                foundGlove.WebSocketPort = (WebsocketBase + PortNumber).ToString();
                 foundGlove.Connected = false;
                 foundGlove.LegacyGlove = new LegacyOpenGlove();
 
@@ -260,6 +272,9 @@ namespace OpenGloveWCF
 
         [DataMember]
         public string Port;
+
+        [DataMember]
+        public string WebSocketPort;
 
         [DataMember]
         public Sides Side;
@@ -334,7 +349,67 @@ namespace OpenGloveWCF
                 [DataMember]
                 public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
 
+                [DataMember]
+                public IMU_Settings IMUSettings;
+
+               // [DataMember]
+               // public Flexors_Settings FlexorsSettings;
+
+                [DataContract]
+                public class IMU_Settings
+                {
+                    [DataMember]
+                    public String nameModel;
+
+                    [DataMember]
+                    public bool imuStatus;
+
+                    [DataMember]
+                    public bool rawData;
+
+                    [DataMember]
+                    public bool calibrationStatus;
+                    /*
+                    
+                    [DataMember]
+                    public bool gyroStatus;
+
+                    [DataMember]
+                    public bool accelStatus;
+                
+                    [DataMember]
+                    public bool magStatus;
+
+                    [DataMember]
+                    public List<int> gyroScale = new List<int> {245, 500, 2000};
+
+                    [DataMember]
+                    public List<int> accelScale = new List<int> {2, 4, 8, 16 };
+
+                    [DataMember]
+                    public List<int> magScale = new List<int> { 4, 8, 16 };
+
+                    */
+
+                }
+
+                [DataContract]
+                public class Flexors_Settings
+                {
+                    [DataMember]
+                    public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
+
+                    [DataMember]
+                    public int FlexorsThreshold;
+
+                    [DataMember]
+                    public bool calibrationStatus = false;
+
+                }
+
             }
+
+
         }
 
 

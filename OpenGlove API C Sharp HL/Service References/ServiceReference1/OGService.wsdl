@@ -106,6 +106,12 @@
   <wsdl:message name="IOGService_setIMUStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:setIMUStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_setRawData_InputMessage">
+    <wsdl:part name="parameters" element="tns:setRawData" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setRawData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setRawDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -166,6 +172,10 @@
     <wsdl:operation name="setIMUStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setIMUStatus" message="tns:IOGService_setIMUStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setIMUStatusResponse" message="tns:IOGService_setIMUStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setRawData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setRawData" message="tns:IOGService_setRawData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setRawDataResponse" message="tns:IOGService_setRawData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetHttpBinding_IOGService" type="tns:IOGService">
@@ -299,6 +309,15 @@
     </wsdl:operation>
     <wsdl:operation name="setIMUStatus">
       <soap12:operation soapAction="http://tempuri.org/IOGService/setIMUStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setRawData">
+      <soap12:operation soapAction="http://tempuri.org/IOGService/setRawData" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

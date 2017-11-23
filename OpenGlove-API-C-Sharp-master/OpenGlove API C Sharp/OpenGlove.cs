@@ -240,9 +240,20 @@ namespace OpenGlove
         /// <summary>
         ///  
         /// </summary>
+        /// <param name="status"></param>
         public void setIMUStatus(int status)
         {
             string message = messageGenerator.setIMUStatus(status);
+            communication.Write(message);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="status"></param>
+        public void setRawData(int status)
+        {
+            string message = messageGenerator.setRawData(status);
             communication.Write(message);
         }
 

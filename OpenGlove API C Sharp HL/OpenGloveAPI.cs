@@ -1,6 +1,7 @@
 ﻿using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
@@ -77,25 +78,25 @@ namespace OpenGlove_API_C_Sharp_HL
                                     fingersFunction?.Invoke(mapping, value);
                                     break;
                                 case "a":
-                                    valueX =float.Parse(words[1]);
-                                    valueY = float.Parse(words[2]);
-                                    valueZ = float.Parse(words[3]);
+                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
+                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
+                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
                                     accelerometerFunction?.Invoke(valueX,valueY,valueZ);
                                     break;
                                 case "g":
-                                    valueX = float.Parse(words[1]);
-                                    valueY = float.Parse(words[2]);
-                                    valueZ = float.Parse(words[3]);
+                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
+                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
+                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
                                     gyroscopeFunction?.Invoke(valueX, valueY, valueZ);
                                     break;
                                 case "m":
-                                    valueX = float.Parse(words[1]);
-                                    valueY = float.Parse(words[2]);
-                                    valueZ = float.Parse(words[3]);
+                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
+                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
+                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
                                     magnometerFunction?.Invoke(valueX, valueY, valueZ);
                                     break;
                                 case "z":
-                                    imu_ValuesFunction?.Invoke(float.Parse(words[1]), float.Parse(words[2]), float.Parse(words[3]), float.Parse(words[4]), float.Parse(words[5]), float.Parse(words[6]), float.Parse(words[7]), float.Parse(words[8]), float.Parse(words[9]));
+                                    imu_ValuesFunction?.Invoke(float.Parse(words[1], CultureInfo.InvariantCulture), float.Parse(words[2], CultureInfo.InvariantCulture), float.Parse(words[3], CultureInfo.InvariantCulture), float.Parse(words[4], CultureInfo.InvariantCulture), float.Parse(words[5], CultureInfo.InvariantCulture), float.Parse(words[6], CultureInfo.InvariantCulture), float.Parse(words[7], CultureInfo.InvariantCulture), float.Parse(words[8], CultureInfo.InvariantCulture), float.Parse(words[9], CultureInfo.InvariantCulture));
                                     break;
                                 default:
                                     break;
@@ -104,7 +105,7 @@ namespace OpenGlove_API_C_Sharp_HL
                         }
                         catch
                         {
-                            Console.WriteLine("ERROR");
+                            Console.WriteLine("ERROR: BAD FORMAT");
                         }
                     }
                 };
@@ -118,7 +119,7 @@ namespace OpenGlove_API_C_Sharp_HL
 
         public void startCaptureData(Glove selectedGlove)
         {
-            WebSocketClient = new WebSocket("ws://localhost:9876/" + selectedGlove.Port);
+            WebSocketClient = new WebSocket("ws://localhost:"+selectedGlove.WebSocketPort + "/" + selectedGlove.Port);
             try
             {
                 mytask = Task.Run(() =>
@@ -199,7 +200,7 @@ namespace OpenGlove_API_C_Sharp_HL
             this.serviceClient.startIMU(selectedGlove.BluetoothAddress);
         }
 
-        public void startIMU(Glove selectedGlove, bool value)
+        public void setIMUStatus(Glove selectedGlove, bool value)
         {
             if (value == true)
             {
@@ -209,6 +210,19 @@ namespace OpenGlove_API_C_Sharp_HL
                 this.serviceClient.setIMUStatus(selectedGlove.BluetoothAddress, 0);
             }
             
+        }
+
+        public void setRawData(Glove selectedGlove, bool value)
+        {
+            if (value == true)
+            {
+                this.serviceClient.setRawData(selectedGlove.BluetoothAddress, 1);
+            }
+            else
+            {
+                this.serviceClient.setRawData(selectedGlove.BluetoothAddress, 0);
+            }
+
         }
 
 

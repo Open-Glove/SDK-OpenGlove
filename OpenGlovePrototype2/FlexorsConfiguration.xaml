@@ -79,7 +79,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy0" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="20,27,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy0" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="32,26,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="31" Width="19">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -116,7 +116,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy1" Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="6,24,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy1" Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="15,24,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="30" Width="21">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -153,7 +153,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy2" Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="4,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy2" Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="14,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="31" Width="20">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -191,7 +191,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy3" Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="7,41,0,-2" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy3" Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="19,41,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="32" Width="19">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -229,7 +229,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy4" Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="14,41,0,-2" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy4" Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="25,41,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="31" Width="19">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -266,7 +266,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy5" Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="0,13,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy5" Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="12,13,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="29" Width="18">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -304,7 +304,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy6" Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="2,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy6" Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="14,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="30" Width="19">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -342,7 +342,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy7" Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="8,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy7" Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="19,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="31" Width="20">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -380,7 +380,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy8" Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="11,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy8" Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="22,9,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="30" Width="20">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -418,7 +418,7 @@
                                     </TransformGroup>
                                 </ComboBox.RenderTransform>
                             </ComboBox>
-                            <Label x:Name="label_Copy9" Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="10,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="45" Width="31">
+                            <Label x:Name="label_Copy9" Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="21,23,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Grid.Row="1" Height="31" Width="19">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="0.998" ScaleX="-1.002"/>
@@ -434,150 +434,162 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="dorsoTab2" Header="Flex test" >
-                <Grid x:Name="progressBarsDorso" Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" ScaleX="1"/>
-                            <SkewTransform AngleY="0" AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-                    <Image x:Name="imageDorsal2" Height="540" VerticalAlignment="Top" Source="dorso.png" Stretch="UniformToFill" Margin="0,0,-1,0" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
+                <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                    <Grid x:Name="progressBarsDorso" Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1" ScaleX="1"/>
                                 <SkewTransform AngleY="0" AngleX="0"/>
                                 <RotateTransform Angle="0"/>
                                 <TranslateTransform/>
                             </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
+                        </Grid.RenderTransform>
+                        <Image x:Name="imageDorsal2" Height="540" VerticalAlignment="Top" Source="dorso.png" Stretch="UniformToFill" Margin="0,0,-1,0" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                    <SkewTransform AngleY="0" AngleX="0"/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
 
-                    <!-- Finger 0 -->
+                        <!-- Finger 0 -->
+                        <Grid HorizontalAlignment="Left" Height="100" Margin="61,276,0,0" VerticalAlignment="Top" Width="85">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                    <SkewTransform AngleY="0" AngleX="0.023"/>
+                                    <RotateTransform Angle="-0.093"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="-13,31,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="0">
+                                <ProgressBar.RenderTransform>
 
-                    <ProgressBar x:Name="progressBar0" HorizontalAlignment="Left" Height="28" Margin="53,314,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="0">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-126.257"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                        <SkewTransform AngleY="0" AngleX="0.023"/>
+                                        <RotateTransform Angle="-126.257"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ProgressBar.RenderTransform>
+                            </ProgressBar>
+                        </Grid>
 
-                    <!-- Finger 1 -->
-                    <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-99.172"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 1 -->
+                        <ProgressBar x:Name="progressBar1" HorizontalAlignment="Left" Height="28" Margin="121,129,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="1">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-99.172"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 2 -->
-                    <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-91.707"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 2 -->
+                        <ProgressBar x:Name="progressBar2" HorizontalAlignment="Left" Height="28" Margin="209,118,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="2">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-91.707"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 3 -->
-                    <ProgressBar x:Name="progressBar3" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="3">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90.224"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 3 -->
+                        <ProgressBar x:Name="progressBar3" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="3">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90.224"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 4 -->
-                    <ProgressBar x:Name="progressBar4" HorizontalAlignment="Left" Height="28" Margin="362,189,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="4">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-78.805"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 4 -->
+                        <ProgressBar x:Name="progressBar4" HorizontalAlignment="Left" Height="28" Margin="362,189,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="4">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-78.805"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 5 -->
-                    <ProgressBar x:Name="progressBar5" HorizontalAlignment="Left" Height="28" Margin="114,396,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="5">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-126.51"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 5 -->
+                        <ProgressBar x:Name="progressBar5" HorizontalAlignment="Left" Height="28" Margin="114,396,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="5">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-126.51"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 6 -->
-                    <ProgressBar x:Name="progressBar6" HorizontalAlignment="Left" Height="28" Margin="143,234,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="6">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-103.278"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 6 -->
+                        <ProgressBar x:Name="progressBar6" HorizontalAlignment="Left" Height="28" Margin="143,234,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="6">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-103.278"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 7 -->
-                    <ProgressBar x:Name="progressBar7" HorizontalAlignment="Left" Height="28" Margin="213,224,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="7">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-92.236"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 7 -->
+                        <ProgressBar x:Name="progressBar7" HorizontalAlignment="Left" Height="28" Margin="213,224,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="7">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-92.236"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 8 -->
-                    <ProgressBar x:Name="progressBar8" HorizontalAlignment="Left" Height="28" Margin="283,240,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="8">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90.224"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 8 -->
+                        <ProgressBar x:Name="progressBar8" HorizontalAlignment="Left" Height="28" Margin="283,240,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="8">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90.224"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
-                    <!-- Finger 9 -->
-                    <ProgressBar x:Name="progressBar9" HorizontalAlignment="Left" Height="28" Margin="343,289,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="9">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-79.024"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
+                        <!-- Finger 9 -->
+                        <ProgressBar x:Name="progressBar9" HorizontalAlignment="Left" Height="28" Margin="343,289,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" TabIndex="9">
+                            <ProgressBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-79.024"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
 
 
+
+                    </Grid>
                 </Grid>
-
             </TabItem>
 
 

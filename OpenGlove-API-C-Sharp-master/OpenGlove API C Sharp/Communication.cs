@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 using System.Threading;
 using WebSocketSharp;
 using WebSocketSharp.Server;
@@ -12,8 +13,15 @@ namespace OpenGlove
     /// </summary>
     class Communication
     {
-        private static string WSAddress = "ws://localhost:9876";
-        private static WebSocketServer wssv = new WebSocketServer(WSAddress);
+        /// <summary>
+        /// Serial port communication field. 
+        /// </summary>
+        private static SerialPort port = new SerialPort();
+
+        private static int websocketBase = 9870;
+        private static int portNumber;
+        private static string WSAddress;
+        private static WebSocketServer wssv;
         //static Thread readThread;
         public class WSbase
         {
@@ -30,10 +38,6 @@ namespace OpenGlove
             }
         }
 
-        /// <summary>
-        /// Serial port communication field. 
-        /// </summary>
-        private static SerialPort port = new SerialPort();
 
         /// <summary>
         /// Initialize an instance of Communication class without open the communication with the device.
@@ -68,6 +72,9 @@ namespace OpenGlove
         /// <param name="baudRate">Data rate in bits per second. Use one of these values: 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200</param>
         public void OpenPort(string portName, int baudRate)
         {
+            portNumber = int.Parse(Regex.Replace(portName, @"[^\d]", ""));
+            WSAddress = "ws://localhost:" + (websocketBase + portNumber).ToString();
+            wssv = new WebSocketServer(WSAddress);
             port.PortName = portName;
             port.BaudRate = baudRate;
             port.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);

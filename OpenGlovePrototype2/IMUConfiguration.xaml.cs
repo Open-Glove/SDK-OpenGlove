@@ -22,20 +22,67 @@ namespace OpenGlovePrototype2
 
         private Glove selectedGlove;
 
+        private bool testing;
         public IMUConfiguration(Glove selectedGlove)
         {
             this.selectedGlove = selectedGlove;
             InitializeComponent();
+            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings == null)
+            {
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings = new Glove.Configuration.Profile.IMU_Settings();
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.calibrationStatus = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.nameModel = "Default";
+                labelIMUStatus.Content = "Off";
+
+            }
+            updateView();
+            testing = false;
             GridTest.Visibility = Visibility.Hidden;
+        }
+
+        private void updateView()
+        {
+
+            if(this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus == true)
+            {
+                button.Content = "Deactivate data";
+                labelIMUStatus.Content = "On";
+            }else
+            {
+                button.Content = "Activate data";
+                labelIMUStatus.Content = "Off";
+            }
+
+            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData == true)
+            {
+                buttonSetRawData.Content = "Processed data";
+            }
+            else
+            {
+                buttonSetRawData.Content = "Raw Data";
+            }
+
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            gloves.startIMU(selectedGlove);
-            labelIMUStatus.Content = "On";
+            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus == false)
+            {
+                gloves.startIMU(selectedGlove);
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = true;
+            }else
+            {
+                gloves.setIMUStatus(selectedGlove, false);
+                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = false;
+            }
+            
+            updateView();
         }
 
-        private bool testing;
+        
+
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
             if (testing)
@@ -47,7 +94,7 @@ namespace OpenGlovePrototype2
                 GridTest.Visibility = Visibility.Hidden;
 
             }
-            else if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
+            else
             {
                 testing = true;
                 GridTest.Visibility = Visibility.Visible;
@@ -72,6 +119,30 @@ namespace OpenGlovePrototype2
                 this.labelMz.Content = mz.ToString();
             }));
         }
+   
+        private void buttonSetRawData_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData == true)
+            {
+                gloves.setRawData(selectedGlove, false);
+                selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = false;
+            }
+            else
+            {
+                gloves.setRawData(selectedGlove, true);
+                selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = true;
+            }
+            updateView();            
+        }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            /*
+            if(testing == true)
+            {
+                buttonTest.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
+            */
+        }
     }
 }

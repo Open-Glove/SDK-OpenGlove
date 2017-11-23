@@ -15,6 +15,7 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Port" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Side" type="tns:Side" />
+      <xs:element minOccurs="0" name="WebSocketPort" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Glove" nillable="true" type="tns:Glove" />
@@ -40,11 +41,21 @@
       <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FlexorsMappings" nillable="true" type="q8:ArrayOfKeyValueOfintint" />
       <xs:element minOccurs="0" name="FlexorsThreshold" type="xs:int" />
       <xs:element minOccurs="0" name="GloveHash" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMUSettings" nillable="true" type="tns:Glove.Configuration.Profile.IMU_Settings" />
       <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Mappings" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="ProfileName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Glove.Configuration.Profile" nillable="true" type="tns:Glove.Configuration.Profile" />
+  <xs:complexType name="Glove.Configuration.Profile.IMU_Settings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="calibrationStatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="imuStatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nameModel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rawData" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Glove.Configuration.Profile.IMU_Settings" nillable="true" type="tns:Glove.Configuration.Profile.IMU_Settings" />
   <xs:simpleType name="Side">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Right" />

@@ -40,6 +40,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OpenGlove_API_C_Sharp_HL.ServiceReference1.Side SideField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WebSocketPortField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -124,6 +127,19 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 if ((this.SideField.Equals(value) != true)) {
                     this.SideField = value;
                     this.RaisePropertyChanged("Side");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WebSocketPort {
+            get {
+                return this.WebSocketPortField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WebSocketPortField, value) != true)) {
+                    this.WebSocketPortField = value;
+                    this.RaisePropertyChanged("WebSocketPort");
                 }
             }
         }
@@ -362,6 +378,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 private string GloveHashField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove.Configuration.Profile.IMU_Settings IMUSettingsField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
                 private System.Collections.Generic.Dictionary<string, string> MappingsField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -429,6 +448,19 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 }
                 
                 [System.Runtime.Serialization.DataMemberAttribute()]
+                public OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove.Configuration.Profile.IMU_Settings IMUSettings {
+                    get {
+                        return this.IMUSettingsField;
+                    }
+                    set {
+                        if ((object.ReferenceEquals(this.IMUSettingsField, value) != true)) {
+                            this.IMUSettingsField = value;
+                            this.RaisePropertyChanged("IMUSettings");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
                 public System.Collections.Generic.Dictionary<string, string> Mappings {
                     get {
                         return this.MappingsField;
@@ -460,6 +492,98 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                     System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
                     if ((propertyChanged != null)) {
                         propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                    }
+                }
+                
+                [System.Diagnostics.DebuggerStepThroughAttribute()]
+                [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+                [System.Runtime.Serialization.DataContractAttribute(Name="Glove.Configuration.Profile.IMU_Settings", Namespace="http://schemas.datacontract.org/2004/07/OpenGloveWCF")]
+                [System.SerializableAttribute()]
+                public partial class IMU_Settings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+                    
+                    [System.NonSerializedAttribute()]
+                    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+                    
+                    [System.Runtime.Serialization.OptionalFieldAttribute()]
+                    private bool calibrationStatusField;
+                    
+                    [System.Runtime.Serialization.OptionalFieldAttribute()]
+                    private bool imuStatusField;
+                    
+                    [System.Runtime.Serialization.OptionalFieldAttribute()]
+                    private string nameModelField;
+                    
+                    [System.Runtime.Serialization.OptionalFieldAttribute()]
+                    private bool rawDataField;
+                    
+                    public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+                        get {
+                            return this.extensionDataField;
+                        }
+                        set {
+                            this.extensionDataField = value;
+                        }
+                    }
+                    
+                    [System.Runtime.Serialization.DataMemberAttribute()]
+                    public bool calibrationStatus {
+                        get {
+                            return this.calibrationStatusField;
+                        }
+                        set {
+                            if ((this.calibrationStatusField.Equals(value) != true)) {
+                                this.calibrationStatusField = value;
+                                this.RaisePropertyChanged("calibrationStatus");
+                            }
+                        }
+                    }
+                    
+                    [System.Runtime.Serialization.DataMemberAttribute()]
+                    public bool imuStatus {
+                        get {
+                            return this.imuStatusField;
+                        }
+                        set {
+                            if ((this.imuStatusField.Equals(value) != true)) {
+                                this.imuStatusField = value;
+                                this.RaisePropertyChanged("imuStatus");
+                            }
+                        }
+                    }
+                    
+                    [System.Runtime.Serialization.DataMemberAttribute()]
+                    public string nameModel {
+                        get {
+                            return this.nameModelField;
+                        }
+                        set {
+                            if ((object.ReferenceEquals(this.nameModelField, value) != true)) {
+                                this.nameModelField = value;
+                                this.RaisePropertyChanged("nameModel");
+                            }
+                        }
+                    }
+                    
+                    [System.Runtime.Serialization.DataMemberAttribute()]
+                    public bool rawData {
+                        get {
+                            return this.rawDataField;
+                        }
+                        set {
+                            if ((this.rawDataField.Equals(value) != true)) {
+                                this.rawDataField = value;
+                                this.RaisePropertyChanged("rawData");
+                            }
+                        }
+                    }
+                    
+                    public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+                    
+                    protected void RaisePropertyChanged(string propertyName) {
+                        System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+                        if ((propertyChanged != null)) {
+                            propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                        }
                     }
                 }
             }
@@ -525,6 +649,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setIMUStatus", ReplyAction="http://tempuri.org/IOGService/setIMUStatusResponse")]
         void setIMUStatus(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setRawData", ReplyAction="http://tempuri.org/IOGService/setRawDataResponse")]
+        void setRawData(string gloveAddress, int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -612,6 +739,10 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public void setIMUStatus(string gloveAddress, int value) {
             base.Channel.setIMUStatus(gloveAddress, value);
+        }
+        
+        public void setRawData(string gloveAddress, int value) {
+            base.Channel.setRawData(gloveAddress, value);
         }
     }
 }

@@ -75,6 +75,10 @@ namespace OpenGlove
         /// Description
         /// </summary>
         private string setIMUStatusFunctionNumber = "21";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string setRawDataFunctionNumber = "22";
 
 
         /// <summary>
@@ -463,6 +467,16 @@ namespace OpenGlove
         public string setIMUStatus(int status)
         {
             string message = setIMUStatusFunctionNumber + separator + status + terminal;
+            return message;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string with the "set_RawData" format specified in the OpenGlove communication protocol</returns>
+        public string setRawData(int status)
+        {
+            string message = setRawDataFunctionNumber + separator + status + terminal;
             return message;
         }
 

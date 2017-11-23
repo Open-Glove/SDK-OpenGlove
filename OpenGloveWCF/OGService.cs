@@ -298,5 +298,17 @@ namespace OpenGloveWCF
 
         }
 
+        public void setRawData(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setRawData(value);
+                }
+            }
+
+        }
+
     }
 }

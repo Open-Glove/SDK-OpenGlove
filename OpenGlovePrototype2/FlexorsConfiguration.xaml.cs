@@ -97,7 +97,13 @@ namespace OpenGlovePrototype2
             stD.ScaleX = 1;
             stD.ScaleY = 1;
 
+            foreach (var item in selectors)
+            {
+                item.RenderTransform = st;
+            }
+
             imageDorsal.RenderTransform = st;
+            imageDorsal2.RenderTransform = st;
             selectorsGridDorso.RenderTransform = stD;
 
             List<Grid> grids = selectorsGridDorso.Children.OfType<Grid>().ToList();
@@ -108,6 +114,23 @@ namespace OpenGlovePrototype2
                 {
                     label.RenderTransform = stD;
                 }
+            }
+
+/*
+            
+            progressBar1.RenderTransform = stD;
+            progressBar2.RenderTransform = stD;
+            progressBar3.RenderTransform = stD;
+            progressBar4.RenderTransform = stD;
+            progressBar5.RenderTransform = stD;
+            progressBar6.RenderTransform = stD;
+            progressBar7.RenderTransform = stD;
+            progressBar8.RenderTransform = stD;
+            progressBar9.RenderTransform = stD;
+*/
+            foreach (var item in selectors)
+            {
+                item.RenderTransform = stD;
             }
         }
 
