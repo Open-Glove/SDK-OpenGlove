@@ -27,15 +27,25 @@ namespace OpenGlovePrototype2
         {
             this.selectedGlove = selectedGlove;
             InitializeComponent();
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings == null)
+            if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings = new Glove.Configuration.Profile.IMU_Settings();
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = false;
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = false;
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.calibrationStatus = false;
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.nameModel = "Default";
-                labelIMUStatus.Content = "Off";
+                this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
 
+                this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.rawData = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.imuCalibrationStatus = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.imuModel = "Default";
+                labelIMUStatus.Content = "Off";
+            }else
+            {
+                if(this.selectedGlove.GloveConfiguration.GloveProfile.imuModel == null || this.selectedGlove.GloveConfiguration.GloveProfile.imuModel.Equals(""))
+                {
+                    this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus = false;
+                    this.selectedGlove.GloveConfiguration.GloveProfile.rawData = false;
+                    this.selectedGlove.GloveConfiguration.GloveProfile.imuCalibrationStatus = false;
+                    this.selectedGlove.GloveConfiguration.GloveProfile.imuModel = "Default";
+                    labelIMUStatus.Content = "Off";
+                }
             }
             updateView();
             testing = false;
@@ -45,7 +55,7 @@ namespace OpenGlovePrototype2
         private void updateView()
         {
 
-            if(this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus == true)
+            if(this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus == true)
             {
                 button.Content = "Deactivate data";
                 labelIMUStatus.Content = "On";
@@ -55,7 +65,7 @@ namespace OpenGlovePrototype2
                 labelIMUStatus.Content = "Off";
             }
 
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData == true)
+            if (this.selectedGlove.GloveConfiguration.GloveProfile.rawData == true)
             {
                 buttonSetRawData.Content = "Processed data";
             }
@@ -68,14 +78,14 @@ namespace OpenGlovePrototype2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus == false)
+            if (this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus == false)
             {
                 gloves.startIMU(selectedGlove);
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = true;
+                this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus = true;
             }else
             {
                 gloves.setIMUStatus(selectedGlove, false);
-                this.selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.imuStatus = false;
+                this.selectedGlove.GloveConfiguration.GloveProfile.imuStatus = false;
             }
             
             updateView();
@@ -122,15 +132,15 @@ namespace OpenGlovePrototype2
    
         private void buttonSetRawData_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData == true)
+            if (selectedGlove.GloveConfiguration.GloveProfile.rawData == true)
             {
                 gloves.setRawData(selectedGlove, false);
-                selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = false;
+                selectedGlove.GloveConfiguration.GloveProfile.rawData = false;
             }
             else
             {
                 gloves.setRawData(selectedGlove, true);
-                selectedGlove.GloveConfiguration.GloveProfile.IMUSettings.rawData = true;
+                selectedGlove.GloveConfiguration.GloveProfile.rawData = true;
             }
             updateView();            
         }

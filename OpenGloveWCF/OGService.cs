@@ -2,11 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-//using System.Runtime.Remoting.Channels;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Threading.Tasks;
 
 namespace OpenGloveWCF
 {
@@ -123,17 +118,63 @@ namespace OpenGloveWCF
             return Glove.RefreshGloves();
         }
 
+        int index;
         public void SaveGlove(Glove glove)
         {
+           index = 0;
+            for(int i = 0; i < Glove.Gloves.Count; i++)
+            {
+                if (Glove.Gloves[i].BluetoothAddress.Equals(glove.BluetoothAddress))
+                {
+                    if (glove.Connected == true && glove.LegacyGlove == null)
+                    {
+                        glove.LegacyGlove = new LegacyOpenGlove();
+                    }
+
+                    Glove.Gloves[i] = glove;
+                    // Glove.Gloves.Remove(g);
+                    // Glove.Gloves.Add(glove);
+                    break;
+                }
+            }
+            
+            /*
             foreach (Glove g in Glove.Gloves)
             {
                 if (g.BluetoothAddress.Equals(glove.BluetoothAddress))
                 {
-                    Glove.Gloves.Remove(g);
-                    Glove.Gloves.Add(glove);
+                    if(glove.Connected == true && glove.LegacyGlove == null)
+                    {
+                        glove.LegacyGlove = new LegacyOpenGlove();
+                    }
+
+                    Glove.Gloves[index] = glove;
+                   // Glove.Gloves.Remove(g);
+                   // Glove.Gloves.Add(glove);
                     break;
                 }
+                index++;
             }
+            */
+            
+        }
+
+        public void UpdateGlove(Glove glove)
+        {
+            index = 0;
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(glove.BluetoothAddress))
+                {
+                    Glove.Gloves[index].GloveConfiguration = glove.GloveConfiguration;
+                    //Glove.Gloves[index].
+                    // Glove.Gloves.Remove(g);
+                    // Glove.Gloves.Add(glove);
+                    break;
+                }
+                index++;
+            }
+
         }
 
         public int Connect(string gloveAddres)
@@ -194,15 +235,17 @@ namespace OpenGloveWCF
         
         public int addFlexor(string gloveAddress, int pin, int mapping)
         {
-
+            index = 0;
             foreach (Glove g in Glove.Gloves)
             {
+                
                 if (g.BluetoothAddress.Equals(gloveAddress))
                 {
-                    g.LegacyGlove.addFlexor(pin, mapping);
 
+                    g.LegacyGlove.addFlexor(pin, mapping);
                     return 0;
                 }
+                index++;
             }
             return 1;
 

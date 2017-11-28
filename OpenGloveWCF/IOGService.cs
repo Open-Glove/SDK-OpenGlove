@@ -7,9 +7,6 @@ using System.Management;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Threading.Tasks;
-using WebSocketSharp;
-using WebSocketSharp.Server;
 using System.Text.RegularExpressions;
 
 namespace OpenGloveWCF
@@ -144,20 +141,6 @@ namespace OpenGloveWCF
 
     }
 
-    
-    /*
-    [DataContract]
-    public class ActivateManyData {
-        [DataMember]
-        string gloveAddress;
-
-        [DataMember]
-        List<int> actuators;
-
-        [DataMember]
-        List<int> intensityList;
-    }
-    */
 
     [DataContract]
     public class Glove
@@ -235,6 +218,7 @@ namespace OpenGloveWCF
             return scannedGloves;
         }
 
+        /*
         /// <summary>
         /// Gets the outgoing COM Serial Port of a bluetooth device.
         /// </summary>
@@ -267,6 +251,8 @@ namespace OpenGloveWCF
             return null;
         }
 
+        */
+
         [DataMember]
         public string Name;
 
@@ -289,7 +275,6 @@ namespace OpenGloveWCF
         public Configuration GloveConfiguration;
 
         public LegacyOpenGlove LegacyGlove { get; set; }
-
 
         [DataContract]
         public class Configuration
@@ -350,70 +335,29 @@ namespace OpenGloveWCF
                 public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
 
                 [DataMember]
-                public IMU_Settings IMUSettings;
+                public String imuModel;
+
+                [DataMember]
+                public bool imuStatus;
+
+                [DataMember]
+                public bool rawData;
+
+                [DataMember]
+                public bool imuCalibrationStatus;
 
                // [DataMember]
-               // public Flexors_Settings FlexorsSettings;
+               // public IMU_Settings IMUSettings;
 
-                [DataContract]
-                public class IMU_Settings
-                {
-                    [DataMember]
-                    public String nameModel;
-
-                    [DataMember]
-                    public bool imuStatus;
-
-                    [DataMember]
-                    public bool rawData;
-
-                    [DataMember]
-                    public bool calibrationStatus;
-                    /*
-                    
-                    [DataMember]
-                    public bool gyroStatus;
-
-                    [DataMember]
-                    public bool accelStatus;
-                
-                    [DataMember]
-                    public bool magStatus;
-
-                    [DataMember]
-                    public List<int> gyroScale = new List<int> {245, 500, 2000};
-
-                    [DataMember]
-                    public List<int> accelScale = new List<int> {2, 4, 8, 16 };
-
-                    [DataMember]
-                    public List<int> magScale = new List<int> { 4, 8, 16 };
-
-                    */
-
-                }
-
-                [DataContract]
-                public class Flexors_Settings
-                {
-                    [DataMember]
-                    public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
-
-                    [DataMember]
-                    public int FlexorsThreshold;
-
-                    [DataMember]
-                    public bool calibrationStatus = false;
-
-                }
-
+                // [DataMember]
+                // public Flexors_Settings FlexorsSettings;            
             }
 
 
         }
 
-
     }
+    
 
     [DataContract(Name = "Side")]
     public enum Sides
@@ -423,4 +367,42 @@ namespace OpenGloveWCF
         [EnumMember]
         Left
     }
+
+    /*
+    [DataContract]
+    public class Flexors_Settings
+    {
+        [DataMember]
+        public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
+
+        [DataMember]
+        public int FlexorsThreshold;
+
+        [DataMember]
+        public bool calibrationStatus = false;
+
+    }
+    */
+
+    //gyro
+    /*
+       [DataMember]
+       public bool gyroStatus;
+
+       [DataMember]
+       public bool accelStatus;
+
+       [DataMember]
+       public bool magStatus;
+
+       [DataMember]
+       public List<int> gyroScale = new List<int> {245, 500, 2000};
+
+       [DataMember]
+       public List<int> accelScale = new List<int> {2, 4, 8, 16 };
+
+       [DataMember]
+       public List<int> magScale = new List<int> { 4, 8, 16 };
+       */
+
 }

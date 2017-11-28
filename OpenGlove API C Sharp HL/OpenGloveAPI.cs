@@ -25,7 +25,7 @@ namespace OpenGlove_API_C_Sharp_HL
 
         OpenGloveAPI()
         {
-            NetHttpBinding binding = new NetHttpBinding();
+            BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
             WebSocketActive = false;
@@ -48,12 +48,14 @@ namespace OpenGlove_API_C_Sharp_HL
         public delegate void gyroscopeValues(float gx, float gy, float gz);
         public delegate void magnometerValues(float mx, float my, float mz);
         public delegate void allIMUValues(float ax, float ay, float az, float gx, float gy, float gz,float mx, float my, float mz);
-        WebSocket WebSocketClient;
+       
         public event FingerMovement fingersFunction;
         public event accelerometerValues accelerometerFunction;
         public event gyroscopeValues gyroscopeFunction;
         public event magnometerValues magnometerFunction;
         public event allIMUValues imu_ValuesFunction;
+
+        WebSocket WebSocketClient;
 
         public void readData( )
         {
@@ -316,7 +318,15 @@ namespace OpenGlove_API_C_Sharp_HL
 
             this.serviceClient.ActivateMany(selectedGlove.BluetoothAddress, actuators.ToArray(), intensityList.ToArray());
         }
+
+        public void saveGlove(Glove selectedGlove)
+        {
+            this.serviceClient.SaveGlove(selectedGlove);
+        }
+
     }
+
+    
 
 
     public enum PalmarRegion

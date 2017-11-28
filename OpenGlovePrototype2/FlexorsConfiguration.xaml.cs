@@ -80,8 +80,6 @@ namespace OpenGlovePrototype2
                 flipControls();
             }
 
-           
-
         }
 
         /// <summary>
@@ -332,7 +330,8 @@ namespace OpenGlovePrototype2
 
                 int owner = ((ComboBox)sender).TabIndex;
                 if (selection != null)
-                { 
+                {
+                    Console.WriteLine("entro a añadir flexor?");
                     if (!selection.Equals(""))
                     {
                         int selectionFlexor = Int32.Parse(selection);
@@ -344,10 +343,11 @@ namespace OpenGlovePrototype2
                         }
                         catch (Exception)
                         {
-                            int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
+                         /*   int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
                             liberateFlexor(liberatedFlexor, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner] = selectionFlexor;
                             gloves.addFlexor(this.selectedGlove, selectionFlexor, owner);
+                            */
                         }
                     }
                     else
