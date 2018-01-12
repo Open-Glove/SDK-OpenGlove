@@ -20,7 +20,7 @@
         </Menu>
         <TabControl x:Name="tabControl" Height="540" VerticalAlignment="Top" Margin="264,110,0,0" HorizontalAlignment="Left" Width="534" Grid.ColumnSpan="2" IsHitTestVisible="True" SelectionChanged="tabControl_SelectionChanged_1" >
 
-            <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True"  >
+            <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True" Visibility="Hidden"  >
                 <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <TransformGroup>
@@ -433,7 +433,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="dorsoTab2" Header="Flex test" >
+            <TabItem x:Name="dorsoTab2" Header="Flex test" Visibility="Hidden" >
                 <Grid Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
                     <Grid x:Name="progressBarsDorso" Margin="0,0,0,-28" HorizontalAlignment="Left" Width="527" RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
@@ -614,6 +614,10 @@
         <Button x:Name="buttonCalibrateFlexors" Content="Calibrate Flexors" HorizontalAlignment="Left" Margin="13,505,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonCalibrateFlexors_Click" IsEnabled="False"/>
         <xctk:IntegerUpDown x:Name="ThresholdValue" HorizontalAlignment="Left" Margin="13,573,0,0" VerticalAlignment="Top" Height="34" Width="154" DefaultValue="0" DisplayDefaultValueOnEmptyText="True" ValueChanged="IntegerUpDown_ValueChanged"/>
         <Button x:Name="buttonSetThreshold" Content="Set Threshold" HorizontalAlignment="Left" Margin="167,573,0,0" VerticalAlignment="Top" Width="92" Height="34" IsHitTestVisible="True" Click="buttonSetThreshold_Click"/>
+        <Button x:Name="button" Content="addFlex" HorizontalAlignment="Left" Margin="202,630,0,0" VerticalAlignment="Top" Width="57" Click="button_Click"/>
+        <TextBox x:Name="regiontest" HorizontalAlignment="Left" Height="23" Margin="34,630,0,0" TextWrapping="Wrap" Text="region" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="flextest" HorizontalAlignment="Left" Height="23" Margin="122,631,0,0" TextWrapping="Wrap" Text="flex" VerticalAlignment="Top" Width="64"/>
+        <Button x:Name="removeflex" Content="removeflex" HorizontalAlignment="Left" Margin="202,607,0,0" VerticalAlignment="Top" Width="57" Click="removeflex_Click"/>
 
     </Grid>
 </Window>

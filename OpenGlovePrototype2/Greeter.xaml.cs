@@ -187,7 +187,6 @@ namespace OpenGlovePrototype2
                 this.buttonCreateProfileConfig.IsEnabled = false;
                // this.buttonOpenProfileConfig.IsEnabled = false;
                 this.ConnectMenuItem.IsEnabled = false;
-                this.CurrentProfileMenuItem.IsEnabled = false;
             }
             else
             {
@@ -205,7 +204,6 @@ namespace OpenGlovePrototype2
                 }
                 else
                 {
-                    this.CurrentProfileMenuItem.IsEnabled = true;
                     this.labelProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
                 }
 
@@ -290,20 +288,7 @@ namespace OpenGlovePrototype2
             this.Hide();
         }
 
-        private void CurrentProfileMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count != 0)
-            {
-                ConfigurationTool config = new ConfigurationTool(selectedGlove);
-                config.Show();
-            }
-            else
-            {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("No profile loaded.", "No profile", System.Windows.MessageBoxButton.OK);
-
-            }
-        }
+      
 
         private void ConnectMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -341,8 +326,6 @@ namespace OpenGlovePrototype2
             {
                 HandConfiguration HC = new HandConfiguration(this.selectedGlove);
                 HC.ShowDialog();
-               // ConfigurationTool config = new ConfigurationTool(this.selectedGlove);
-              //  config.ShowDialog();
                 refreshControls();
             }
             

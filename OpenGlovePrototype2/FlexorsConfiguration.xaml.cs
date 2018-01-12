@@ -530,7 +530,16 @@ namespace OpenGlovePrototype2
             
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.addFlexor(this.selectedGlove, Int32.Parse(flextest.Text), Int32.Parse(regiontest.Text));
 
+        }
+
+        private void removeflex_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.removeFlexor(this.selectedGlove, Int32.Parse(regiontest.Text));
+        }
     }
 
 }

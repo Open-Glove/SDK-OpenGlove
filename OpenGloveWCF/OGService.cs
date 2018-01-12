@@ -119,46 +119,43 @@ namespace OpenGloveWCF
         }
 
         int index;
+
         public void SaveGlove(Glove glove)
         {
-           index = 0;
+            /*
             for(int i = 0; i < Glove.Gloves.Count; i++)
             {
                 if (Glove.Gloves[i].BluetoothAddress.Equals(glove.BluetoothAddress))
                 {
                     if (glove.Connected == true && glove.LegacyGlove == null)
                     {
-                        glove.LegacyGlove = new LegacyOpenGlove();
+                        if(Glove.Gloves[i].LegacyGlove != null)
+                        {
+                            glove.LegacyGlove = new LegacyOpenGlove();
+                        }
+                        else
+                        {
+                            glove.LegacyGlove = new LegacyOpenGlove();
+                        }
+                        
                     }
-
                     Glove.Gloves[i] = glove;
-                    // Glove.Gloves.Remove(g);
-                    // Glove.Gloves.Add(glove);
                     break;
                 }
             }
-            
-            /*
+            */
             foreach (Glove g in Glove.Gloves)
             {
                 if (g.BluetoothAddress.Equals(glove.BluetoothAddress))
                 {
-                    if(glove.Connected == true && glove.LegacyGlove == null)
-                    {
-                        glove.LegacyGlove = new LegacyOpenGlove();
-                    }
-
-                    Glove.Gloves[index] = glove;
-                   // Glove.Gloves.Remove(g);
-                   // Glove.Gloves.Add(glove);
+                    Glove.Gloves.Remove(g);
+                    Glove.Gloves.Add(glove);
                     break;
                 }
-                index++;
             }
-            */
-            
         }
 
+        /*
         public void UpdateGlove(Glove glove)
         {
             index = 0;
@@ -176,7 +173,7 @@ namespace OpenGloveWCF
             }
 
         }
-
+        */
         public int Connect(string gloveAddres)
         {
             foreach (Glove g in Glove.Gloves)
@@ -210,7 +207,6 @@ namespace OpenGloveWCF
             }
             return 0; //OK
         }
-
 
         public int Disconnect(string gloveAddres)
         {
@@ -300,7 +296,6 @@ namespace OpenGloveWCF
             }
             
         }
-
 
         public void resetFlexors(string gloveAddress)
         {

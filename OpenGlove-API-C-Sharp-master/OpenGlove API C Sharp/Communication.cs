@@ -16,12 +16,12 @@ namespace OpenGlove
         /// <summary>
         /// Serial port communication field. 
         /// </summary>
-        private static SerialPort port = new SerialPort();
+        private SerialPort port = new SerialPort();
 
-        private static int websocketBase = 9870;
-        private static int portNumber;
-        private static string WSAddress;
-        private static WebSocketServer wssv;
+        private int websocketBase = 9870;
+        private int portNumber;
+        private string WSAddress;
+        private WebSocketServer wssv;
         //static Thread readThread;
         public class WSbase
         {
@@ -111,7 +111,7 @@ namespace OpenGlove
 
         }
 
-        private static void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             // Obtenemos el puerto serie que lanza el evento
             SerialPort currentSerialPort = (SerialPort)sender;
@@ -122,6 +122,7 @@ namespace OpenGlove
                 string inData = currentSerialPort.ReadLine();
             
                 wssv.WebSocketServices["/" + port.PortName].Sessions.Broadcast(inData);
+               
             }
             catch
             {

@@ -23,7 +23,6 @@
             <Separator Width="11"/>
             <MenuItem x:Name="ConnectMenuItem" Header="Connect" Foreground="White" IsEnabled="False" Click="ConnectMenuItem_Click"/>
             <Separator Width="11"/>
-            <MenuItem x:Name="CurrentProfileMenuItem" Header="Current Profile" Foreground="White" Click="CurrentProfileMenuItem_Click" IsEnabled="False"/>
             <Separator Width="18" Background="Black"/>
         </Menu>
         <ListView x:Name="listViewGloves" Margin="10,155,332,0" SelectionChanged="listViewGloves_SelectionChanged" Grid.ColumnSpan="2" Height="124" VerticalAlignment="Top">
