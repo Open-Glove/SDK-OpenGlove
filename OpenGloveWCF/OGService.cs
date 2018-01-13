@@ -122,37 +122,26 @@ namespace OpenGloveWCF
 
         public void SaveGlove(Glove glove)
         {
-            /*
             for(int i = 0; i < Glove.Gloves.Count; i++)
             {
                 if (Glove.Gloves[i].BluetoothAddress.Equals(glove.BluetoothAddress))
                 {
-                    if (glove.Connected == true && glove.LegacyGlove == null)
-                    {
+                    //if (glove.Connected == true && glove.LegacyGlove == null)
+                  //  {
                         if(Glove.Gloves[i].LegacyGlove != null)
                         {
-                            glove.LegacyGlove = new LegacyOpenGlove();
+                            glove.LegacyGlove = Glove.Gloves[i].LegacyGlove;
                         }
                         else
                         {
                             glove.LegacyGlove = new LegacyOpenGlove();
                         }
                         
-                    }
+                  //  }
                     Glove.Gloves[i] = glove;
                     break;
                 }
-            }
-            */
-            foreach (Glove g in Glove.Gloves)
-            {
-                if (g.BluetoothAddress.Equals(glove.BluetoothAddress))
-                {
-                    Glove.Gloves.Remove(g);
-                    Glove.Gloves.Add(glove);
-                    break;
-                }
-            }
+            }  
         }
 
         /*

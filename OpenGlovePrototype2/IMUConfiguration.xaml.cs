@@ -99,8 +99,7 @@ namespace OpenGlovePrototype2
             {
                 testing = false;
                 buttonTest.Content = "Test";
-                gloves.imu_ValuesFunction -= allIMUValues;
-                gloves.stopCaptureData();
+                gloves.getDataReceiver(selectedGlove).imu_ValuesFunction -= allIMUValues;
                 GridTest.Visibility = Visibility.Hidden;
 
             }
@@ -108,8 +107,7 @@ namespace OpenGlovePrototype2
             {
                 testing = true;
                 GridTest.Visibility = Visibility.Visible;
-                gloves.startCaptureData(selectedGlove);
-                gloves.imu_ValuesFunction += allIMUValues;
+                gloves.getDataReceiver(selectedGlove).imu_ValuesFunction += allIMUValues;
                 buttonTest.Content = "Stop";
             }
         }

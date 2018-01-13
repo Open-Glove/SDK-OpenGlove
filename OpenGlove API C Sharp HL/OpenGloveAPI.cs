@@ -17,18 +17,21 @@ namespace OpenGlove_API_C_Sharp_HL
         /// Singleton instance of the API
         /// </summary>
         private static OpenGloveAPI instance;
-        bool WebSocketActive;
+       // bool WebSocketActive;
         /// <summary>
         /// Client for the WCF service
         /// </summary>
         private OGServiceClient serviceClient;
+
+        private List<DataReceiver> DataReceivers;
 
         OpenGloveAPI()
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
-            WebSocketActive = false;
+            DataReceivers = new List<DataReceiver>();
+          //  WebSocketActive = false;
         }
         /// <summary>
         /// Gets the current API instance
@@ -43,102 +46,33 @@ namespace OpenGlove_API_C_Sharp_HL
             return instance;
         }
 
-        public delegate void FingerMovement(int region, int value);
-        public delegate void accelerometerValues(float ax, float ay, float az);
-        public delegate void gyroscopeValues(float gx, float gy, float gz);
-        public delegate void magnometerValues(float mx, float my, float mz);
-        public delegate void allIMUValues(float ax, float ay, float az, float gx, float gy, float gz,float mx, float my, float mz);
-       
-        public event FingerMovement fingersFunction;
-        public event accelerometerValues accelerometerFunction;
-        public event gyroscopeValues gyroscopeFunction;
-        public event magnometerValues magnometerFunction;
-        public event allIMUValues imu_ValuesFunction;
-
-        WebSocket WebSocketClient;
-
-        public void readData( )
+        public DataReceiver getDataReceiver(Glove selectedGlove)
         {
-            using (WebSocketClient)
+            foreach(DataReceiver data in DataReceivers)
             {
-                int mapping, value;
-                float valueX, valueY, valueZ;
-                string[] words;
-
-                WebSocketClient.OnMessage += (sender, e) => {
-                    
-                    if (e.Data != null)
-                    {
-                        words = e.Data.Split(',');
-                        try
-                        {
-                            switch (words[0])
-                            {
-                                case "f":
-                                    mapping = Int32.Parse(words[1]);
-                                    value = Int32.Parse(words[2]);
-                                    fingersFunction?.Invoke(mapping, value);
-                                    break;
-                                case "a":
-                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
-                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
-                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
-                                    accelerometerFunction?.Invoke(valueX,valueY,valueZ);
-                                    break;
-                                case "g":
-                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
-                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
-                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
-                                    gyroscopeFunction?.Invoke(valueX, valueY, valueZ);
-                                    break;
-                                case "m":
-                                    valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
-                                    valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
-                                    valueZ = float.Parse(words[3], CultureInfo.InvariantCulture);
-                                    magnometerFunction?.Invoke(valueX, valueY, valueZ);
-                                    break;
-                                case "z":
-                                    imu_ValuesFunction?.Invoke(float.Parse(words[1], CultureInfo.InvariantCulture), float.Parse(words[2], CultureInfo.InvariantCulture), float.Parse(words[3], CultureInfo.InvariantCulture), float.Parse(words[4], CultureInfo.InvariantCulture), float.Parse(words[5], CultureInfo.InvariantCulture), float.Parse(words[6], CultureInfo.InvariantCulture), float.Parse(words[7], CultureInfo.InvariantCulture), float.Parse(words[8], CultureInfo.InvariantCulture), float.Parse(words[9], CultureInfo.InvariantCulture));
-                                    break;
-                                default:
-                                    break;
-                            }
-                            
-                        }
-                        catch
-                        {
-                            Console.WriteLine("ERROR: BAD FORMAT");
-                        }
-                    }
-                };
-                WebSocketClient.Connect();
-                WebSocketActive = true;
-                while (WebSocketActive == true) { }
+                if (data.SerialPort.Equals(selectedGlove.Port))
+                {
+                    return data;
+                }
             }
+            return null;
         }
-
-        Task mytask;
 
         public void startCaptureData(Glove selectedGlove)
         {
-            WebSocketClient = new WebSocket("ws://localhost:"+selectedGlove.WebSocketPort + "/" + selectedGlove.Port);
-            try
-            {
-                mytask = Task.Run(() =>
-                {
-                    readData();
-                });
-            }
-            catch
-            {
-
-            }
+            DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
+            DataReceivers.Add(data);
         }
 
-        public void stopCaptureData()
+        public void stopCaptureData(Glove selectedGlove)
         {
-            WebSocketClient.Close();
-            WebSocketActive = false;
+            foreach (DataReceiver d in DataReceivers)
+            {
+                if (d.SerialPort == selectedGlove.Port)
+                {
+                    DataReceivers.Remove(d);
+                }
+            }
         }
 
         /// <summary>
@@ -224,14 +158,7 @@ namespace OpenGlove_API_C_Sharp_HL
             {
                 this.serviceClient.setRawData(selectedGlove.BluetoothAddress, 0);
             }
-
         }
-
-
-
-
-
-
 
         /// <summary>
         /// Establishes connection with a glove
@@ -240,13 +167,14 @@ namespace OpenGlove_API_C_Sharp_HL
         /// <returns>Result code</returns>
         public int Connect(Glove selectedGlove)
         {
+            DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
+           DataReceivers.Add(data);
             try
             {
                 return this.serviceClient.Connect(selectedGlove.BluetoothAddress);
             }
             catch (Exception)
             {
-
                 return -1;
             }
         }

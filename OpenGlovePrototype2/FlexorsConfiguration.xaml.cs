@@ -430,8 +430,7 @@ namespace OpenGlovePrototype2
             {
                 testing = false;
                 buttonTestFlexors.Content = "Test";
-                gloves.fingersFunction -= testFingers;
-                gloves.stopCaptureData();
+                gloves.getDataReceiver(selectedGlove).fingersFunction -= testFingers;
                 tabControl.SelectedIndex = 0;
 
             }
@@ -440,9 +439,7 @@ namespace OpenGlovePrototype2
                 testing = true;
                 tabControl.SelectedIndex = 1;
                 Console.WriteLine("TEST WS");
-                
-                gloves.startCaptureData(selectedGlove);
-                gloves.fingersFunction += testFingers;
+                gloves.getDataReceiver(selectedGlove).fingersFunction += testFingers;
                 buttonTestFlexors.Content = "Stop";
             }
         }
