@@ -14,7 +14,7 @@ namespace OpenGlove_API_C_Sharp_HL
         public string WebSocketPort;
         public string SerialPort;
         WebSocket WebSocketClient;
-        bool WebSocketActive = false;
+        public bool WebSocketActive = false;
         Task webSocketTask;
 
         public DataReceiver(string WebSocketPort, string SerialPort)

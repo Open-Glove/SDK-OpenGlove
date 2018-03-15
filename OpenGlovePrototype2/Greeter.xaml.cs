@@ -193,7 +193,7 @@ namespace OpenGlovePrototype2
                 this.labelGloveConfig.Content = this.selectedGlove.GloveConfiguration.GloveName;
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
-               // this.buttonCreateProfileConfig.IsEnabled = true;
+                this.buttonCreateProfileConfig.IsEnabled = true;
                // this.buttonOpenProfileConfig.IsEnabled = true;
                 this.ConnectMenuItem.IsEnabled = true;
 
@@ -288,6 +288,20 @@ namespace OpenGlovePrototype2
             this.Hide();
         }
 
+        public void restoreConfiguration(Glove glove)
+        {
+            if(glove.GloveConfiguration != null && glove.GloveConfiguration.GloveProfile != null)
+            {
+                if (glove.GloveConfiguration.GloveProfile.FlexorsMappings != null && glove.GloveConfiguration.GloveProfile.FlexorsMappings.Count >0)
+                {
+                    foreach (KeyValuePair<int, int> mapping in glove.GloveConfiguration.GloveProfile.FlexorsMappings)
+                    {
+                        gloves.addFlexor(glove, mapping.Value, mapping.Key);
+                    }
+                }
+               
+            }
+        }
       
 
         private void ConnectMenuItem_Click(object sender, RoutedEventArgs e)
@@ -310,6 +324,7 @@ namespace OpenGlovePrototype2
                     MessageBoxResult messageBoxResult = MessageBox.Show("Glove " + selectedGlove.Name + " successfully connected.", "Connection", MessageBoxButton.OK);
                     selectedGlove.Connected = true;
                     buttonCreateProfileConfig.IsEnabled = true;
+                    restoreConfiguration(selectedGlove);
                 }
                 else
                 {

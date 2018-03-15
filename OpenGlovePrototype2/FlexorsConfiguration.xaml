@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OpenGlovePrototype2"
          xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         mc:Ignorable="d"
-        Title="OpenGlove Profile Tool" Height="732.99" Width="888.079" Background="#FF00B47F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="OpenGlove Profile Tool" Height="732.99" Width="888.079" Background="#FF00B47F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid Background="#FFCBF3E7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="363*"/>

@@ -21,6 +21,7 @@ namespace OpenGloveWCF
                     UriTemplate = "GetGloves")]
         List<Glove> GetGloves();
 
+
         [OperationContract]
         [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
@@ -138,6 +139,10 @@ namespace OpenGloveWCF
                     BodyStyle = WebMessageBodyStyle.Bare,
                     UriTemplate = "setRawData?gloveAddress={gloveAddress}&value={value}")]
         void setRawData(string gloveAddress, int value);
+
+  
+
+
 
     }
 

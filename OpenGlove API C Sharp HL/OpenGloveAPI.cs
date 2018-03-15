@@ -60,19 +60,35 @@ namespace OpenGlove_API_C_Sharp_HL
 
         public void startCaptureData(Glove selectedGlove)
         {
-            DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
-            DataReceivers.Add(data);
+            if (DataReceivers != null)
+            {
+                foreach (DataReceiver d in DataReceivers)
+                {
+                    if (d.SerialPort == selectedGlove.Port)
+                    {
+                        return; //already exist
+                    }
+                }
+                DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
+                DataReceivers.Add(data);
+            }
         }
 
         public void stopCaptureData(Glove selectedGlove)
         {
-            foreach (DataReceiver d in DataReceivers)
+            if (DataReceivers != null)
             {
-                if (d.SerialPort == selectedGlove.Port)
+                foreach (DataReceiver d in DataReceivers)
                 {
-                    DataReceivers.Remove(d);
+                    if (d.SerialPort == selectedGlove.Port)
+                    {
+                        d.WebSocketActive = false;
+                        Thread.Sleep(100);
+                        DataReceivers.Remove(d);
+                        return;
+                    }
                 }
-            }
+            }    
         }
 
         /// <summary>
@@ -167,8 +183,7 @@ namespace OpenGlove_API_C_Sharp_HL
         /// <returns>Result code</returns>
         public int Connect(Glove selectedGlove)
         {
-            DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
-           DataReceivers.Add(data);
+            startCaptureData(selectedGlove);
             try
             {
                 return this.serviceClient.Connect(selectedGlove.BluetoothAddress);
@@ -186,6 +201,7 @@ namespace OpenGlove_API_C_Sharp_HL
         /// <returns>Result code</returns>
         public int Disconnect(Glove selectedGlove)
         {
+            stopCaptureData(selectedGlove);
             try
             {
                 return this.serviceClient.Disconnect(selectedGlove.BluetoothAddress);

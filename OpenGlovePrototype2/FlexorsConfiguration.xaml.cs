@@ -13,6 +13,7 @@ using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System.Threading;
 using WebSocketSharp;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace OpenGlovePrototype2
 {
@@ -21,6 +22,7 @@ namespace OpenGlovePrototype2
     /// </summary>
     public partial class FlexorsConfiguration : Window
     {
+        private OGServiceClient serviceClient;
 
         public class Mapping
         {
@@ -43,6 +45,10 @@ namespace OpenGlovePrototype2
         public FlexorsConfiguration(Glove selectedGlove)
         {
             InitializeComponent();
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
+            serviceClient = new OGServiceClient(binding, address);
 
             configManager = new ConfigManager();
 
@@ -113,7 +119,6 @@ namespace OpenGlovePrototype2
                     label.RenderTransform = stD;
                 }
             }
-
 /*
             
             progressBar1.RenderTransform = stD;
@@ -331,7 +336,6 @@ namespace OpenGlovePrototype2
                 int owner = ((ComboBox)sender).TabIndex;
                 if (selection != null)
                 {
-                    Console.WriteLine("entro a añadir flexor?");
                     if (!selection.Equals(""))
                     {
                         int selectionFlexor = Int32.Parse(selection);
@@ -364,6 +368,8 @@ namespace OpenGlovePrototype2
                         }
                     }
                 }
+                serviceClient.SaveGlove(this.selectedGlove);
+
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
@@ -438,7 +444,6 @@ namespace OpenGlovePrototype2
             {
                 testing = true;
                 tabControl.SelectedIndex = 1;
-                Console.WriteLine("TEST WS");
                 gloves.getDataReceiver(selectedGlove).fingersFunction += testFingers;
                 buttonTestFlexors.Content = "Stop";
             }
@@ -536,6 +541,17 @@ namespace OpenGlovePrototype2
         private void removeflex_Click(object sender, RoutedEventArgs e)
         {
             gloves.removeFlexor(this.selectedGlove, Int32.Parse(regiontest.Text));
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (testing == true)
+            {
+                testing = false;
+                buttonTestFlexors.Content = "Test";
+                gloves.getDataReceiver(selectedGlove).fingersFunction -= testFingers;
+                tabControl.SelectedIndex = 0;
+            }
         }
     }
 
