@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTest", "TimeTest\TimeTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenGlove API C Sharp", "OpenGlove-API-C-Sharp-master\OpenGlove API C Sharp\OpenGlove API C Sharp.csproj", "{C4CE6B7A-CDEE-42B9-A3C0-8BCD8256C648}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OpenGloveSetup", "OpenGloveSetup\OpenGloveSetup.vdproj", "{6231A7FB-7783-4E08-AD5C-B2D23D95158A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +114,12 @@ Global
 		{C4CE6B7A-CDEE-42B9-A3C0-8BCD8256C648}.Release|x64.Build.0 = Release|Any CPU
 		{C4CE6B7A-CDEE-42B9-A3C0-8BCD8256C648}.Release|x86.ActiveCfg = Release|Any CPU
 		{C4CE6B7A-CDEE-42B9-A3C0-8BCD8256C648}.Release|x86.Build.0 = Release|Any CPU
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Debug|Any CPU.ActiveCfg = Debug
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Debug|x64.ActiveCfg = Debug
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Debug|x86.ActiveCfg = Debug
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Release|Any CPU.ActiveCfg = Release
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Release|x64.ActiveCfg = Release
+		{6231A7FB-7783-4E08-AD5C-B2D23D95158A}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
