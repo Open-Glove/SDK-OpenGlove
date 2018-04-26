@@ -15,9 +15,7 @@
         </Grid.ColumnDefinitions>
         <Rectangle Grid.ColumnSpan="2" Fill="#FF00B47F" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="1022"/>
         <Label x:Name="labelHeader" Grid.ColumnSpan="2" Content="Flexors Configuration" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
-        <Menu x:Name="menu" Height="35" Margin="0,70,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF001912" FontSize="16">
-            <MenuItem x:Name="saveButton" Header="   Save" Foreground="White" Height="32" Width="68" Click="saveButton_Click" IsEnabled="False"/>
-        </Menu>
+        <Menu x:Name="menu" Height="35" Margin="0,70,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF001912" FontSize="16"/>
         <TabControl x:Name="tabControl" Height="540" VerticalAlignment="Top" Margin="264,110,0,0" HorizontalAlignment="Left" Width="534" Grid.ColumnSpan="2" IsHitTestVisible="True" SelectionChanged="tabControl_SelectionChanged_1" >
 
             <TabItem x:Name="dorsoTab" Header="Dorsal" IsHitTestVisible="True" Visibility="Hidden"  >

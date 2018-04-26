@@ -114,6 +114,9 @@
       <DependentUpon>CalibratingFlexors.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="ExtrasConfiguration.xaml.cs">
+      <DependentUpon>ExtrasConfiguration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Greeter.xaml.cs">
       <DependentUpon>Greeter.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <DependentUpon>ConfigurationTool.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ExtrasConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Greeter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

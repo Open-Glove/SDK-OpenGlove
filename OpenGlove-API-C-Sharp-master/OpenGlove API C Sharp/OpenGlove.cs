@@ -257,5 +257,15 @@ namespace OpenGlove
             communication.Write(message);
         }
 
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="value"></param>
+        public void setLoopDelay(int value)
+        {
+            string message = messageGenerator.setLoopDelay(value);
+            communication.Write(message);
+        }
+
     }
 }

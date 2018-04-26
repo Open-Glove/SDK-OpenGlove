@@ -79,6 +79,10 @@ namespace OpenGlove
         /// Description
         /// </summary>
         private string setRawDataFunctionNumber = "22";
+        /// <summary>
+        /// Description
+        /// </summary>
+        private string setLoopDelayNumber = "0";
 
 
         /// <summary>
@@ -480,8 +484,15 @@ namespace OpenGlove
             return message;
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>set loop delay Arduino</returns>
+        public string setLoopDelay(int value)
+        {
+            string message = setLoopDelayNumber + separator + value + terminal;
+            return message;
+        }
 
     }
 }

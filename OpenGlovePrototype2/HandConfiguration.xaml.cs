@@ -59,7 +59,10 @@ namespace OpenGlovePrototype2
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
                 this.selectedGlove.GloveConfiguration.GloveProfile.Mappings = new Dictionary<string, string>();
                 this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<int, int>();
-                gloves.resetFlexors(this.selectedGlove);
+                if (selectedGlove.Connected == true)
+                {
+                    gloves.resetFlexors(this.selectedGlove);
+                }         
             }
 
         }
@@ -131,6 +134,12 @@ namespace OpenGlovePrototype2
 
             }
 
+        }
+
+        private void buttonExtras_Click(object sender, RoutedEventArgs e)
+        {
+            ExtrasConfiguration EC = new ExtrasConfiguration(this.selectedGlove);
+            EC.ShowDialog();
         }
     }
 }

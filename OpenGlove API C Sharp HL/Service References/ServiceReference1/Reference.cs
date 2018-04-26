@@ -656,6 +656,12 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setRawData", ReplyAction="http://tempuri.org/IOGService/setRawDataResponse")]
         System.Threading.Tasks.Task setRawDataAsync(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setLoopDelay", ReplyAction="http://tempuri.org/IOGService/setLoopDelayResponse")]
+        void setLoopDelay(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setLoopDelay", ReplyAction="http://tempuri.org/IOGService/setLoopDelayResponse")]
+        System.Threading.Tasks.Task setLoopDelayAsync(string gloveAddress, int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -811,6 +817,14 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         
         public System.Threading.Tasks.Task setRawDataAsync(string gloveAddress, int value) {
             return base.Channel.setRawDataAsync(gloveAddress, value);
+        }
+        
+        public void setLoopDelay(string gloveAddress, int value) {
+            base.Channel.setLoopDelay(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setLoopDelayAsync(string gloveAddress, int value) {
+            return base.Channel.setLoopDelayAsync(gloveAddress, value);
         }
     }
 }

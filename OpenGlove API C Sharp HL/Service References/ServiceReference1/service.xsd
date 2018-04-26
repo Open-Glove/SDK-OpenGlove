@@ -216,4 +216,17 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="setLoopDelay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gloveAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setLoopDelayResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

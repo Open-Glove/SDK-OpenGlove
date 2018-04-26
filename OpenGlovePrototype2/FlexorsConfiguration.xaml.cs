@@ -244,31 +244,7 @@ namespace OpenGlovePrototype2
             }
         }
 
-        /// <summary>
-        /// Handles the action of saving a profile
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveConfigurationDialog = new SaveFileDialog();
-            saveConfigurationDialog.Filter = "XML-File | *.xml";
-            saveConfigurationDialog.Title = "Save your configuration file";
-            saveConfigurationDialog.ShowDialog();
 
-            if (saveConfigurationDialog.FileName != "")
-            {
-                Console.WriteLine(saveConfigurationDialog.FileName);
-                configManager.saveGloveFlexProfile(saveConfigurationDialog.FileName, selectedGlove);
-                this.statusBarItemProfile.Content = saveConfigurationDialog.FileName;
-
-                string message = "File saved.";
-                string caption = "Save";
-                MessageBoxButton button = MessageBoxButton.OK;
-
-                MessageBox.Show(message, caption, button, MessageBoxImage.Information);
-            }
-        }
 
         /// <summary>
         /// Sets the selectors and MappingsList to an updated state, meaningful for the user.

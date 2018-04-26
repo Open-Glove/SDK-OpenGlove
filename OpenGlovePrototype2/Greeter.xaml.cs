@@ -314,6 +314,7 @@ namespace OpenGlovePrototype2
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Glove " + selectedGlove.Name + " successfully disconnected.", "Connection", MessageBoxButton.OK);
                     selectedGlove.Connected = false;
+                    buttonCreateGloveConfig.IsEnabled = false;
                 }
             }
             else
@@ -336,12 +337,15 @@ namespace OpenGlovePrototype2
 
         private void buttonCreateProfileConfig_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current profile. Are you sure?", "New configuration confirmation", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (selectedGlove.Connected == true)
             {
                 HandConfiguration HC = new HandConfiguration(this.selectedGlove);
                 HC.ShowDialog();
                 refreshControls();
+            }
+            else
+            {
+                MessageBox.Show("Please connect your Glove", "Disconnected Glove", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             
         }

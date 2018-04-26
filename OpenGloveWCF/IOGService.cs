@@ -1,9 +1,7 @@
-﻿using InTheHand.Net.Sockets;
-using OpenGlove;
+﻿using OpenGlove;
 using System;
 using System.IO.Ports;
 using System.Collections.Generic;
-using System.Management;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -140,9 +138,13 @@ namespace OpenGloveWCF
                     UriTemplate = "setRawData?gloveAddress={gloveAddress}&value={value}")]
         void setRawData(string gloveAddress, int value);
 
-  
-
-
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setLoopDelay?gloveAddress={gloveAddress}&value={value}")]
+        void setLoopDelay(string gloveAddress, int value);
 
     }
 

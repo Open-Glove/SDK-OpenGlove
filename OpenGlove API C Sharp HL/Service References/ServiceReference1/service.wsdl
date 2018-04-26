@@ -104,6 +104,12 @@
   <wsdl:message name="IOGService_setRawData_OutputMessage">
     <wsdl:part name="parameters" element="tns:setRawDataResponse" />
   </wsdl:message>
+  <wsdl:message name="IOGService_setLoopDelay_InputMessage">
+    <wsdl:part name="parameters" element="tns:setLoopDelay" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setLoopDelay_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setLoopDelayResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOGService">
     <wsdl:operation name="GetGloves">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
@@ -168,6 +174,10 @@
     <wsdl:operation name="setRawData">
       <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setRawData" message="tns:IOGService_setRawData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setRawDataResponse" message="tns:IOGService_setRawData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setLoopDelay">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setLoopDelay" message="tns:IOGService_setLoopDelay_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setLoopDelayResponse" message="tns:IOGService_setLoopDelay_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOGService" type="tns:IOGService">
@@ -309,6 +319,15 @@
     </wsdl:operation>
     <wsdl:operation name="setRawData">
       <soap:operation soapAction="http://tempuri.org/IOGService/setRawData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setLoopDelay">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setLoopDelay" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
