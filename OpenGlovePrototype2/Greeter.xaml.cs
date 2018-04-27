@@ -299,6 +299,10 @@ namespace OpenGlovePrototype2
                         gloves.addFlexor(glove, mapping.Value, mapping.Key);
                     }
                 }
+                if(glove.GloveConfiguration.GloveProfile.imuStatus == true)
+                {
+                    gloves.setIMUStatus(glove, true);
+                }
                
             }
         }

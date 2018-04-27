@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
+using System.ServiceModel;
 
 namespace OpenGlovePrototype2
 {
@@ -18,6 +19,9 @@ namespace OpenGlovePrototype2
     /// </summary>
     public partial class IMUConfiguration : Window
     {
+        private OGServiceClient serviceClient;
+        
+
         private OpenGloveAPI gloves = OpenGloveAPI.GetInstance();
 
         private Glove selectedGlove;
@@ -25,6 +29,10 @@ namespace OpenGlovePrototype2
         private bool testing;
         public IMUConfiguration(Glove selectedGlove)
         {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
+            serviceClient = new OGServiceClient(binding, address);
+
             this.selectedGlove = selectedGlove;
             InitializeComponent();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
@@ -73,6 +81,7 @@ namespace OpenGlovePrototype2
             {
                 buttonSetRawData.Content = "Raw Data";
             }
+            serviceClient.SaveGlove(this.selectedGlove);
 
         }
 

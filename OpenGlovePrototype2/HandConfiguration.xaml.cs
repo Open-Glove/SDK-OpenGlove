@@ -98,7 +98,7 @@ namespace OpenGlovePrototype2
             {
                 OpenFileDialog openConfigurationDialog = new OpenFileDialog();
                 openConfigurationDialog.Filter = "XML-File | *.xml";
-                openConfigurationDialog.Title = "Open a glove vibe boards profile file";
+                openConfigurationDialog.Title = "Open a glove profile file";
                 openConfigurationDialog.ShowDialog();
 
                 if (openConfigurationDialog.FileName != null)
@@ -106,7 +106,7 @@ namespace OpenGlovePrototype2
                     if (openConfigurationDialog.FileName != "")
                     {
                         configManager.OpenProfileConfiguration(openConfigurationDialog.FileName, selectedGlove);
-
+                        statusBarItemProfile.Content = openConfigurationDialog.FileName;
                     }
                 }
             }

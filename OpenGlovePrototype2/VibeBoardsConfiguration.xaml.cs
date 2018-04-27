@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
+using System.ServiceModel;
 
 namespace OpenGlovePrototype2
 {
@@ -18,6 +19,8 @@ namespace OpenGlovePrototype2
     /// </summary>
     public partial class VibeBoardsConfiguration : Window
     {
+        private OGServiceClient serviceClient;
+
         public class Mapping
         {
             public String Actuator { get; set; }
@@ -36,6 +39,11 @@ namespace OpenGlovePrototype2
 
         public VibeBoardsConfiguration(Glove selectedGlove)
         {
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
+            serviceClient = new OGServiceClient(binding, address);
+
             InitializeComponent();
 
             configManager = new ConfigManager();
@@ -341,6 +349,7 @@ namespace OpenGlovePrototype2
                     }
                 }
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.Mappings);
+                serviceClient.SaveGlove(this.selectedGlove);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
 

@@ -341,12 +341,12 @@ namespace OpenGlovePrototype2
                             liberateFlexor(liberatedFlexorC, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Remove(owner);
                             gloves.removeFlexor(this.selectedGlove, owner);
+                            changeBarValue(owner, 0);
                         }
                     }
                 }
-                serviceClient.SaveGlove(this.selectedGlove);
-
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
+                serviceClient.SaveGlove(this.selectedGlove);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
         }
