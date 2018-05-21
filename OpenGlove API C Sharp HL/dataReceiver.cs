@@ -39,6 +39,7 @@ namespace OpenGlove_API_C_Sharp_HL
         public delegate void accelerometerValues(float ax, float ay, float az);
         public delegate void gyroscopeValues(float gx, float gy, float gz);
         public delegate void magnometerValues(float mx, float my, float mz);
+        public delegate void attitudeValues(float yx, float yy, float yz);
         public delegate void allIMUValues(float ax, float ay, float az, float gx, float gy, float gz,float mx, float my, float mz);
        
         public event FingerMovement fingersFunction;
@@ -46,6 +47,7 @@ namespace OpenGlove_API_C_Sharp_HL
         public event gyroscopeValues gyroscopeFunction;
         public event magnometerValues magnometerFunction;
         public event allIMUValues imu_ValuesFunction;
+        public event attitudeValues imu_attitudeFunction;
 
         public void readData( )
         {
@@ -69,6 +71,9 @@ namespace OpenGlove_API_C_Sharp_HL
                                     value = Int32.Parse(words[2]);
                                     fingersFunction?.Invoke(mapping, value);
                                     break;
+                                case "r":
+                                    imu_attitudeFunction?.Invoke(float.Parse(words[1], CultureInfo.InvariantCulture), float.Parse(words[2], CultureInfo.InvariantCulture), float.Parse(words[3], CultureInfo.InvariantCulture));
+                                    break;
                                 case "a":
                                     valueX = float.Parse(words[1], CultureInfo.InvariantCulture);
                                     valueY = float.Parse(words[2], CultureInfo.InvariantCulture);
@@ -90,6 +95,7 @@ namespace OpenGlove_API_C_Sharp_HL
                                 case "z":
                                     imu_ValuesFunction?.Invoke(float.Parse(words[1], CultureInfo.InvariantCulture), float.Parse(words[2], CultureInfo.InvariantCulture), float.Parse(words[3], CultureInfo.InvariantCulture), float.Parse(words[4], CultureInfo.InvariantCulture), float.Parse(words[5], CultureInfo.InvariantCulture), float.Parse(words[6], CultureInfo.InvariantCulture), float.Parse(words[7], CultureInfo.InvariantCulture), float.Parse(words[8], CultureInfo.InvariantCulture), float.Parse(words[9], CultureInfo.InvariantCulture));
                                     break;
+
                                 default:
                                     break;
                             }

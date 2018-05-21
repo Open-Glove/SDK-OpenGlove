@@ -20,7 +20,6 @@ namespace OpenGlovePrototype2
     public partial class IMUConfiguration : Window
     {
         private OGServiceClient serviceClient;
-        
 
         private OpenGloveAPI gloves = OpenGloveAPI.GetInstance();
 
@@ -35,6 +34,7 @@ namespace OpenGlovePrototype2
 
             this.selectedGlove = selectedGlove;
             InitializeComponent();
+            this.initDataComboBox();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
@@ -59,6 +59,46 @@ namespace OpenGlovePrototype2
             testing = false;
             GridTest.Visibility = Visibility.Hidden;
         }
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        private void initDataComboBox()
+        {
+
+            ComboboxItem item = new ComboboxItem();
+            item.Text = "All Data";
+            item.Value = "z";
+            choosenDataComboBox.Items.Add(item);
+            item = new ComboboxItem();
+            item.Text = "Accelerometer";
+            item.Value = "a";
+            choosenDataComboBox.Items.Add(item);
+            item = new ComboboxItem();
+            item.Text = "Gyroscope";
+            item.Value = "g";
+            choosenDataComboBox.Items.Add(item);
+            item = new ComboboxItem();
+            item.Text = "magnetometer";
+            item.Value = "g";
+            choosenDataComboBox.Items.Add(item);
+            item = new ComboboxItem();
+            item.Text = "Attitude Data";
+            item.Value = "r";
+            choosenDataComboBox.Items.Add(item);
+            choosenDataComboBox.SelectedIndex = 0;
+            
+           
+        }
+
 
         private void updateView()
         {
@@ -160,6 +200,29 @@ namespace OpenGlovePrototype2
                 buttonTest.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             }
             */
+        }
+
+        private void choosenDataComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedData = (choosenDataComboBox.SelectedItem as ComboboxItem).Value.ToString();
+            switch (selectedData)
+            {
+                case "a":
+                    gloves.setChoosingData(this.selectedGlove, 0);
+                    break;
+                case "g":
+                    gloves.setChoosingData(this.selectedGlove, 1);
+                    break;
+                case "m":
+                    gloves.setChoosingData(this.selectedGlove, 2);
+                    break;
+                case "r":
+                    gloves.setChoosingData(this.selectedGlove, 3);
+                    break;
+                case "z":
+                    gloves.setChoosingData(this.selectedGlove, 4);
+                    break;
+            }
         }
     }
 }

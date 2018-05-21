@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:OpenGlovePrototype2"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="OpenGlovePrototype2.IMUConfiguration"
         mc:Ignorable="d"
-        Title="IMUConfiguration" Height="378.806" Width="458.382" Closing="Window_Closing" ResizeMode="NoResize">
-    <Grid>
+        Title="IMUConfiguration" Height="378.806" Width="458.382" Closing="Window_Closing" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Cursor="No">
         <Rectangle Fill="#FF00B47F" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="616"/>
         <Label x:Name="labelHeader" Content="IMU Configuration" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
         <Label x:Name="label" Content="IMU Model:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="26" Margin="82,91,0,0" VerticalAlignment="Top" Width="136" IsEnabled="False"/>
-        <Label x:Name="label1" Content="Coming soon" HorizontalAlignment="Left" Margin="218,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.421,0.077"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="26" Margin="82,91,0,0" VerticalAlignment="Top" Width="109" IsEnabled="False"/>
         <Label x:Name="label2" Content="Start IMU:" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Active IMU Data" HorizontalAlignment="Left" Margin="82,135,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="button_Click"/>
         <Label x:Name="label3" Content="IMU Status:" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top"/>
@@ -46,6 +45,8 @@
             <Label x:Name="label5_Copy4" Content="Z" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.615" Grid.Column="2"/>
         </Grid>
         <Button x:Name="buttonSetRawData" Content="Raw Data" HorizontalAlignment="Left" Margin="328,135,0,0" VerticalAlignment="Top" Width="93" Height="32" Click="buttonSetRawData_Click"/>
+        <Label x:Name="label_ValueData" Content="Data:" HorizontalAlignment="Left" Margin="271,91,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="choosenDataComboBox" HorizontalAlignment="Left" Margin="308,91,0,0" VerticalAlignment="Top" Width="122" Height="26" SelectionChanged="choosenDataComboBox_SelectionChanged"/>
 
     </Grid>
 </Window>

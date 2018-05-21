@@ -37,7 +37,7 @@ namespace OpenGlovePrototype2
         {
             try
             {
-                gloves.setThreshold(this.selectedGlove, (int)delayValue.Value);
+                gloves.setLoopDelay(this.selectedGlove, (int)delayValue.Value);
             }
             catch
             {

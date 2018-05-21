@@ -229,4 +229,17 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="setChoosingData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gloveAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setChoosingDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

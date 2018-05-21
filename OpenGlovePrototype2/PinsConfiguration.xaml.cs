@@ -116,8 +116,8 @@ namespace OpenGlovePrototype2
             xml.Root.Add(xboard);
 
             xml.Save("Boards.xml");
-
             this.boards.Add(board);
+            refreshBoards();
         }
 
         private void initializeBoards() {
@@ -286,7 +286,7 @@ namespace OpenGlovePrototype2
 
         }
 
-        private void buttonRefreshBoards_Click(object sender, RoutedEventArgs e)
+        private void refreshBoards()
         {
             refresh = true;
             int actualIndex = this.comboBoxBoard.SelectedIndex;

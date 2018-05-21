@@ -146,6 +146,14 @@ namespace OpenGloveWCF
                     UriTemplate = "setLoopDelay?gloveAddress={gloveAddress}&value={value}")]
         void setLoopDelay(string gloveAddress, int value);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setChoosingData?gloveAddress={gloveAddress}&value={value}")]
+        void setChoosingData(string gloveAddress, int value);
+
     }
 
 

@@ -181,6 +181,11 @@ namespace OpenGlove_API_C_Sharp_HL
             this.serviceClient.setLoopDelay(selectedGlove.BluetoothAddress, value);
         }
 
+        public void setChoosingData(Glove selectedGlove, int value)
+        {
+            this.serviceClient.setChoosingData(selectedGlove.BluetoothAddress, value);
+        }
+
         /// <summary>
         /// Establishes connection with a glove
         /// </summary>
