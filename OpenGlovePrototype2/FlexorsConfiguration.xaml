@@ -612,10 +612,10 @@
         <Button x:Name="buttonCalibrateFlexors" Content="Calibrate Flexors" HorizontalAlignment="Left" Margin="13,505,0,0" VerticalAlignment="Top" Width="246" Height="34" Click="buttonCalibrateFlexors_Click" IsEnabled="False"/>
         <xctk:IntegerUpDown x:Name="ThresholdValue" HorizontalAlignment="Left" Margin="13,573,0,0" VerticalAlignment="Top" Height="34" Width="154" DefaultValue="0" DisplayDefaultValueOnEmptyText="True" ValueChanged="IntegerUpDown_ValueChanged"/>
         <Button x:Name="buttonSetThreshold" Content="Set Threshold" HorizontalAlignment="Left" Margin="167,573,0,0" VerticalAlignment="Top" Width="92" Height="34" IsHitTestVisible="True" Click="buttonSetThreshold_Click"/>
-        <Button x:Name="button" Content="addFlex" HorizontalAlignment="Left" Margin="264,742,0,-58" VerticalAlignment="Top" Width="57" Click="button_Click" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="regiontest" HorizontalAlignment="Left" Height="23" Margin="96,742,0,-61" TextWrapping="Wrap" Text="region" VerticalAlignment="Top" Width="64"/>
-        <TextBox x:Name="flextest" HorizontalAlignment="Left" Height="23" Margin="184,743,0,-62" TextWrapping="Wrap" Text="flex" VerticalAlignment="Top" Width="64"/>
-        <Button x:Name="removeflex" Content="removeflex" HorizontalAlignment="Left" Margin="264,719,0,-35" VerticalAlignment="Top" Width="57" Click="removeflex_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="button" Content="addFlex" HorizontalAlignment="Left" Margin="186,613,0,0" VerticalAlignment="Top" Width="57" Click="button_Click"/>
+        <TextBox x:Name="regiontest" HorizontalAlignment="Left" Height="23" Margin="24,627,0,0" TextWrapping="Wrap" Text="region" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="flextest" HorizontalAlignment="Left" Height="23" Margin="103,627,0,0" TextWrapping="Wrap" Text="flex" VerticalAlignment="Top" Width="64"/>
+        <Button x:Name="removeflex" Content="removeflex" HorizontalAlignment="Left" Margin="186,635,0,0" VerticalAlignment="Top" Width="57" Click="removeflex_Click"/>
 
     </Grid>
 </Window>

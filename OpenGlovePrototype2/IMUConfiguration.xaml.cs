@@ -88,7 +88,7 @@ namespace OpenGlovePrototype2
             choosenDataComboBox.Items.Add(item);
             item = new ComboboxItem();
             item.Text = "magnetometer";
-            item.Value = "g";
+            item.Value = "m";
             choosenDataComboBox.Items.Add(item);
             item = new ComboboxItem();
             item.Text = "Attitude Data";
