@@ -50,7 +50,6 @@ namespace OpenGlovePrototype2
 
         public HandConfiguration(Glove selectedGlove)
         {
-          
             InitializeComponent();
             configManager = new ConfigManager();
             this.selectedGlove = selectedGlove;
@@ -60,7 +59,10 @@ namespace OpenGlovePrototype2
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
                 this.selectedGlove.GloveConfiguration.GloveProfile.Mappings = new Dictionary<string, string>();
                 this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = new Dictionary<int, int>();
-                this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappingsValues = new Dictionary<int, int>();
+                if (selectedGlove.Connected == true)
+                {
+                    gloves.resetFlexors(this.selectedGlove);
+                }         
             }
 
         }
@@ -69,11 +71,15 @@ namespace OpenGlovePrototype2
         {
             VibeBoardsConfiguration vibeConfig = new VibeBoardsConfiguration(this.selectedGlove);
             vibeConfig.ShowDialog();
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.Mappings != null)
-            {
-                this.numbersActuators.Content = this.selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count;
-            }
-            
+
+            //refreshControls();
+        }
+
+        private void buttonIMU_Click(object sender, RoutedEventArgs e)
+        {
+            IMUConfiguration imuConfig = new IMUConfiguration(this.selectedGlove);
+            imuConfig.ShowDialog();
+
             //refreshControls();
         }
 
@@ -81,22 +87,18 @@ namespace OpenGlovePrototype2
         {
             FlexorsConfiguration FC = new FlexorsConfiguration(this.selectedGlove);
             FC.ShowDialog();
-            if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings != null)
-            {
-                this.numberFlexors.Content = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count;
-            }
-            
+
         }
 
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current flex profile. Are you sure?", "New flexors configuration confirmation", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current Glove Profile. Are you sure?", "New Glove Profile configuration confirmation", MessageBoxButton.YesNo);
 
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 OpenFileDialog openConfigurationDialog = new OpenFileDialog();
                 openConfigurationDialog.Filter = "XML-File | *.xml";
-                openConfigurationDialog.Title = "Open a glove vibe boards profile file";
+                openConfigurationDialog.Title = "Open a glove profile file";
                 openConfigurationDialog.ShowDialog();
 
                 if (openConfigurationDialog.FileName != null)
@@ -104,16 +106,7 @@ namespace OpenGlovePrototype2
                     if (openConfigurationDialog.FileName != "")
                     {
                         configManager.OpenProfileConfiguration(openConfigurationDialog.FileName, selectedGlove);
-
-                        if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings != null)
-                        {
-                            this.numberFlexors.Content = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count;
-                        }
-
-                        if (this.selectedGlove.GloveConfiguration.GloveProfile.Mappings != null)
-                        {
-                            this.numbersActuators.Content = this.selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count;
-                        }
+                        statusBarItemProfile.Content = openConfigurationDialog.FileName;
                     }
                 }
             }
@@ -141,6 +134,12 @@ namespace OpenGlovePrototype2
 
             }
 
+        }
+
+        private void buttonExtras_Click(object sender, RoutedEventArgs e)
+        {
+            ExtrasConfiguration EC = new ExtrasConfiguration(this.selectedGlove);
+            EC.ShowDialog();
         }
     }
 }

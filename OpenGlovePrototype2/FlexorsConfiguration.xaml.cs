@@ -11,6 +11,9 @@ using System.Diagnostics;
 using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System.Threading;
+using WebSocketSharp;
+using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace OpenGlovePrototype2
 {
@@ -19,6 +22,7 @@ namespace OpenGlovePrototype2
     /// </summary>
     public partial class FlexorsConfiguration : Window
     {
+        private OGServiceClient serviceClient;
 
         public class Mapping
         {
@@ -42,11 +46,15 @@ namespace OpenGlovePrototype2
         {
             InitializeComponent();
 
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
+            serviceClient = new OGServiceClient(binding, address);
+
             configManager = new ConfigManager();
 
             this.selectedGlove = selectedGlove;
+
             this.initializeSelectors();
-            this.initializeProgressBars();
             if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
             {
                 this.selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
@@ -77,6 +85,7 @@ namespace OpenGlovePrototype2
             {
                 flipControls();
             }
+
         }
 
         /// <summary>
@@ -92,7 +101,13 @@ namespace OpenGlovePrototype2
             stD.ScaleX = 1;
             stD.ScaleY = 1;
 
+            foreach (var item in selectors)
+            {
+                item.RenderTransform = st;
+            }
+
             imageDorsal.RenderTransform = st;
+            imageDorsal2.RenderTransform = st;
             selectorsGridDorso.RenderTransform = stD;
 
             List<Grid> grids = selectorsGridDorso.Children.OfType<Grid>().ToList();
@@ -103,6 +118,22 @@ namespace OpenGlovePrototype2
                 {
                     label.RenderTransform = stD;
                 }
+            }
+/*
+            
+            progressBar1.RenderTransform = stD;
+            progressBar2.RenderTransform = stD;
+            progressBar3.RenderTransform = stD;
+            progressBar4.RenderTransform = stD;
+            progressBar5.RenderTransform = stD;
+            progressBar6.RenderTransform = stD;
+            progressBar7.RenderTransform = stD;
+            progressBar8.RenderTransform = stD;
+            progressBar9.RenderTransform = stD;
+*/
+            foreach (var item in selectors)
+            {
+                item.RenderTransform = stD;
             }
         }
 
@@ -201,33 +232,19 @@ namespace OpenGlovePrototype2
                 //Console.WriteLine("MAPPING: "+ mapping.Key + ", " + mapping.Value);
                 this.mappingsList.Items.Add(new Mapping() { Flexor = mapping.Value.ToString(), Region = mapping.Key.ToString() });
             }
-        }
 
-        /// <summary>
-        /// Handles the action of saving a profile
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveConfigurationDialog = new SaveFileDialog();
-            saveConfigurationDialog.Filter = "XML-File | *.xml";
-            saveConfigurationDialog.Title = "Save your configuration file";
-            saveConfigurationDialog.ShowDialog();
-
-            if (saveConfigurationDialog.FileName != "")
+            if (this.mappingsList.Items.Count > 0)
             {
-                Console.WriteLine(saveConfigurationDialog.FileName);
-                configManager.saveGloveFlexProfile(saveConfigurationDialog.FileName, selectedGlove);
-                this.statusBarItemProfile.Content = saveConfigurationDialog.FileName;
-
-                string message = "File saved.";
-                string caption = "Save";
-                MessageBoxButton button = MessageBoxButton.OK;
-
-                MessageBox.Show(message, caption, button, MessageBoxImage.Information);
+                buttonCalibrateFlexors.IsEnabled = true;
+                buttonTestFlexors.IsEnabled = true;
+            }else
+            {
+                buttonCalibrateFlexors.IsEnabled = false;
+                buttonTestFlexors.IsEnabled = false;
             }
         }
+
+
 
         /// <summary>
         /// Sets the selectors and MappingsList to an updated state, meaningful for the user.
@@ -250,6 +267,10 @@ namespace OpenGlovePrototype2
                 {
                     this.selectors[mapping.Key].SelectedItem = mapping.Value;
                     this.removeFlexor(mapping.Value, this.selectors[mapping.Key]);
+                }
+                if (this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName == null)
+                {
+                    this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName = "Unnamed Configuration";
                 }
                 this.statusBarItemProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
             }
@@ -290,7 +311,7 @@ namespace OpenGlovePrototype2
 
                 int owner = ((ComboBox)sender).TabIndex;
                 if (selection != null)
-                { 
+                {
                     if (!selection.Equals(""))
                     {
                         int selectionFlexor = Int32.Parse(selection);
@@ -298,12 +319,15 @@ namespace OpenGlovePrototype2
                         try
                         {
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Add(owner, selectionFlexor);
+                            gloves.addFlexor(this.selectedGlove, selectionFlexor, owner);
                         }
                         catch (Exception)
                         {
-                            int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
+                         /*   int liberatedFlexor = this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner];
                             liberateFlexor(liberatedFlexor, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings[owner] = selectionFlexor;
+                            gloves.addFlexor(this.selectedGlove, selectionFlexor, owner);
+                            */
                         }
                     }
                     else
@@ -316,10 +340,13 @@ namespace OpenGlovePrototype2
                             liberatedFlexorC = liberatedFlexor == null ? default(int) : liberatedFlexor.GetValueOrDefault();
                             liberateFlexor(liberatedFlexorC, sender);
                             this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Remove(owner);
+                            gloves.removeFlexor(this.selectedGlove, owner);
+                            changeBarValue(owner, 0);
                         }
                     }
                 }
                 refreshMappingsList(this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings);
+                serviceClient.SaveGlove(this.selectedGlove);
                 ((ComboBox)sender).Visibility = Visibility.Hidden;
             }
         }
@@ -367,8 +394,7 @@ namespace OpenGlovePrototype2
         private bool testing;
 
         Stopwatch sw = new Stopwatch();
-
-        private void buttonTestFlexors_Click(object sender, RoutedEventArgs e)
+        private void buttonTestFlexors_Click(object sender2, RoutedEventArgs e)
         {
             if (!selectedGlove.Connected)
             {
@@ -381,49 +407,42 @@ namespace OpenGlovePrototype2
             }
             sw.Restart();
 
-            /*  Mapping mapping = (Mapping)this.mappingsList.SelectedItem;
-              if (testing)
-              {
-                  this.gloves.Activate(selectedGlove, Int32.Parse(mapping.Region), 0);
-                  testing = false;
-                  buttonTestIntensity.Content = "Test";
-                  this.mappingsList.IsEnabled = true;
 
-              }
-              else if (this.mappingsList.SelectedItem != null)
-              {
-                  this.gloves.Activate(selectedGlove, Int32.Parse(mapping.Region), ((int)this.intensityUpDown.Value));
-
-                  sw.Stop();
-
-                  Console.WriteLine("Elapsed={0}", sw.Elapsed);
-
-                  testing = true;
-                  buttonTestIntensity.Content = "Stop";
-                  this.mappingsList.IsEnabled = false;
-
-              }
-              */
-            if (testing) {
+            if (testing)
+            {
                 testing = false;
                 buttonTestFlexors.Content = "Test";
+                gloves.getDataReceiver(selectedGlove).fingersFunction -= testFingers;
                 tabControl.SelectedIndex = 0;
-               
-            }else if (this.mappingsList.Items.Count > 0)
+
+            }
+            else if (this.selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings.Count > 0)
             {
                 testing = true;
                 tabControl.SelectedIndex = 1;
+                gloves.getDataReceiver(selectedGlove).fingersFunction += testFingers;
                 buttonTestFlexors.Content = "Stop";
+            }
+        }
+
+
+        public void testFingers(int index, int value)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.changeBarValue(index, value);
+            }));
+        }
 
         private void changeBarValue(int index, int value)
         {
             switch (index)
             {
                 case 0:
-                    this.progressBar0.Value = value;
+                    progressBar0.Value = value;
                     break;
                 case 1:
-                    this.progressBar1.Value = value;
+                    progressBar1.Value = value;
                     break;
                 case 2:
                     progressBar2.Value = value;
@@ -460,6 +479,55 @@ namespace OpenGlovePrototype2
         private void tabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void buttonCalibrateFlexors_Click(object sender, RoutedEventArgs e)
+        {
+            CalibratingFlexors CF = new CalibratingFlexors(selectedGlove);
+            CF.ShowDialog();
+        }
+
+        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(this.ThresholdValue.Value < 0)
+            {
+                this.ThresholdValue.Value = 0;
+            }
+        }
+
+        private void buttonSetThreshold_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                gloves.setThreshold(this.selectedGlove, (int)ThresholdValue.Value);
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.addFlexor(this.selectedGlove, Int32.Parse(flextest.Text), Int32.Parse(regiontest.Text));
+
+        }
+
+        private void removeflex_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.removeFlexor(this.selectedGlove, Int32.Parse(regiontest.Text));
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (testing == true)
+            {
+                testing = false;
+                buttonTestFlexors.Content = "Test";
+                gloves.getDataReceiver(selectedGlove).fingersFunction -= testFingers;
+                tabControl.SelectedIndex = 0;
+            }
         }
     }
 

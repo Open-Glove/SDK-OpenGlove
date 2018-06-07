@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>1472417527_thefreeforty_hand.ico</ApplicationIcon>
@@ -44,6 +47,10 @@
     </Reference>
     <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
       <HintPath>..\packages\32feet.NET.3.5.0.0\lib\net\InTheHand.Net.Personal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NetJSON, Version=1.2.1.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetJSON.1.2.1.10\lib\net40\NetJSON.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -62,9 +69,17 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.15\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -98,12 +113,21 @@
     <Compile Include="AddBoard.xaml.cs">
       <DependentUpon>AddBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CalibratingFlexors.xaml.cs">
+      <DependentUpon>CalibratingFlexors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="ExtrasConfiguration.xaml.cs">
+      <DependentUpon>ExtrasConfiguration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Greeter.xaml.cs">
       <DependentUpon>Greeter.xaml</DependentUpon>
     </Compile>
     <Compile Include="HandConfiguration.xaml.cs">
       <DependentUpon>HandConfiguration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IMUConfiguration.xaml.cs">
+      <DependentUpon>IMUConfiguration.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoadingBar.xaml.cs">
       <DependentUpon>LoadingBar.xaml</DependentUpon>
@@ -121,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CalibratingFlexors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfigurationTool.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,11 +161,19 @@
       <DependentUpon>ConfigurationTool.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ExtrasConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Greeter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HandConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IMUConfiguration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +250,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Images\calibrationText.gif" />
+    <Resource Include="Images\hand_closetoopen.gif" />
+    <Resource Include="Images\hand_openandclose.gif" />
+    <Resource Include="Images\hand_quiet.gif" />
     <Resource Include="dorsalBones.png" />
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,6 @@
             <Separator Width="11"/>
             <MenuItem x:Name="ConnectMenuItem" Header="Connect" Foreground="White" IsEnabled="False" Click="ConnectMenuItem_Click"/>
             <Separator Width="11"/>
-            <MenuItem x:Name="CurrentProfileMenuItem" Header="Current Profile" Foreground="White" Click="CurrentProfileMenuItem_Click" IsEnabled="False"/>
             <Separator Width="18" Background="Black"/>
         </Menu>
         <ListView x:Name="listViewGloves" Margin="10,155,332,0" SelectionChanged="listViewGloves_SelectionChanged" Grid.ColumnSpan="2" Height="124" VerticalAlignment="Top">
@@ -44,8 +43,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="buttonCreateGloveConfig" Content="Create Glove Configuration" VerticalAlignment="Top" Height="48" FontSize="18" Click="buttonCreateGloveConfig_Click" IsEnabled="False" Grid.RowSpan="2"/>
             <Button x:Name="buttonOpenGloveConfig" Content="Open Glove Configuration" Margin="0,47,0,0" VerticalAlignment="Top" Height="49" FontSize="18" IsEnabled="False" Click="buttonOpenGloveConfig_Click" Grid.Row="1"/>
-            <Button x:Name="buttonCreateProfileConfig" Content="Create Profile Configuration" Margin="0,102,0,0" VerticalAlignment="Top" Height="48" FontSize="18" IsEnabled="False" Click="buttonCreateProfileConfig_Click" Grid.Row="1"/>
-            <Button x:Name="buttonOpenProfileConfig" Content="Open Profile Configuration" Margin="0,156,0,0" FontSize="18" IsEnabled="False" Click="buttonOpenProfileConfig_Click" Grid.Row="1" Height="49" VerticalAlignment="Top"/>
+            <Button x:Name="buttonCreateProfileConfig" Content="Profile Configuration" Margin="0,102,0,0" VerticalAlignment="Top" Height="48" FontSize="18" IsEnabled="False" Click="buttonCreateProfileConfig_Click" Grid.Row="1" SnapsToDevicePixels="True"/>
         </Grid>
         <ComboBox x:Name="comboBoxSide" Margin="83,122,332,0" SelectionChanged="comboBoxSide_SelectionChanged" IsEnabled="False" Grid.ColumnSpan="2" Height="28" VerticalAlignment="Top"/>
         <StatusBar Height="40" Margin="0,339,332,0" VerticalAlignment="Top" Background="#FF00B47F" Grid.ColumnSpan="2">

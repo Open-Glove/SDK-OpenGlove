@@ -15,7 +15,7 @@ namespace OpenGlovePrototype2
 
         public ConfigManager()
         {
-            NetHttpBinding binding = new NetHttpBinding();
+            BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
             serviceClient = new OGServiceClient(binding, address);
         }
@@ -122,6 +122,7 @@ namespace OpenGlovePrototype2
         public void OpenProfileConfiguration(string fileName, Glove selectedGlove)
         {
             selectedGlove.GloveConfiguration.GloveProfile = new Glove.Configuration.Profile();
+            serviceClient.resetFlexors(selectedGlove.BluetoothAddress);
 
             Dictionary<String, String> openedConfiguration = new Dictionary<String, String>();
 
@@ -131,19 +132,39 @@ namespace OpenGlovePrototype2
             {
                 //avisar
             }
+            try
+            {
 
-            openedConfiguration = xml.Root.Element("mappings").Elements("mapping")
+                openedConfiguration = xml.Root.Element("mappings").Elements("mapping")
                                .ToDictionary(c => (String)c.Element("region"),
                                              c => (String)c.Element("actuator"));
+
+            }
+            catch
+            {
+                openedConfiguration = new Dictionary<String, String>();
+            }
 
             selectedGlove.GloveConfiguration.GloveProfile.Mappings = openedConfiguration;
 
             Dictionary<int, int> openedConfiguration2 = new Dictionary<int, int>();
-
-            openedConfiguration2 = xml.Root.Element("FlexorsMappings").Elements("mapping")
+            try
+            {
+                openedConfiguration2 = xml.Root.Element("FlexorsMappings").Elements("mapping")
                                .ToDictionary(c => (Int32)c.Element("region"),
                                              c => (Int32)c.Element("flexor"));
+            }
+            catch
+            {
+                openedConfiguration2 = new Dictionary<int, int>();
+            }
+
             selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings = openedConfiguration2;
+
+            foreach (KeyValuePair<int, int> mapping in selectedGlove.GloveConfiguration.GloveProfile.FlexorsMappings)
+            {
+                serviceClient.addFlexor(selectedGlove.BluetoothAddress, mapping.Value, mapping.Key);
+            }
 
             //Aqui deberia comprobarse que sean todos valores validos
             selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
@@ -175,7 +196,7 @@ namespace OpenGlovePrototype2
             //Aqui deberia comprobarse que sean todos valores validos
            // selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
            // selectedGlove.GloveConfiguration.GloveProfile.GloveHash = selectedGlove.GloveConfiguration.GloveHash;
-           // serviceClient.SaveGlove(selectedGlove);
+            serviceClient.SaveGlove(selectedGlove);
         }
 
         public void OpenProfileVibeBoardsConfiguration(string fileName, Glove selectedGlove)
@@ -229,7 +250,7 @@ namespace OpenGlovePrototype2
 
             rootXML.Save(fileName);
             selectedGlove.GloveConfiguration.GloveProfile.ProfileName = fileName;
-            serviceClient.SaveGlove(selectedGlove);
+          //  serviceClient.SaveGlove(selectedGlove);
         }
 
         public void saveGloveVibeBoardsProfile(string fileName, Glove selectedGlove)

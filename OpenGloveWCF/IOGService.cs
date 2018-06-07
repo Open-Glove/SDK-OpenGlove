@@ -1,12 +1,11 @@
-﻿using InTheHand.Net.Sockets;
-using OpenGlove;
+﻿using OpenGlove;
 using System;
 using System.IO.Ports;
 using System.Collections.Generic;
-using System.Management;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using System.Text.RegularExpressions;
 
 namespace OpenGloveWCF
 {
@@ -19,6 +18,7 @@ namespace OpenGloveWCF
                     RequestFormat = WebMessageFormat.Json,
                     UriTemplate = "GetGloves")]
         List<Glove> GetGloves();
+
 
         [OperationContract]
         [WebInvoke(Method = "GET",
@@ -65,21 +65,97 @@ namespace OpenGloveWCF
                     BodyStyle = WebMessageBodyStyle.Wrapped,
                     UriTemplate = "ActivateMany?gloveAddress={gloveAddress}")]
         int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "AddFlexor?gloveAddress={gloveAddress}&pin={pin}&mapping={mapping}")]
+        int addFlexor(string gloveAddress, int pin, int mapping);
         
-    }
-    /*
-    [DataContract]
-    public class ActivateManyData {
-        [DataMember]
-        string gloveAddress;
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "RemoveFlexor?gloveAddress={gloveAddress}&mapping={mapping}")]
+        int removeFlexor(string gloveAddress, int mapping);
+        
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "CalibrateFlexors?gloveAddress={gloveAddress}")]
+        void calibrateFlexors(string gloveAddress);
 
-        [DataMember]
-        List<int> actuators;
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "ConfirmCalibration?gloveAddress={gloveAddress}")]
+        void confirmCalibration(string gloveAddress);
 
-        [DataMember]
-        List<int> intensityList;
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setThreshold?gloveAddress={gloveAddress}&value={value}")]
+        void setThreshold(string gloveAddress, int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "ResetFlexors?gloveAddress={gloveAddress}")]
+        void resetFlexors(string gloveAddress);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "startIMU?gloveAddress={gloveAddress}")]
+        void startIMU(string gloveAddress);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setIMUStatus?gloveAddress={gloveAddress}&value={value}")]
+        void setIMUStatus(string gloveAddress, int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setRawData?gloveAddress={gloveAddress}&value={value}")]
+        void setRawData(string gloveAddress, int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setLoopDelay?gloveAddress={gloveAddress}&value={value}")]
+        void setLoopDelay(string gloveAddress, int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+                    ResponseFormat = WebMessageFormat.Json,
+                    RequestFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Bare,
+                    UriTemplate = "setChoosingData?gloveAddress={gloveAddress}&value={value}")]
+        void setChoosingData(string gloveAddress, int value);
+
     }
-    */
+
 
     [DataContract]
     public class Glove
@@ -100,11 +176,11 @@ namespace OpenGloveWCF
                 if (gloves == null)
                 {
                     gloves = ScanGloves();
-
                 }
                 return gloves;
             }
         }
+
 
         /// <summary>
         /// Same behaviour as Gloves, but always refreshes the glove list.
@@ -140,11 +216,14 @@ namespace OpenGloveWCF
                 string comPort = device;
                 string address = device;
                 string name = device;
+                int WebsocketBase = 9870;
+                int PortNumber = Int32.Parse(Regex.Replace(comPort, @"[^\d]", "")); //Obtiene el número del puerto
 
                 Glove foundGlove = new Glove();
                 foundGlove.BluetoothAddress = deviceAddress;
                 foundGlove.Port = comPort;
                 foundGlove.Name = name;
+                foundGlove.WebSocketPort = (WebsocketBase + PortNumber).ToString();
                 foundGlove.Connected = false;
                 foundGlove.LegacyGlove = new LegacyOpenGlove();
 
@@ -154,6 +233,7 @@ namespace OpenGloveWCF
             return scannedGloves;
         }
 
+        /*
         /// <summary>
         /// Gets the outgoing COM Serial Port of a bluetooth device.
         /// </summary>
@@ -186,11 +266,16 @@ namespace OpenGloveWCF
             return null;
         }
 
+        */
+
         [DataMember]
         public string Name;
 
         [DataMember]
         public string Port;
+
+        [DataMember]
+        public string WebSocketPort;
 
         [DataMember]
         public Sides Side;
@@ -205,7 +290,6 @@ namespace OpenGloveWCF
         public Configuration GloveConfiguration;
 
         public LegacyOpenGlove LegacyGlove { get; set; }
-
 
         [DataContract]
         public class Configuration
@@ -257,15 +341,38 @@ namespace OpenGloveWCF
                 public int AreaCount = 58;
 
                 [DataMember]
+                public int FlexorsThreshold;
+
+                [DataMember]
                 public Dictionary<string, string> Mappings = new Dictionary<string, string>();
 
                 [DataMember]
                 public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
+
+                [DataMember]
+                public String imuModel;
+
+                [DataMember]
+                public bool imuStatus;
+
+                [DataMember]
+                public bool rawData;
+
+                [DataMember]
+                public bool imuCalibrationStatus;
+
+               // [DataMember]
+               // public IMU_Settings IMUSettings;
+
+                // [DataMember]
+                // public Flexors_Settings FlexorsSettings;            
             }
+
+
         }
 
-
     }
+    
 
     [DataContract(Name = "Side")]
     public enum Sides
@@ -275,4 +382,42 @@ namespace OpenGloveWCF
         [EnumMember]
         Left
     }
+
+    /*
+    [DataContract]
+    public class Flexors_Settings
+    {
+        [DataMember]
+        public Dictionary<int, int> FlexorsMappings = new Dictionary<int, int>();
+
+        [DataMember]
+        public int FlexorsThreshold;
+
+        [DataMember]
+        public bool calibrationStatus = false;
+
+    }
+    */
+
+    //gyro
+    /*
+       [DataMember]
+       public bool gyroStatus;
+
+       [DataMember]
+       public bool accelStatus;
+
+       [DataMember]
+       public bool magStatus;
+
+       [DataMember]
+       public List<int> gyroScale = new List<int> {245, 500, 2000};
+
+       [DataMember]
+       public List<int> accelScale = new List<int> {2, 4, 8, 16 };
+
+       [DataMember]
+       public List<int> magScale = new List<int> { 4, 8, 16 };
+       */
+
 }

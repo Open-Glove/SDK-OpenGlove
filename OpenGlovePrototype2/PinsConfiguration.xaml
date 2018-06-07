@@ -31,12 +31,11 @@
             </DataGrid>
             <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" Margin="0,303,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click"/>
             <Label x:Name="labelBaud" Content="Baud Rate" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <ComboBox x:Name="comboBoxBaudRate" HorizontalAlignment="Left" Margin="69,4,0,0" VerticalAlignment="Top" Width="221"/>
+            <ComboBox x:Name="comboBoxBaudRate" HorizontalAlignment="Left" Margin="69,4,0,0" VerticalAlignment="Top" Width="221" SelectedIndex="10"/>
         </Grid>
         <Label x:Name="labelBoard" Content="Board" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBoxBoard" HorizontalAlignment="Left" Margin="78,61,0,0" VerticalAlignment="Top" Width="192"/>
         <Button x:Name="buttonAddBoard" Content="+" HorizontalAlignment="Left" Margin="275,61,0,0" VerticalAlignment="Top" Width="25" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" Click="buttonAddBoard_Click"/>
-        <Button x:Name="buttonRefreshBoards" Content="REFRESH" HorizontalAlignment="Left" Margin="314,62,0,0" VerticalAlignment="Top" Width="73" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" Click="buttonRefreshBoards_Click"/>
 
     </Grid>
 </Window>

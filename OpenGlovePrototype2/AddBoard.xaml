@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:OpenGlovePrototype2"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="OpenGlovePrototype2.AddBoard"
         mc:Ignorable="d"
-        Title="AddBoard" Height="250.5" Width="308.775">
-    <Grid Margin="0,0,-60.225,-0.5">
+        Title="AddBoard" Height="263.305" Width="278.363" ResizeMode="NoResize">
+    <Grid Margin="0,0,2,-1">
         <Label x:Name="label" Content="Digital Pins&#xA;" HorizontalAlignment="Left" Margin="34,62,0,0" VerticalAlignment="Top" Height="29"/>
         <Label x:Name="label1" Content="Name" HorizontalAlignment="Left" Margin="56,28,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxBoardName" HorizontalAlignment="Left" Height="23" Margin="103,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>

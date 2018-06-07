@@ -40,6 +40,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OpenGlove_API_C_Sharp_HL.ServiceReference1.Side SideField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WebSocketPortField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -124,6 +127,19 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 if ((this.SideField.Equals(value) != true)) {
                     this.SideField = value;
                     this.RaisePropertyChanged("Side");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WebSocketPort {
+            get {
+                return this.WebSocketPortField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WebSocketPortField, value) != true)) {
+                    this.WebSocketPortField = value;
+                    this.RaisePropertyChanged("WebSocketPort");
                 }
             }
         }
@@ -356,6 +372,9 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 private System.Collections.Generic.Dictionary<int, int> FlexorsMappingsField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private int FlexorsThresholdField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
                 private string GloveHashField;
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -363,6 +382,18 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                 
                 [System.Runtime.Serialization.OptionalFieldAttribute()]
                 private string ProfileNameField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private bool imuCalibrationStatusField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private string imuModelField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private bool imuStatusField;
+                
+                [System.Runtime.Serialization.OptionalFieldAttribute()]
+                private bool rawDataField;
                 
                 public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
                     get {
@@ -395,6 +426,19 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                         if ((object.ReferenceEquals(this.FlexorsMappingsField, value) != true)) {
                             this.FlexorsMappingsField = value;
                             this.RaisePropertyChanged("FlexorsMappings");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public int FlexorsThreshold {
+                    get {
+                        return this.FlexorsThresholdField;
+                    }
+                    set {
+                        if ((this.FlexorsThresholdField.Equals(value) != true)) {
+                            this.FlexorsThresholdField = value;
+                            this.RaisePropertyChanged("FlexorsThreshold");
                         }
                     }
                 }
@@ -438,6 +482,58 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
                     }
                 }
                 
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public bool imuCalibrationStatus {
+                    get {
+                        return this.imuCalibrationStatusField;
+                    }
+                    set {
+                        if ((this.imuCalibrationStatusField.Equals(value) != true)) {
+                            this.imuCalibrationStatusField = value;
+                            this.RaisePropertyChanged("imuCalibrationStatus");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public string imuModel {
+                    get {
+                        return this.imuModelField;
+                    }
+                    set {
+                        if ((object.ReferenceEquals(this.imuModelField, value) != true)) {
+                            this.imuModelField = value;
+                            this.RaisePropertyChanged("imuModel");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public bool imuStatus {
+                    get {
+                        return this.imuStatusField;
+                    }
+                    set {
+                        if ((this.imuStatusField.Equals(value) != true)) {
+                            this.imuStatusField = value;
+                            this.RaisePropertyChanged("imuStatus");
+                        }
+                    }
+                }
+                
+                [System.Runtime.Serialization.DataMemberAttribute()]
+                public bool rawData {
+                    get {
+                        return this.rawDataField;
+                    }
+                    set {
+                        if ((this.rawDataField.Equals(value) != true)) {
+                            this.rawDataField = value;
+                            this.RaisePropertyChanged("rawData");
+                        }
+                    }
+                }
+                
                 public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
                 
                 protected void RaisePropertyChanged(string propertyName) {
@@ -468,23 +564,110 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/GetGloves", ReplyAction="http://tempuri.org/IOGService/GetGlovesResponse")]
         OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[] GetGloves();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/GetGloves", ReplyAction="http://tempuri.org/IOGService/GetGlovesResponse")]
+        System.Threading.Tasks.Task<OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[]> GetGlovesAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/RefreshGloves", ReplyAction="http://tempuri.org/IOGService/RefreshGlovesResponse")]
         OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[] RefreshGloves();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/RefreshGloves", ReplyAction="http://tempuri.org/IOGService/RefreshGlovesResponse")]
+        System.Threading.Tasks.Task<OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[]> RefreshGlovesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/SaveGlove", ReplyAction="http://tempuri.org/IOGService/SaveGloveResponse")]
         void SaveGlove(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/SaveGlove", ReplyAction="http://tempuri.org/IOGService/SaveGloveResponse")]
+        System.Threading.Tasks.Task SaveGloveAsync(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Activate", ReplyAction="http://tempuri.org/IOGService/ActivateResponse")]
         int Activate(string gloveAddress, int actuator, int intensity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Activate", ReplyAction="http://tempuri.org/IOGService/ActivateResponse")]
+        System.Threading.Tasks.Task<int> ActivateAsync(string gloveAddress, int actuator, int intensity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Connect", ReplyAction="http://tempuri.org/IOGService/ConnectResponse")]
         int Connect(string gloveAddress);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Connect", ReplyAction="http://tempuri.org/IOGService/ConnectResponse")]
+        System.Threading.Tasks.Task<int> ConnectAsync(string gloveAddress);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Disconnect", ReplyAction="http://tempuri.org/IOGService/DisconnectResponse")]
         int Disconnect(string gloveAddress);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/Disconnect", ReplyAction="http://tempuri.org/IOGService/DisconnectResponse")]
+        System.Threading.Tasks.Task<int> DisconnectAsync(string gloveAddress);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/ActivateMany", ReplyAction="http://tempuri.org/IOGService/ActivateManyResponse")]
         int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/ActivateMany", ReplyAction="http://tempuri.org/IOGService/ActivateManyResponse")]
+        System.Threading.Tasks.Task<int> ActivateManyAsync(string gloveAddress, int[] actuators, int[] intensityList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/addFlexor", ReplyAction="http://tempuri.org/IOGService/addFlexorResponse")]
+        int addFlexor(string gloveAddress, int pin, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/addFlexor", ReplyAction="http://tempuri.org/IOGService/addFlexorResponse")]
+        System.Threading.Tasks.Task<int> addFlexorAsync(string gloveAddress, int pin, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/removeFlexor", ReplyAction="http://tempuri.org/IOGService/removeFlexorResponse")]
+        int removeFlexor(string gloveAddress, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/removeFlexor", ReplyAction="http://tempuri.org/IOGService/removeFlexorResponse")]
+        System.Threading.Tasks.Task<int> removeFlexorAsync(string gloveAddress, int mapping);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/calibrateFlexors", ReplyAction="http://tempuri.org/IOGService/calibrateFlexorsResponse")]
+        void calibrateFlexors(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/calibrateFlexors", ReplyAction="http://tempuri.org/IOGService/calibrateFlexorsResponse")]
+        System.Threading.Tasks.Task calibrateFlexorsAsync(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/confirmCalibration", ReplyAction="http://tempuri.org/IOGService/confirmCalibrationResponse")]
+        void confirmCalibration(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/confirmCalibration", ReplyAction="http://tempuri.org/IOGService/confirmCalibrationResponse")]
+        System.Threading.Tasks.Task confirmCalibrationAsync(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setThreshold", ReplyAction="http://tempuri.org/IOGService/setThresholdResponse")]
+        void setThreshold(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setThreshold", ReplyAction="http://tempuri.org/IOGService/setThresholdResponse")]
+        System.Threading.Tasks.Task setThresholdAsync(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/resetFlexors", ReplyAction="http://tempuri.org/IOGService/resetFlexorsResponse")]
+        void resetFlexors(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/resetFlexors", ReplyAction="http://tempuri.org/IOGService/resetFlexorsResponse")]
+        System.Threading.Tasks.Task resetFlexorsAsync(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/startIMU", ReplyAction="http://tempuri.org/IOGService/startIMUResponse")]
+        void startIMU(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/startIMU", ReplyAction="http://tempuri.org/IOGService/startIMUResponse")]
+        System.Threading.Tasks.Task startIMUAsync(string gloveAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setIMUStatus", ReplyAction="http://tempuri.org/IOGService/setIMUStatusResponse")]
+        void setIMUStatus(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setIMUStatus", ReplyAction="http://tempuri.org/IOGService/setIMUStatusResponse")]
+        System.Threading.Tasks.Task setIMUStatusAsync(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setRawData", ReplyAction="http://tempuri.org/IOGService/setRawDataResponse")]
+        void setRawData(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setRawData", ReplyAction="http://tempuri.org/IOGService/setRawDataResponse")]
+        System.Threading.Tasks.Task setRawDataAsync(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setLoopDelay", ReplyAction="http://tempuri.org/IOGService/setLoopDelayResponse")]
+        void setLoopDelay(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setLoopDelay", ReplyAction="http://tempuri.org/IOGService/setLoopDelayResponse")]
+        System.Threading.Tasks.Task setLoopDelayAsync(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setChoosingData", ReplyAction="http://tempuri.org/IOGService/setChoosingDataResponse")]
+        void setChoosingData(string gloveAddress, int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOGService/setChoosingData", ReplyAction="http://tempuri.org/IOGService/setChoosingDataResponse")]
+        System.Threading.Tasks.Task setChoosingDataAsync(string gloveAddress, int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -518,28 +701,144 @@ namespace OpenGlove_API_C_Sharp_HL.ServiceReference1 {
             return base.Channel.GetGloves();
         }
         
+        public System.Threading.Tasks.Task<OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[]> GetGlovesAsync() {
+            return base.Channel.GetGlovesAsync();
+        }
+        
         public OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[] RefreshGloves() {
             return base.Channel.RefreshGloves();
+        }
+        
+        public System.Threading.Tasks.Task<OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove[]> RefreshGlovesAsync() {
+            return base.Channel.RefreshGlovesAsync();
         }
         
         public void SaveGlove(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove) {
             base.Channel.SaveGlove(glove);
         }
         
+        public System.Threading.Tasks.Task SaveGloveAsync(OpenGlove_API_C_Sharp_HL.ServiceReference1.Glove glove) {
+            return base.Channel.SaveGloveAsync(glove);
+        }
+        
         public int Activate(string gloveAddress, int actuator, int intensity) {
             return base.Channel.Activate(gloveAddress, actuator, intensity);
+        }
+        
+        public System.Threading.Tasks.Task<int> ActivateAsync(string gloveAddress, int actuator, int intensity) {
+            return base.Channel.ActivateAsync(gloveAddress, actuator, intensity);
         }
         
         public int Connect(string gloveAddress) {
             return base.Channel.Connect(gloveAddress);
         }
         
+        public System.Threading.Tasks.Task<int> ConnectAsync(string gloveAddress) {
+            return base.Channel.ConnectAsync(gloveAddress);
+        }
+        
         public int Disconnect(string gloveAddress) {
             return base.Channel.Disconnect(gloveAddress);
         }
         
+        public System.Threading.Tasks.Task<int> DisconnectAsync(string gloveAddress) {
+            return base.Channel.DisconnectAsync(gloveAddress);
+        }
+        
         public int ActivateMany(string gloveAddress, int[] actuators, int[] intensityList) {
             return base.Channel.ActivateMany(gloveAddress, actuators, intensityList);
+        }
+        
+        public System.Threading.Tasks.Task<int> ActivateManyAsync(string gloveAddress, int[] actuators, int[] intensityList) {
+            return base.Channel.ActivateManyAsync(gloveAddress, actuators, intensityList);
+        }
+        
+        public int addFlexor(string gloveAddress, int pin, int mapping) {
+            return base.Channel.addFlexor(gloveAddress, pin, mapping);
+        }
+        
+        public System.Threading.Tasks.Task<int> addFlexorAsync(string gloveAddress, int pin, int mapping) {
+            return base.Channel.addFlexorAsync(gloveAddress, pin, mapping);
+        }
+        
+        public int removeFlexor(string gloveAddress, int mapping) {
+            return base.Channel.removeFlexor(gloveAddress, mapping);
+        }
+        
+        public System.Threading.Tasks.Task<int> removeFlexorAsync(string gloveAddress, int mapping) {
+            return base.Channel.removeFlexorAsync(gloveAddress, mapping);
+        }
+        
+        public void calibrateFlexors(string gloveAddress) {
+            base.Channel.calibrateFlexors(gloveAddress);
+        }
+        
+        public System.Threading.Tasks.Task calibrateFlexorsAsync(string gloveAddress) {
+            return base.Channel.calibrateFlexorsAsync(gloveAddress);
+        }
+        
+        public void confirmCalibration(string gloveAddress) {
+            base.Channel.confirmCalibration(gloveAddress);
+        }
+        
+        public System.Threading.Tasks.Task confirmCalibrationAsync(string gloveAddress) {
+            return base.Channel.confirmCalibrationAsync(gloveAddress);
+        }
+        
+        public void setThreshold(string gloveAddress, int value) {
+            base.Channel.setThreshold(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setThresholdAsync(string gloveAddress, int value) {
+            return base.Channel.setThresholdAsync(gloveAddress, value);
+        }
+        
+        public void resetFlexors(string gloveAddress) {
+            base.Channel.resetFlexors(gloveAddress);
+        }
+        
+        public System.Threading.Tasks.Task resetFlexorsAsync(string gloveAddress) {
+            return base.Channel.resetFlexorsAsync(gloveAddress);
+        }
+        
+        public void startIMU(string gloveAddress) {
+            base.Channel.startIMU(gloveAddress);
+        }
+        
+        public System.Threading.Tasks.Task startIMUAsync(string gloveAddress) {
+            return base.Channel.startIMUAsync(gloveAddress);
+        }
+        
+        public void setIMUStatus(string gloveAddress, int value) {
+            base.Channel.setIMUStatus(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setIMUStatusAsync(string gloveAddress, int value) {
+            return base.Channel.setIMUStatusAsync(gloveAddress, value);
+        }
+        
+        public void setRawData(string gloveAddress, int value) {
+            base.Channel.setRawData(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setRawDataAsync(string gloveAddress, int value) {
+            return base.Channel.setRawDataAsync(gloveAddress, value);
+        }
+        
+        public void setLoopDelay(string gloveAddress, int value) {
+            base.Channel.setLoopDelay(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setLoopDelayAsync(string gloveAddress, int value) {
+            return base.Channel.setLoopDelayAsync(gloveAddress, value);
+        }
+        
+        public void setChoosingData(string gloveAddress, int value) {
+            base.Channel.setChoosingData(gloveAddress, value);
+        }
+        
+        public System.Threading.Tasks.Task setChoosingDataAsync(string gloveAddress, int value) {
+            return base.Channel.setChoosingDataAsync(gloveAddress, value);
         }
     }
 }

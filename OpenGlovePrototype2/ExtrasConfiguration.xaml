@@ -1,0 +1,19 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenGlovePrototype2"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="OpenGlovePrototype2.ExtrasConfiguration"
+        mc:Ignorable="d"
+        Title="ExtrasConfiguration" Height="324" Width="488">
+    <Grid>
+        <Rectangle Fill="#FF00B47F" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="480"/>
+        <Label x:Name="labelHeader" Content="Extras Configuration" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
+
+        <xctk:IntegerUpDown x:Name="delayValue" HorizontalAlignment="Left" Margin="29,117,0,0" VerticalAlignment="Top" Height="34" Width="153" DefaultValue="60" ValueChanged="delayValue_ValueChanged" DisplayDefaultValueOnEmptyText="True"/>
+        <Label x:Name="label" Content="General Delay (ms)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,91,0,0" Width="135"/>
+        <Button x:Name="buttonDelay" Content="Set Delay" HorizontalAlignment="Left" Margin="187,117,0,0" VerticalAlignment="Top" Width="92" Height="34" Click="buttonDelay_Click"/>
+
+    </Grid>
+</Window>

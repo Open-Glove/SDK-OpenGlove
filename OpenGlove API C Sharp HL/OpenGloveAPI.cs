@@ -1,9 +1,13 @@
 ﻿using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using WebSocketSharp;
 
 namespace OpenGlove_API_C_Sharp_HL
 {
@@ -13,19 +17,22 @@ namespace OpenGlove_API_C_Sharp_HL
         /// Singleton instance of the API
         /// </summary>
         private static OpenGloveAPI instance;
-
+       // bool WebSocketActive;
         /// <summary>
         /// Client for the WCF service
         /// </summary>
         private OGServiceClient serviceClient;
 
+        private List<DataReceiver> DataReceivers;
+
         OpenGloveAPI()
         {
-            NetHttpBinding binding = new NetHttpBinding();
+            BasicHttpBinding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress("http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/");
-            serviceClient = new OGServiceClient(binding, address); 
+            serviceClient = new OGServiceClient(binding, address);
+            DataReceivers = new List<DataReceiver>();
+          //  WebSocketActive = false;
         }
-
         /// <summary>
         /// Gets the current API instance
         /// </summary>
@@ -37,6 +44,51 @@ namespace OpenGlove_API_C_Sharp_HL
                 instance = new OpenGloveAPI();
             }
             return instance;
+        }
+
+        public DataReceiver getDataReceiver(Glove selectedGlove)
+        {
+            foreach(DataReceiver data in DataReceivers)
+            {
+                if (data.SerialPort.Equals(selectedGlove.Port))
+                {
+                    return data;
+                }
+            }
+            return null;
+        }
+
+        public void startCaptureData(Glove selectedGlove)
+        {
+            if (DataReceivers != null)
+            {
+                foreach (DataReceiver d in DataReceivers)
+                {
+                    if (d.SerialPort == selectedGlove.Port)
+                    {
+                        return; //already exist
+                    }
+                }
+                DataReceiver data = new DataReceiver(selectedGlove.WebSocketPort, selectedGlove.Port);
+                DataReceivers.Add(data);
+            }
+        }
+
+        public void stopCaptureData(Glove selectedGlove)
+        {
+            if (DataReceivers != null)
+            {
+                foreach (DataReceiver d in DataReceivers)
+                {
+                    if (d.SerialPort == selectedGlove.Port)
+                    {
+                        d.WebSocketActive = false;
+                        Thread.Sleep(100);
+                        DataReceivers.Remove(d);
+                        return;
+                    }
+                }
+            }    
         }
 
         /// <summary>
@@ -65,15 +117,73 @@ namespace OpenGlove_API_C_Sharp_HL
             return serviceClient.RefreshGloves().ToList();
         }
 
-        public int getflexor(string gloveAddress, int pin)
+        public int addFlexor(Glove selectedGlove, int flexor, int mapping)
         {
-            serviceClient
-            return 0;
+            return this.serviceClient.addFlexor(selectedGlove.BluetoothAddress, flexor, mapping);
         }
 
-        public void captureFlexorsValues(Glove selectedGlove)
+        public int removeFlexor(Glove selectedGlove, int mapping)
         {
-            serviceClient.getFlexorsValues(selectedGlove.BluetoothAddress);
+            return this.serviceClient.removeFlexor(selectedGlove.BluetoothAddress, mapping);
+        }
+
+        public void calibrateFlexors(Glove selectedGlove)
+        {
+           this.serviceClient.calibrateFlexors(selectedGlove.BluetoothAddress);
+        }
+
+        public void confirmCalibration(Glove selectedGlove)
+        {
+            this.serviceClient.confirmCalibration(selectedGlove.BluetoothAddress);
+        }
+
+        public void setThreshold(Glove selectedGlove, int value)
+        {
+            this.serviceClient.setThreshold(selectedGlove.BluetoothAddress,value);
+        }
+
+        public void resetFlexors(Glove selectedGlove)
+        {
+            this.serviceClient.resetFlexors(selectedGlove.BluetoothAddress);
+        }
+
+        public void startIMU(Glove selectedGlove)
+        {
+            this.serviceClient.startIMU(selectedGlove.BluetoothAddress);
+        }
+
+        public void setIMUStatus(Glove selectedGlove, bool value)
+        {
+            if (value == true)
+            {
+                this.serviceClient.setIMUStatus(selectedGlove.BluetoothAddress, 1);
+            }else
+            {
+                this.serviceClient.setIMUStatus(selectedGlove.BluetoothAddress, 0);
+            }
+            
+        }
+
+        public void setRawData(Glove selectedGlove, bool value)
+        {
+            if (value == true)
+            {
+                this.serviceClient.setRawData(selectedGlove.BluetoothAddress, 1);
+            }
+            else
+            {
+                this.serviceClient.setRawData(selectedGlove.BluetoothAddress, 0);
+            }
+        }
+
+        public void setLoopDelay(Glove selectedGlove, int value)
+        {
+            this.serviceClient.setLoopDelay(selectedGlove.BluetoothAddress, value);
+        }
+
+        public void setChoosingData(Glove selectedGlove, int value)
+        {
+            this.serviceClient.setChoosingData(selectedGlove.BluetoothAddress, value);
         }
 
         /// <summary>
@@ -83,13 +193,13 @@ namespace OpenGlove_API_C_Sharp_HL
         /// <returns>Result code</returns>
         public int Connect(Glove selectedGlove)
         {
+            startCaptureData(selectedGlove);
             try
             {
                 return this.serviceClient.Connect(selectedGlove.BluetoothAddress);
             }
             catch (Exception)
             {
-
                 return -1;
             }
         }
@@ -101,6 +211,7 @@ namespace OpenGlove_API_C_Sharp_HL
         /// <returns>Result code</returns>
         public int Disconnect(Glove selectedGlove)
         {
+            stopCaptureData(selectedGlove);
             try
             {
                 return this.serviceClient.Disconnect(selectedGlove.BluetoothAddress);
@@ -161,7 +272,15 @@ namespace OpenGlove_API_C_Sharp_HL
 
             this.serviceClient.ActivateMany(selectedGlove.BluetoothAddress, actuators.ToArray(), intensityList.ToArray());
         }
+
+        public void saveGlove(Glove selectedGlove)
+        {
+            this.serviceClient.SaveGlove(selectedGlove);
+        }
+
     }
+
+    
 
 
     public enum PalmarRegion
@@ -244,5 +363,20 @@ namespace OpenGlove_API_C_Sharp_HL
         Thenar,
 
         HypoThenarProximal
+    }
+
+    public enum FlexorsRegion
+    {
+        ThumbInterphalangealJoint = 0,
+        IndexInterphalangealJoint,
+        MiddleInterphalangealJoint,
+        RingInterphalangealJoint,
+        SmallInterphalangealJoint,
+
+        ThumbMetacarpophalangealJoint,
+        IndexMetacarpophalangealJoint,
+        MiddleMetacarpophalangealJoint,
+        RingMetacarpophalangealJoint,
+        SmallMetacarpophalangealJoint
     }
 }

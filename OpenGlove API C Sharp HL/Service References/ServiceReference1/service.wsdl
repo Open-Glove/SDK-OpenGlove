@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OGService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/OpenGloveWCF" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IOGService_GetGloves_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGloves" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_GetGloves_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlovesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_RefreshGloves_InputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshGloves" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_RefreshGloves_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshGlovesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_SaveGlove_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveGlove" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_SaveGlove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveGloveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Activate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Activate" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Activate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActivateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_Disconnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_ActivateMany_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActivateMany" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_ActivateMany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActivateManyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_addFlexor_InputMessage">
+    <wsdl:part name="parameters" element="tns:addFlexor" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_addFlexor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addFlexorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_removeFlexor_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeFlexor" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_removeFlexor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeFlexorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_calibrateFlexors_InputMessage">
+    <wsdl:part name="parameters" element="tns:calibrateFlexors" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_calibrateFlexors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:calibrateFlexorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_confirmCalibration_InputMessage">
+    <wsdl:part name="parameters" element="tns:confirmCalibration" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_confirmCalibration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:confirmCalibrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setThreshold_InputMessage">
+    <wsdl:part name="parameters" element="tns:setThreshold" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setThreshold_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setThresholdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_resetFlexors_InputMessage">
+    <wsdl:part name="parameters" element="tns:resetFlexors" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_resetFlexors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:resetFlexorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_startIMU_InputMessage">
+    <wsdl:part name="parameters" element="tns:startIMU" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_startIMU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:startIMUResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setIMUStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:setIMUStatus" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setIMUStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setIMUStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setRawData_InputMessage">
+    <wsdl:part name="parameters" element="tns:setRawData" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setRawData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setRawDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setLoopDelay_InputMessage">
+    <wsdl:part name="parameters" element="tns:setLoopDelay" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setLoopDelay_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setLoopDelayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setChoosingData_InputMessage">
+    <wsdl:part name="parameters" element="tns:setChoosingData" />
+  </wsdl:message>
+  <wsdl:message name="IOGService_setChoosingData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setChoosingDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IOGService">
+    <wsdl:operation name="GetGloves">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/GetGloves" message="tns:IOGService_GetGloves_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/GetGlovesResponse" message="tns:IOGService_GetGloves_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshGloves">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/RefreshGloves" message="tns:IOGService_RefreshGloves_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/RefreshGlovesResponse" message="tns:IOGService_RefreshGloves_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveGlove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/SaveGlove" message="tns:IOGService_SaveGlove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/SaveGloveResponse" message="tns:IOGService_SaveGlove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Activate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/Activate" message="tns:IOGService_Activate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ActivateResponse" message="tns:IOGService_Activate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/Connect" message="tns:IOGService_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ConnectResponse" message="tns:IOGService_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/Disconnect" message="tns:IOGService_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/DisconnectResponse" message="tns:IOGService_Disconnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateMany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/ActivateMany" message="tns:IOGService_ActivateMany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/ActivateManyResponse" message="tns:IOGService_ActivateMany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addFlexor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/addFlexor" message="tns:IOGService_addFlexor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/addFlexorResponse" message="tns:IOGService_addFlexor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeFlexor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/removeFlexor" message="tns:IOGService_removeFlexor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/removeFlexorResponse" message="tns:IOGService_removeFlexor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="calibrateFlexors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/calibrateFlexors" message="tns:IOGService_calibrateFlexors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/calibrateFlexorsResponse" message="tns:IOGService_calibrateFlexors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCalibration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/confirmCalibration" message="tns:IOGService_confirmCalibration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/confirmCalibrationResponse" message="tns:IOGService_confirmCalibration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setThreshold">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setThreshold" message="tns:IOGService_setThreshold_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setThresholdResponse" message="tns:IOGService_setThreshold_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="resetFlexors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/resetFlexors" message="tns:IOGService_resetFlexors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/resetFlexorsResponse" message="tns:IOGService_resetFlexors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="startIMU">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/startIMU" message="tns:IOGService_startIMU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/startIMUResponse" message="tns:IOGService_startIMU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setIMUStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setIMUStatus" message="tns:IOGService_setIMUStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setIMUStatusResponse" message="tns:IOGService_setIMUStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setRawData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setRawData" message="tns:IOGService_setRawData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setRawDataResponse" message="tns:IOGService_setRawData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setLoopDelay">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setLoopDelay" message="tns:IOGService_setLoopDelay_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setLoopDelayResponse" message="tns:IOGService_setLoopDelay_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setChoosingData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOGService/setChoosingData" message="tns:IOGService_setChoosingData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOGService/setChoosingDataResponse" message="tns:IOGService_setChoosingData_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IOGService" type="tns:IOGService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetGloves">
+      <soap:operation soapAction="http://tempuri.org/IOGService/GetGloves" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshGloves">
+      <soap:operation soapAction="http://tempuri.org/IOGService/RefreshGloves" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveGlove">
+      <soap:operation soapAction="http://tempuri.org/IOGService/SaveGlove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activate">
+      <soap:operation soapAction="http://tempuri.org/IOGService/Activate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <soap:operation soapAction="http://tempuri.org/IOGService/Connect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap:operation soapAction="http://tempuri.org/IOGService/Disconnect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateMany">
+      <soap:operation soapAction="http://tempuri.org/IOGService/ActivateMany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFlexor">
+      <soap:operation soapAction="http://tempuri.org/IOGService/addFlexor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeFlexor">
+      <soap:operation soapAction="http://tempuri.org/IOGService/removeFlexor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calibrateFlexors">
+      <soap:operation soapAction="http://tempuri.org/IOGService/calibrateFlexors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCalibration">
+      <soap:operation soapAction="http://tempuri.org/IOGService/confirmCalibration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setThreshold">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setThreshold" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetFlexors">
+      <soap:operation soapAction="http://tempuri.org/IOGService/resetFlexors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startIMU">
+      <soap:operation soapAction="http://tempuri.org/IOGService/startIMU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setIMUStatus">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setIMUStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setRawData">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setRawData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setLoopDelay">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setLoopDelay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setChoosingData">
+      <soap:operation soapAction="http://tempuri.org/IOGService/setChoosingData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OGService">
+    <wsdl:port name="BasicHttpBinding_IOGService" binding="tns:BasicHttpBinding_IOGService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/OpenGloveWCF/OGService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

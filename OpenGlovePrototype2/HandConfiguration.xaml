@@ -5,23 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenGlovePrototype2"
         mc:Ignorable="d"
-        Title="HandConfiguration" Height="252.911" Width="470.126" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFCBF3E7">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="buttonFlexors" Content="Flexors Profile" HorizontalAlignment="Left" Margin="25,124,0,0" VerticalAlignment="Top" Width="125" Height="31" Grid.Column="0" Click="buttonFlexors_Click"/>
-        <Label x:Name="labelFlexors" Content="Flex Sensors Config:&#xD;&#xA;" HorizontalAlignment="Left" Margin="18,15,0,0" VerticalAlignment="Top" Grid.Column="0"/>
-        <Button x:Name="buttonVibeBoards" Content="Actual Config" HorizontalAlignment="Left" Margin="42,124,0,0" VerticalAlignment="Top" Width="127" Height="31" Grid.Column="1" Click="buttonVibeBoards_Click"/>
-        <Label x:Name="labelVibeBoard" Content="Vibe Boards Config:" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top" Grid.Column="1" Width="144"/>
+        Title="HandConfiguration" Height="380.628" Width="301.624" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF00B47F" Margin="0,0,0,-4">
 
-        <Label x:Name="labelNumberFlexors" Content="Number of flexors:&#xA;" HorizontalAlignment="Left" Margin="25,52,0,0" VerticalAlignment="Top" Grid.Column="0"/>
-        <Label x:Name="labelNumbersVibe" Content="Number of actuators:&#xA;" HorizontalAlignment="Left" Margin="29,52,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label x:Name="numberFlexors" Content="0" HorizontalAlignment="Left" Margin="134,52,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="numbersActuators" Content="0" HorizontalAlignment="Left" Margin="153,52,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.458,-0.244"/>
-        <Button x:Name="saveButton" Content="Save Config" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.04,0.2" Grid.Column="1" Click="saveButton_Click"/>
-        <Button x:Name="openButton" Content="Open Config" HorizontalAlignment="Left" Margin="147,194,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.04,0.2" Click="openButton_Click"/>
+        <Button x:Name="buttonFlexors" Content="Flexors " HorizontalAlignment="Left" Margin="22,84,0,0" VerticalAlignment="Top" Width="250" Height="50" Grid.Column="0" Click="buttonFlexors_Click" FontSize="23"/>
+        <Button x:Name="buttonVibeBoards" Content="Vibe Boards" HorizontalAlignment="Left" Margin="22,139,0,0" VerticalAlignment="Top" Width="250" Height="50" Click="buttonVibeBoards_Click" FontSize="23"/>
+        <Button x:Name="buttonIMU" Content="IMU" HorizontalAlignment="Left" Margin="22,194,0,0" VerticalAlignment="Top" Width="250" Height="50" Click="buttonIMU_Click" FontSize="23"/>
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="298" Background="Black">
+            <Separator  Width="20"/>
+            <MenuItem x:Name="OpenConfigMenuItem" Header="Open Config" Height="26" Width="75" HorizontalAlignment="Center"  Foreground="White" Background="Black" BorderBrush="Black" Click="openButton_Click"/>
+            <Separator Width="30"/>
+            <MenuItem x:Name="SaveConfigMenuItem" Header="Save Config" Height="26" Width="75" HorizontalAlignment="Center"  Foreground="White" Background="Black" BorderBrush="Black" Click="saveButton_Click"/>
+        </Menu>
+        <Label x:Name="MenuTittle" Content="Glove Configuration" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" FontSize="28" Foreground="White" Width="269"/>
+        <StatusBar HorizontalAlignment="Left" Height="30" Margin="0,315,0,0" VerticalAlignment="Top" Width="296" Background="#FFA8A8A8">
+            <StatusBarItem x:Name="statusBarItemProfileLabel" Content="Actual Config :" Height="24" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" Width="89" HorizontalAlignment="Left" BorderThickness="5,0,0,0"/>
+            <StatusBarItem x:Name="statusBarItemProfile" Content="None" Height="24" VerticalAlignment="Top" Width="224" HorizontalAlignment="Left" Foreground="White" Background="{x:Null}"/>
+        </StatusBar>
+        <Button x:Name="buttonExtras" Content="Extras" HorizontalAlignment="Left" Margin="22,249,0,0" VerticalAlignment="Top" Width="250" Height="50" Click="buttonExtras_Click" FontSize="23"/>
 
     </Grid>
 </Window>

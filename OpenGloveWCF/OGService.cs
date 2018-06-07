@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 
 namespace OpenGloveWCF
 {
     public class OGService : IOGService
     {
+
         private const bool DEBUGGING = false;
 
         private const int AREACOUNT = 58;
@@ -28,6 +28,7 @@ namespace OpenGloveWCF
         {
             //After completing the job.
         }
+
 
         public int Activate(string gloveAddress, int actuator, int intensity)
         {
@@ -75,6 +76,7 @@ namespace OpenGloveWCF
             return 0; //OK
         }
         
+
         public int ActivateMany(string gloveAddress, List<int> actuators, List<int> intensityList)
         {
             if (actuators == null || intensityList == null) {
@@ -116,19 +118,51 @@ namespace OpenGloveWCF
             return Glove.RefreshGloves();
         }
 
+        int index;
+
         public void SaveGlove(Glove glove)
         {
+            for(int i = 0; i < Glove.Gloves.Count; i++)
+            {
+                if (Glove.Gloves[i].BluetoothAddress.Equals(glove.BluetoothAddress))
+                {
+                    //if (glove.Connected == true && glove.LegacyGlove == null)
+                  //  {
+                        if(Glove.Gloves[i].LegacyGlove != null)
+                        {
+                            glove.LegacyGlove = Glove.Gloves[i].LegacyGlove;
+                        }
+                        else
+                        {
+                            glove.LegacyGlove = new LegacyOpenGlove();
+                        }
+                        
+                  //  }
+                    Glove.Gloves[i] = glove;
+                    break;
+                }
+            }  
+        }
+
+        /*
+        public void UpdateGlove(Glove glove)
+        {
+            index = 0;
             foreach (Glove g in Glove.Gloves)
             {
                 if (g.BluetoothAddress.Equals(glove.BluetoothAddress))
                 {
-                    Glove.Gloves.Remove(g);
-                    Glove.Gloves.Add(glove);
+                    Glove.Gloves[index].GloveConfiguration = glove.GloveConfiguration;
+                    //Glove.Gloves[index].
+                    // Glove.Gloves.Remove(g);
+                    // Glove.Gloves.Add(glove);
                     break;
                 }
+                index++;
             }
-        }
 
+        }
+        */
         public int Connect(string gloveAddres)
         {
             foreach (Glove g in Glove.Gloves)
@@ -139,9 +173,18 @@ namespace OpenGloveWCF
                     {
                         g.LegacyGlove = new LegacyOpenGlove();
                         g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
-                        g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
-                        g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                        if (g.GloveConfiguration.PositivePins.Count > 0 && g.GloveConfiguration.NegativePins.Count > 0)
+                        {
+                            g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
+                            g.LegacyGlove.InitializeMotor(g.GloveConfiguration.NegativePins);
+                            g.LegacyGlove.ActivateMotor(g.GloveConfiguration.NegativePins, g.GloveConfiguration.NegativeInit);
+                        }
+                        
+                        if(g.GloveConfiguration.GloveProfile == null || (g.GloveConfiguration.GloveProfile!=null && g.GloveConfiguration.GloveProfile.FlexorsMappings.Count == 0) )
+                        {
+                            g.LegacyGlove.resetFlexors();
+                        }
+                        g.LegacyGlove.setIMUStatus(0);
                         g.Connected = true;
                     }
                     else
@@ -173,6 +216,147 @@ namespace OpenGloveWCF
                 }
             }
             return 0;
+        }
+        
+        public int addFlexor(string gloveAddress, int pin, int mapping)
+        {
+            index = 0;
+            foreach (Glove g in Glove.Gloves)
+            {
+                
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+
+                    g.LegacyGlove.addFlexor(pin, mapping);
+                    return 0;
+                }
+                index++;
+            }
+            return 1;
+
+        }
+
+        public int removeFlexor(string gloveAddress, int mapping)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.removeFlexor(mapping);
+                    return 0;
+                }
+            }
+            return 1;
+            
+        }
+
+        public void calibrateFlexors(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.calibrateFlexors();
+                }
+            }
+            
+        }
+
+        public void confirmCalibration(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.confirmCalibration();
+                }
+            }
+            
+        }
+
+        public void setThreshold(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setThreshold(value);
+                }
+            }
+            
+        }
+
+        public void resetFlexors(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.resetFlexors();
+                    if(g.GloveConfiguration.GloveProfile != null && g.GloveConfiguration.GloveProfile.FlexorsMappings != null)
+                    {
+                        g.GloveConfiguration.GloveProfile.FlexorsMappings.Clear();
+                    }
+                }
+            }
+        }
+
+        public void setIMUStatus(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setIMUStatus(value);
+                }
+            }
+
+        }
+
+        public void startIMU(string gloveAddress)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.startIMU();
+                }
+            }
+
+        }
+
+        public void setRawData(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setRawData(value);
+                }
+            }
+
+        }
+
+        public void setLoopDelay(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setLoopDelay(value);
+                }
+            }
+        }
+
+        public void setChoosingData(string gloveAddress, int value)
+        {
+            foreach (Glove g in Glove.Gloves)
+            {
+                if (g.BluetoothAddress.Equals(gloveAddress))
+                {
+                    g.LegacyGlove.setChoosingData(value);
+                }
+            }
         }
     }
 }

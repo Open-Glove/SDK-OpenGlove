@@ -185,9 +185,8 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = false;
-                this.buttonOpenProfileConfig.IsEnabled = false;
+               // this.buttonOpenProfileConfig.IsEnabled = false;
                 this.ConnectMenuItem.IsEnabled = false;
-                this.CurrentProfileMenuItem.IsEnabled = false;
             }
             else
             {
@@ -195,7 +194,7 @@ namespace OpenGlovePrototype2
                 this.buttonCreateGloveConfig.IsEnabled = true;
                 this.buttonOpenGloveConfig.IsEnabled = true;
                 this.buttonCreateProfileConfig.IsEnabled = true;
-                this.buttonOpenProfileConfig.IsEnabled = true;
+               // this.buttonOpenProfileConfig.IsEnabled = true;
                 this.ConnectMenuItem.IsEnabled = true;
 
                 if (this.selectedGlove.GloveConfiguration.GloveProfile == null)
@@ -205,7 +204,6 @@ namespace OpenGlovePrototype2
                 }
                 else
                 {
-                    this.CurrentProfileMenuItem.IsEnabled = true;
                     this.labelProfile.Content = this.selectedGlove.GloveConfiguration.GloveProfile.ProfileName;
                 }
 
@@ -290,20 +288,25 @@ namespace OpenGlovePrototype2
             this.Hide();
         }
 
-        private void CurrentProfileMenuItem_Click(object sender, RoutedEventArgs e)
+        public void restoreConfiguration(Glove glove)
         {
-
-            if (selectedGlove.GloveConfiguration.GloveProfile.Mappings.Count != 0)
+            if(glove.GloveConfiguration != null && glove.GloveConfiguration.GloveProfile != null)
             {
-                ConfigurationTool config = new ConfigurationTool(selectedGlove);
-                config.Show();
-            }
-            else
-            {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("No profile loaded.", "No profile", System.Windows.MessageBoxButton.OK);
-
+                if (glove.GloveConfiguration.GloveProfile.FlexorsMappings != null && glove.GloveConfiguration.GloveProfile.FlexorsMappings.Count >0)
+                {
+                    foreach (KeyValuePair<int, int> mapping in glove.GloveConfiguration.GloveProfile.FlexorsMappings)
+                    {
+                        gloves.addFlexor(glove, mapping.Value, mapping.Key);
+                    }
+                }
+                if(glove.GloveConfiguration.GloveProfile.imuStatus == true)
+                {
+                    gloves.setIMUStatus(glove, true);
+                }
+               
             }
         }
+      
 
         private void ConnectMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -315,6 +318,7 @@ namespace OpenGlovePrototype2
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Glove " + selectedGlove.Name + " successfully disconnected.", "Connection", MessageBoxButton.OK);
                     selectedGlove.Connected = false;
+                    buttonCreateGloveConfig.IsEnabled = false;
                 }
             }
             else
@@ -324,6 +328,8 @@ namespace OpenGlovePrototype2
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Glove " + selectedGlove.Name + " successfully connected.", "Connection", MessageBoxButton.OK);
                     selectedGlove.Connected = true;
+                    buttonCreateProfileConfig.IsEnabled = true;
+                    restoreConfiguration(selectedGlove);
                 }
                 else
                 {
@@ -335,22 +341,27 @@ namespace OpenGlovePrototype2
 
         private void buttonCreateProfileConfig_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("This will close the current profile. Are you sure?", "New configuration confirmation", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (selectedGlove.Connected == true)
             {
                 HandConfiguration HC = new HandConfiguration(this.selectedGlove);
                 HC.ShowDialog();
-               // ConfigurationTool config = new ConfigurationTool(this.selectedGlove);
-              //  config.ShowDialog();
                 refreshControls();
+            }
+            else
+            {
+                MessageBox.Show("Please connect your Glove", "Disconnected Glove", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             
         }
 
         private void comboBoxSide_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedGlove.Side = (Side) ((ComboBox)sender).SelectedItem;
-            configManager.saveGlove(selectedGlove);
+            if (selectedGlove.Connected == false)
+            {
+                selectedGlove.Side = (Side)((ComboBox)sender).SelectedItem;
+                configManager.saveGlove(selectedGlove);
+            }
+            
         }
 
         private int startService() {
@@ -416,6 +427,10 @@ namespace OpenGlovePrototype2
             
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            gloves.addFlexor(this.selectedGlove, 19, 2);
+        }
 
     }
 }

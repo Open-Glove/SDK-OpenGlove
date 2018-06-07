@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OpenGloveWCF" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OpenGloveWCF" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfGlove">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Glove" nillable="true" type="tns:Glove" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGlove" nillable="true" type="tns:ArrayOfGlove" />
+  <xs:complexType name="Glove">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BluetoothAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Connected" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GloveConfiguration" nillable="true" type="tns:Glove.Configuration" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Port" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Side" type="tns:Side" />
+      <xs:element minOccurs="0" name="WebSocketPort" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Glove" nillable="true" type="tns:Glove" />
+  <xs:complexType name="Glove.Configuration">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AllowedBaudRates" nillable="true" type="q1:ArrayOfint" />
+      <xs:element minOccurs="0" name="BaudRate" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FlexInit" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FlexPins" nillable="true" type="q3:ArrayOfint" />
+      <xs:element minOccurs="0" name="GloveHash" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GloveName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GloveProfile" nillable="true" type="tns:Glove.Configuration.Profile" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NegativeInit" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NegativePins" nillable="true" type="q5:ArrayOfint" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PositiveInit" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PositivePins" nillable="true" type="q7:ArrayOfint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Glove.Configuration" nillable="true" type="tns:Glove.Configuration" />
+  <xs:complexType name="Glove.Configuration.Profile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AreaCount" type="xs:int" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FlexorsMappings" nillable="true" type="q8:ArrayOfKeyValueOfintint" />
+      <xs:element minOccurs="0" name="FlexorsThreshold" type="xs:int" />
+      <xs:element minOccurs="0" name="GloveHash" nillable="true" type="xs:string" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Mappings" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ProfileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="imuCalibrationStatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="imuModel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="imuStatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="rawData" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Glove.Configuration.Profile" nillable="true" type="tns:Glove.Configuration.Profile" />
+  <xs:simpleType name="Side">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Right" />
+      <xs:enumeration value="Left" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Side" nillable="true" type="tns:Side" />
+</xs:schema>
