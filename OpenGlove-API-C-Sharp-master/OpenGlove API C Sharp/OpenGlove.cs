@@ -27,6 +27,15 @@ namespace OpenGlove
         {
             communication.OpenPort(portName, baudRate);
         }
+
+        /// <summary>
+        /// Selecciona el parser serial de IMU según el modelo del perfil (BNO055 o LSM9DS1).
+        /// </summary>
+        public void SetImuModel(string imuModel)
+        {
+            communication.SetImuModel(imuModel);
+        }
+
         /// <summary>
         /// Close the current active serial communication
         /// </summary>

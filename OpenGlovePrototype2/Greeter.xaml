@@ -36,7 +36,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="buttonRefreshGloves" Content="Refresh Gloves" Margin="10,284,332,0" FontSize="20" Height="50" VerticalAlignment="Top" Click="buttonRefreshGloves_Click" Grid.ColumnSpan="2"/>
-        <Grid Margin="158,122,10,0" Grid.Column="1" Height="241" VerticalAlignment="Top">
+        <Grid Margin="162,122,6,0" Grid.Column="1" Height="241" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="205*"/>

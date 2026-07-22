@@ -8,7 +8,7 @@
         Title="PinsConfiguration" Height="452.884" Width="788.266" WindowStartupLocation="CenterScreen">
     <Grid Height="389" VerticalAlignment="Top">
         <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" Height="365" Margin="300,61,0,-37" VerticalAlignment="Top" Width="9"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="340" Margin="328,81,0,-32" VerticalAlignment="Top" Width="452" Source="A000011_featured.jpg" Stretch="UniformToFill"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="340" Margin="328,81,0,-32" VerticalAlignment="Top" Width="452" Source="ESP32-Pinout.jpg" Stretch="Uniform"/>
         <Rectangle Fill="#FF00B47F" HorizontalAlignment="Left" Height="49" Stroke="Black" VerticalAlignment="Top" Width="780"/>
         <Label x:Name="labelHeader" Content="Pins Configuration" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="780" Foreground="White" FontFamily="Helvetica" FontSize="36"/>
         <Grid x:Name="pinsGrid" HorizontalAlignment="Left" Height="333" Margin="10,88,0,-32" VerticalAlignment="Top" Width="290" ScrollViewer.CanContentScroll="True">

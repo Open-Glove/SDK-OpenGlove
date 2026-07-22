@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using OpenGloveSDKConfigurationPrototype2;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using OpenGlove_API_C_Sharp_HL;
 using OpenGlove_API_C_Sharp_HL.ServiceReference1;
 
 namespace OpenGlovePrototype2
@@ -24,9 +15,10 @@ namespace OpenGlovePrototype2
     /// </summary>
     public partial class PinsConfiguration : Window
     {
-        public class PinRow{
+        public class PinRow
+        {
             public int Pin { get; set; }
-            public String Signal {get; set;}
+            public String Signal { get; set; }
             public String Type { get; set; }
             public String Polarity { get; set; }
 
@@ -37,7 +29,8 @@ namespace OpenGlovePrototype2
             }
         }
 
-        public class Board {
+        public class Board
+        {
             public string name { get; set; }
             public int digitalPins { get; set; }
             public int analogPins { get; set; }
@@ -59,16 +52,20 @@ namespace OpenGlovePrototype2
 
         private ConfigManager configManager;
 
-        private List<Board> openBoards() {
+        private static readonly int[] BaudRates = {
+            300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200
+        };
+
+        private List<Board> openBoards()
+        {
             List<Board> result = new List<Board>();
-            
+
             XDocument xml = XDocument.Load("Boards.xml");
             List<XElement> xBoards = xml.Root.Elements("board").ToList();
 
             foreach (XElement xBoard in xBoards)
             {
                 string name = xBoard.Element("name").Value;
-               // int pins = Int32.Parse(xBoard.Element("pins").Value);
                 int digitalPins = Int32.Parse(xBoard.Element("digitalPins").Value);
                 int firstAnalogPin = Int32.Parse(xBoard.Element("firstAnalogPin").Value);
                 int analogPins = Int32.Parse(xBoard.Element("analogPins").Value);
@@ -78,14 +75,13 @@ namespace OpenGlovePrototype2
                 b.analogPins = analogPins;
                 b.firstAnalogPin = firstAnalogPin;
                 List<int> possiblePins = new List<int>();
-                for (int i = 1; i <= digitalPins;i++) //add digital pins to the list
+                for (int i = 1; i <= digitalPins; i++)
                 {
                     possiblePins.Add(i);
-
                 }
-                for (int i = 0; i < analogPins; i++) // add analog pins to the list
+                for (int i = 0; i < analogPins; i++)
                 {
-                    possiblePins.Add(firstAnalogPin+i);
+                    possiblePins.Add(firstAnalogPin + i);
                 }
                 b.pinNumbers = possiblePins;
                 result.Add(b);
@@ -94,7 +90,8 @@ namespace OpenGlovePrototype2
             return result;
         }
 
-        private void saveBoard(Board board) {
+        private void saveBoard(Board board)
+        {
             XDocument xml = XDocument.Load("Boards.xml");
 
             XElement xboard = new XElement("board");
@@ -112,7 +109,7 @@ namespace OpenGlovePrototype2
             xboard.Add(xdigitalPins);
             xboard.Add(xfirstAnalogPin);
             xboard.Add(xanalogPins);
-  
+
             xml.Root.Add(xboard);
 
             xml.Save("Boards.xml");
@@ -120,11 +117,21 @@ namespace OpenGlovePrototype2
             refreshBoards();
         }
 
-        private void initializeBoards() {
+        private void initializeBoards()
+        {
             this.boards = openBoards();
-            this.comboBoxBoard.SelectedIndex = 0;
-            this.initializePinsList(0);
+            this.comboBoxBoard.ItemsSource = this.boards;
+            this.comboBoxBaudRate.ItemsSource = BaudRates;
+            Polarities = new List<string>() { "Positive", "Negative" };
+            Types = new List<string>() { "Vibe Board", "Flex Sensor" };
+            Polarity.ItemsSource = Polarities;
+            Type.ItemsSource = Types;
+
             this.comboBoxBoard.SelectionChanged += this.comboBoxBoard_SelectionChanged;
+
+            // Preferir ESP32 si existe; si no, la primera board
+            int espIndex = this.boards.FindIndex(b => b.name == "ESP32 DevKit V1");
+            this.comboBoxBoard.SelectedIndex = espIndex >= 0 ? espIndex : 0;
         }
 
         private Glove selectedGlove;
@@ -138,29 +145,77 @@ namespace OpenGlovePrototype2
             initializeBoards();
 
             configManager = new ConfigManager();
-
         }
 
-        private void initializePinsList(int boardIndex) {
-            this.pins = new List<PinRow>();
-            foreach (int pin in this.boards[boardIndex].pinNumbers)
-            {
-                if (pin <= this.boards[boardIndex].digitalPins )
-                {
-                    this.pins.Add(new PinRow(pin, "Digital"));
-                }else
-                {
-                    this.pins.Add(new PinRow(pin, "Analog"));
-                }      
-            }
-            this.dataGridPins.ItemsSource = this.pins;
+        private bool IsEsp32Board(Board b)
+        {
+            return b != null && b.name == "ESP32 DevKit V1";
+        }
 
-            Polarities = new List<string>() {"Positive", "Negative" };
-            Types = new List<string>() { "Vibe Board", "Flex Sensor" };
-            Polarity.ItemsSource = Polarities;
-            Type.ItemsSource = Types;
-            this.comboBoxBaudRate.ItemsSource = new List<int> { 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200 };
-            this.comboBoxBoard.ItemsSource = this.boards;
+        private void initializePinsList(int boardIndex)
+        {
+            if (boardIndex < 0 || boardIndex >= this.boards.Count)
+                return;
+
+            this.pins = new List<PinRow>();
+            var b = this.boards[boardIndex];
+
+            if (IsEsp32Board(b))
+            {
+                int[] espPins = {
+                    0, 2, 4, 5, 12, 13, 14, 15, 16, 17,
+                    18, 19, 21, 22, 23,
+                    25, 26, 27,
+                    32, 33, 34, 35, 36, 39
+                };
+
+                foreach (var n in espPins)
+                {
+                    bool isAnalog =
+                        n == 25 || n == 26 || n == 27 ||
+                        n == 32 || n == 33 || n == 34 || n == 35 || n == 36 || n == 39;
+
+                    this.pins.Add(new PinRow(n, isAnalog ? "Analog" : "Digital"));
+                }
+
+                this.comboBoxBaudRate.SelectedItem = 115200;
+            }
+            else
+            {
+                // LilyPad / boards genéricas (legacy)
+                foreach (int pin in b.pinNumbers)
+                {
+                    if (pin <= b.digitalPins)
+                        this.pins.Add(new PinRow(pin, "Digital"));
+                    else
+                        this.pins.Add(new PinRow(pin, "Analog"));
+                }
+
+                // Mismo default histórico del XAML (SelectedIndex 10 → 57600)
+                this.comboBoxBaudRate.SelectedItem = 57600;
+            }
+
+            this.dataGridPins.ItemsSource = this.pins;
+            UpdateBoardPinoutImage(b);
+        }
+
+        /// <summary>
+        /// Cambia el diagrama de pines según la board. Solo afecta la UI de ayuda;
+        /// al guardar se persisten pines + baudRate en la config del guante (no el nombre de board).
+        /// </summary>
+        private void UpdateBoardPinoutImage(Board board)
+        {
+            string resource = IsEsp32Board(board)
+                ? "ESP32-Pinout.jpg"
+                : "A000011_featured.jpg"; // LilyPad / legacy
+
+            try
+            {
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/" + resource));
+            }
+            catch
+            {
+            }
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
@@ -170,7 +225,8 @@ namespace OpenGlovePrototype2
             saveConfigurationDialog.Title = "Save your configuration file";
             saveConfigurationDialog.ShowDialog();
 
-            if (saveConfigurationDialog.FileName != "") {
+            if (saveConfigurationDialog.FileName != "")
+            {
                 if (this.comboBoxBaudRate.SelectedItem != null)
                 {
                     selectedGlove.GloveConfiguration.BaudRate = Int32.Parse(this.comboBoxBaudRate.SelectedItem.ToString());
@@ -183,7 +239,7 @@ namespace OpenGlovePrototype2
                     {
                         if (pin.Polarity != null && pin.Type != null)
                         {
-                            if(pin.Type.Equals("Vibe Board"))
+                            if (pin.Type.Equals("Vibe Board"))
                             {
                                 if (pin.Polarity.Equals("Positive"))
                                 {
@@ -193,18 +249,19 @@ namespace OpenGlovePrototype2
                                 {
                                     negativePins.Add(pin.Pin);
                                 }
-                            }else if(pin.Type.Equals("Flex Sensor") && pin.Polarity.Equals("Positive"))
+                            }
+                            else if (pin.Type.Equals("Flex Sensor") && pin.Polarity.Equals("Positive"))
                             {
                                 flexPins.Add(pin.Pin);
                             }
-                            
+
                         }
                     }
 
                     selectedGlove.GloveConfiguration.PositivePins = positivePins.ToArray();
                     selectedGlove.GloveConfiguration.NegativePins = negativePins.ToArray();
                     selectedGlove.GloveConfiguration.FlexPins = flexPins.ToArray();
-                    
+
 
                     List<string> positiveInit = new List<string>();
                     List<string> negativeInit = new List<string>();
@@ -235,7 +292,7 @@ namespace OpenGlovePrototype2
                     System.Windows.MessageBox.Show(message, caption, button, MessageBoxImage.Error);
                 }
             }
- 
+
         }
 
         private void buttonAddBoard_Click(object sender, RoutedEventArgs e)
@@ -245,20 +302,22 @@ namespace OpenGlovePrototype2
 
             List<int> pins = new List<int>();
 
-            if (addBoard.BoardName != null) {
-                if (! addBoard.BoardName.Equals("")) {
+            if (addBoard.BoardName != null)
+            {
+                if (!addBoard.BoardName.Equals(""))
+                {
                     Board b = new Board();
                     b.name = addBoard.BoardName;
                     b.digitalPins = addBoard.digitalPins;
                     b.analogPins = addBoard.analogPins;
                     b.firstAnalogPin = addBoard.firstAnalogPin;
 
-                    for(int i = 0; i <= b.digitalPins; i++)
+                    for (int i = 0; i <= b.digitalPins; i++)
                     {
                         pins.Add(i);
                     }
 
-                    for (int i = 0; i < b.analogPins; i++) // add analog pins to the list
+                    for (int i = 0; i < b.analogPins; i++)
                     {
                         pins.Add(b.firstAnalogPin + i);
                     }
@@ -274,11 +333,10 @@ namespace OpenGlovePrototype2
 
         private void comboBoxBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!refresh)
+            if (!refresh && this.comboBoxBoard.SelectedIndex >= 0)
             {
-                this.initializePinsList(((System.Windows.Controls.ComboBox)sender).SelectedIndex);
+                this.initializePinsList(this.comboBoxBoard.SelectedIndex);
             }
-           
         }
 
         private void dataGridPins_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -294,6 +352,8 @@ namespace OpenGlovePrototype2
             this.comboBoxBoard.ItemsSource = this.boards;
             this.comboBoxBoard.SelectedIndex = actualIndex;
             refresh = false;
-        } 
+            if (this.comboBoxBoard.SelectedIndex >= 0)
+                initializePinsList(this.comboBoxBoard.SelectedIndex);
+        }
     }
 }

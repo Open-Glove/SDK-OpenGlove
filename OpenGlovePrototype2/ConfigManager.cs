@@ -128,6 +128,13 @@ namespace OpenGlovePrototype2
 
             XDocument xml = XDocument.Load(fileName);
 
+            var imuAttr = xml.Root.Attribute("imuModel");
+            string imuModel = imuAttr != null ? (string)imuAttr : "BNO055";
+            // Perfiles antiguos usaban "Default" para el LSM9DS1
+            if (string.Equals(imuModel, "Default", StringComparison.OrdinalIgnoreCase))
+                imuModel = "LSM9DS1";
+            selectedGlove.GloveConfiguration.GloveProfile.imuModel = imuModel;
+
             if (!xml.Root.Attribute("gloveHash").Equals(selectedGlove.GloveConfiguration.GloveHash))
             {
                 //avisar
@@ -232,6 +239,10 @@ namespace OpenGlovePrototype2
         {
             XElement rootXML = new XElement("hand");
             rootXML.SetAttributeValue("gloveHash", selectedGlove.GloveConfiguration.GloveHash);
+
+            var imuModel = selectedGlove.GloveConfiguration.GloveProfile?.imuModel ?? "BNO055";
+            rootXML.SetAttributeValue("imuModel", imuModel);
+
             XElement mappings = new XElement("mappings");
             rootXML.Add(mappings);
             foreach (KeyValuePair<string, string> mapping in selectedGlove.GloveConfiguration.GloveProfile.Mappings)

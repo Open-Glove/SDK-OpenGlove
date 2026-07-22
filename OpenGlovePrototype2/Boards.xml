@@ -13,5 +13,11 @@
     <firstAnalogPin>16</firstAnalogPin>
     <analogPins>4</analogPins>
   </board>
-  
+
+  <board>
+    <name>ESP32 DevKit V1</name>
+    <digitalPins>34</digitalPins>
+    <firstAnalogPin>32</firstAnalogPin>
+    <analogPins>8</analogPins>
+  </board>
 </boards>

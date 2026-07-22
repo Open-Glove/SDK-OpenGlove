@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -116,6 +116,7 @@
     <Compile Include="CalibratingFlexors.xaml.cs">
       <DependentUpon>CalibratingFlexors.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ArmTrackingMath.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="ExtrasConfiguration.xaml.cs">
       <DependentUpon>ExtrasConfiguration.xaml</DependentUpon>
@@ -250,6 +251,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="ESP32-Pinout.jpg" />
     <None Include="Images\calibrationText.gif" />
     <Resource Include="Images\hand_closetoopen.gif" />
     <Resource Include="Images\hand_openandclose.gif" />

@@ -139,6 +139,18 @@ namespace OpenGloveWCF
                         
                   //  }
                     Glove.Gloves[i] = glove;
+
+                    // Propagar modelo IMU al parser serial si ya hay instancia de comunicación
+                    try
+                    {
+                        if (glove.LegacyGlove != null
+                            && glove.GloveConfiguration?.GloveProfile != null)
+                        {
+                            glove.LegacyGlove.SetImuModel(glove.GloveConfiguration.GloveProfile.imuModel);
+                        }
+                    }
+                    catch { }
+
                     break;
                 }
             }  
@@ -173,6 +185,15 @@ namespace OpenGloveWCF
                     {
                         g.LegacyGlove = new LegacyOpenGlove();
                         g.LegacyGlove.OpenPort(g.Port, g.GloveConfiguration.BaudRate);
+
+                        string imuModel = "BNO055";
+                        if (g.GloveConfiguration.GloveProfile != null
+                            && !string.IsNullOrWhiteSpace(g.GloveConfiguration.GloveProfile.imuModel))
+                        {
+                            imuModel = g.GloveConfiguration.GloveProfile.imuModel;
+                        }
+                        g.LegacyGlove.SetImuModel(imuModel);
+
                         if (g.GloveConfiguration.PositivePins.Count > 0 && g.GloveConfiguration.NegativePins.Count > 0)
                         {
                             g.LegacyGlove.InitializeMotor(g.GloveConfiguration.PositivePins);
